@@ -1,25 +1,12 @@
 ---
-
+import BaseLayout from "../layouts/BaseLayout.astro";
+const pageTitle = "Blog Page";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-
-		<nav>
-			<ul>
-				<li><a href="/">Home</a></li>
-				<li><a href="/about">About</a></li>
-				<li><a href="/blog">Blog</a></li>
-			</ul>
-		</nav>
-		<h1>Blog Page</h1>
-		<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium voluptatem, laborum nobis dolores dolorem doloribus iusto eligendi consequatur enim culpa vel. Quidem architecto laborum recusandae veniam suscipit. Asperiores autem quos labore tenetur cumque beatae hic, ad eum dolores corporis est nihil soluta, magni non inventore iure facilis, accusantium deserunt sed ipsa. Explicabo doloribus dolor facere repellat eius, accusantium impedit porro ratione magni et saepe iure, cumque vero deserunt possimus iusto tenetur similique. Sint, quia pariatur temporibus animi a sit non repellendus ipsum nihil quaerat incidunt inventore. Culpa dolore odit saepe quae, consectetur consequuntur perferendis, sed quidem temporibus ullam quaerat nihil?</p>
-	</body>
-</html>
+<BaseLayout title={pageTitle}>
+	<ul>
+		<li><a href="/posts/post-1">Post 1</a></li>
+		<li><a href="/posts/post-2">Post 2</a></li>
+		<li><a href="/posts/post-3">Post 3</a></li>
+	</ul>
+</BaseLayout>
