@@ -1,4 +1,6 @@
-html {
+@import "tailwindcss";
+
+/* html {
   background-color: #f1f5f9;
   font-family: monospace, sans-serif;
 }
@@ -13,7 +15,7 @@ body {
 
 * {
   box-sizing: border-box;
-}
+} */
 
 h1 {
   margin: 1rem 0;
