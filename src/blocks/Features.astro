@@ -1,0 +1,41 @@
+---
+const features = [
+  {
+    title: 'Responsive Design',
+    description: 'Wind UI ensures your web application looks and functions flawlessly on various devices, from smartphones to desktops.',
+    icon: "ri-timer-2-line",
+  },
+  {
+    title: 'Customizable Components',
+    description: 'Easily customize components to fit your design needs, ensuring a unique and tailored user experience.',
+    icon: 'ri-zoom-in-line',
+  },
+  {
+    title: 'Accessibility First',
+    description: 'Built with accessibility in mind, Wind UI components are designed to be usable by everyone.',
+    icon: 'ri-flashlight-line',
+  },
+];
+---
+
+  <section class="py-32">
+    <div class="container mx-auto px-8">
+      <p class="mb-4 text-sm text-zinc-600 lg:text-base">OUR VALUES</p>
+      <h2 class="text-3xl font-medium lg:text-4xl">Why Choose Us?</h2>
+      <div class="mt-14 grid gap-6 lg:mt-20 lg:grid-cols-3">
+        {
+            features.map((feature) => (
+                <div class="rounded-lg bg-zinc-100 p-5">
+                  <span class="mb-8 flex size-12 items-center justify-center rounded-full bg-white">
+                    <i class={`text-2xl ${feature.icon}`}></i>
+                  </span>
+                  <h3 class="mb-2 text-xl font-bold">{feature.title}</h3>
+                  <p class="leading-7 text-zinc-600">
+                    {feature.description}
+                  </p>
+                </div>
+            ))
+        }
+      </div>
+    </div>
+  </section>

@@ -1,0 +1,53 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Pricing Page">
+    <!-- Component: Primary Pricing Table with details -->
+<div class="max-w-sm mx-auto overflow-hidden rounded shadow-xl bg-emerald-500 text-emerald-100 shadow-emerald-100 lg:max-md-full">
+    <div class="flex flex-col">
+      <header class="flex flex-col gap-6 p-6 text-emerald-200">
+        <h3 class="text-xl font-bold text-left text-emerald-50">
+          Team
+          <span class="block text-sm font-normal text-emerald-200">Ideal for a small team.</span>
+        </h3>
+        <h4>
+          <span class="text-3xl">$</span>
+          <span class="text-5xl font-bold tracking-tighter transition-all duration-300 text-emerald-50 lg:text-6xl">25</span>
+          <span class="text-sm">/month</span>
+        </h4>
+        <button class="inline-flex items-center justify-center w-full h-12 gap-2 px-6 text-sm font-medium tracking-wide transition duration-300 rounded shadow-lg whitespace-nowrap bg-emerald-50 text-emerald-500 shadow-emerald-600 hover:text-emerald-600 hover:shadow-md hover:shadow-emerald-600 focus:text-emerald-700 focus:shadow-md focus:shadow-emerald-600 focus-visible:outline-none">
+          <span>Try for free</span>
+        </button>
+      </header>
+      <div class="p-6">
+        <ul class="space-y-4">
+          <li class="flex items-start gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 p-1 shrink-0 text-emerald-50" aria-hidden="true">
+              <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" />
+            </svg>
+            Decoupled microservices architecture evolves with your project
+          </li>
+  
+          <li class="flex items-start gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 p-1 shrink-0 text-emerald-50" aria-hidden="true">
+              <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" />
+            </svg>
+            Expanded authoring roles and locales to support basic publishing workflows
+          </li>
+  
+          <li class="flex items-start gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 p-1 shrink-0 text-emerald-50" aria-hidden="true">
+              <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" />
+            </svg>
+            Easy payment via credit card
+          </li>
+        </ul>
+      </div>
+      <footer class="p-6 text-sm text-center border-t border-emerald-600 bg-emerald-600/50">
+        <a class="transition-colors duration-300 text-emerald-100 hover:text-emerald-50 focus:text-emerald-50" href="#">See all features</a>
+      </footer>
+    </div>
+  </div>
+  <!-- End Primary Pricing Table with details -->
+</BaseLayout>

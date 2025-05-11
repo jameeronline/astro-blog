@@ -1,5 +1,24 @@
 @import "tailwindcss";
 
+@theme {
+  --breakpoint-2xl: 80rem;
+
+  --color-primary-50: #ecfff6;
+  --color-primary-100: #d2ffed;
+  --color-primary-200: #a8ffdc;
+  --color-primary-300: #65ffc2;
+  --color-primary-400: #1bffa1;
+  --color-primary-500: #00f982;
+  --color-primary-600: #00d068;
+  --color-primary-700: #00a255;
+  --color-primary-800: #007e47;
+  --color-primary-900: #00663d; /*base color*/
+  --color-primary-950: #003b20;
+}
+
+/* Icons */
+@import "remixicon/fonts/remixicon.css";
+
 /* html {
   background-color: #f1f5f9;
   font-family: monospace, sans-serif;
@@ -17,10 +36,10 @@ body {
   box-sizing: border-box;
 } */
 
-h1 {
+/* h1 {
   margin: 1rem 0;
   font-size: 2.5rem;
-}
+} */
 
 /* navigation styles */
 .navigation {

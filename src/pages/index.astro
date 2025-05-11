@@ -2,11 +2,22 @@
 //layouts
 import BaseLayout from "../layouts/BaseLayout.astro";
 const pageTitle = "Home Page";
+
+//blocks
+import Hero from "../blocks/hero.astro";
+import Features from "../blocks/features.astro";
 ---
 
 <BaseLayout title={pageTitle}>
-	<h2>My Awesome blog titles</h2>
+	<Hero title="Welcome to my site" subtitle="This is a subtitle" />
+	<Features title="Features" subtitle="This is a subtitle" />
+	<!-- <h2>My Awesome blog titles</h2>
 	<h1 class="text-3xl font-bold underline text-emerald-600">
 		Hello world!
 	  </h1>
+
+	  <div x-data="{ count: 0 }">
+		<button x-on:click="count++">Increment</button>
+		<span x-text="count"></span>
+	</div> -->
 </BaseLayout>
