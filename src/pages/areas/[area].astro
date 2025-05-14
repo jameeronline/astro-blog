@@ -3,6 +3,7 @@ import ErrorMessage from '../../components/ErrorMessage.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import axios from 'axios';
 import { textToSlug } from '../../utils/helper';
+import MealCard from '../../components/MealCard.astro';
 
 type Area = {
     strArea: string;
@@ -27,9 +28,7 @@ export async function getStaticPaths() {
 
 const { area } = Astro.params;
 
-
-
-// Fetch items for the specific category
+// Fetch items for the specific area
 let items: Meal[] = [];
 let errorMessage: string | null = null;
 
@@ -48,17 +47,18 @@ try {
 ---
 
 <BaseLayout title={`Category: ${area}`}>
-    <h2 class="text-2xl font-bold">Category: {area}</h2>
+    <div class="flex flex-col items-center justify-center p-4 my-10">
+        <p class="text-sm text-gray-500 uppercase">Meals in Area</p>
+        <h1 class="text-3xl font-bold mb-4 capitalize"> {area}</h1>
+        <p class="text-lg">Explore delicious meals from the {area} area.</p>
+    </div>
 
     {errorMessage 
         ? <ErrorMessage message={errorMessage} /> 
         : (
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
                 {items.map((item) => (
-                    <a href={`/meals/${item.idMeal}`} key={item.idMeal} class="col-span-1 relative bg-white rounded-lg shadow-md overflow-hidden">
-                        <img src={item.strMealThumb} alt={item.strMeal} width="" />
-                        <h3 class="text-center font-bold">{item.strMeal}</h3>
-                    </a>
+                    <MealCard item={item} key={item.idMeal} />
                 ))}
             </div>
         )

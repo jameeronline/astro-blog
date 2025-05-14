@@ -5,3 +5,7 @@ export function textToSlug(text: string): string {
     .replace(/[\s\W-]+/g, "-")
     .replace(/^-+|-+$/g, "");
 }
+
+export function capitalizeText(text: string): string {
+  return text.toLowerCase().replace(/\b\w/g, (char) => char.toUpperCase());
+}
