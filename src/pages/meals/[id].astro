@@ -1,0 +1,59 @@
+---
+export const prerender = false; // Disable pre-rendering for dynamic rendering
+import ErrorMessage from "../../components/ErrorMessage.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import axios from 'axios';
+
+type MealDetails = {
+    idMeal: string;
+    strMeal: string;
+    strCategory: string;
+    strArea: string;
+    strInstructions: string;
+    strMealThumb: string;
+    strYoutube: string;
+    [key: string]: string | null; // For additional dynamic keys like ingredients
+};
+
+const { id } = Astro.params; // Extract the dynamic `id` from the URL
+
+let meal: MealDetails | null = null;
+let errorMessage: string | null = null;
+
+try {
+    // Fetch meal details dynamically based on the `id`
+    const response = await axios.get<{ meals: MealDetails[] }>(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
+    meal = response.data.meals[0];
+
+    // Validate the structure of the meal
+    if (!meal || !meal.idMeal || !meal.strMeal || !meal.strMealThumb) {
+        throw new Error("Invalid data structure received from the API.");
+    }
+} catch (error) {
+    console.error('Error fetching meal details:', error);
+    errorMessage = 'Failed to load meal details. Please try again later.';
+}
+---
+
+<BaseLayout title={`Meal Details: ${meal?.strMeal || 'Error'}`}>
+    {errorMessage 
+        ? <ErrorMessage message={errorMessage} />
+        : meal && (
+            <div class="max-w-4xl mx-auto p-4">
+                <h1 class="text-3xl font-bold mb-4">{meal.strMeal}</h1>
+                <img src={meal.strMealThumb} alt={meal.strMeal} class="w-full rounded-lg mb-4" />
+                <p><strong>Category:</strong> {meal.strCategory}</p>
+                <p><strong>Area:</strong> {meal.strArea}</p>
+                <p class="mt-4"><strong>Instructions:</strong></p>
+                <p>{meal.strInstructions}</p>
+                {meal.strYoutube && (
+                    <p class="mt-4">
+                        <a href={meal.strYoutube} target="_blank" class="text-blue-500 underline">
+                            Watch on YouTube
+                        </a>
+                    </p>
+                )}
+            </div>
+        )
+    }
+</BaseLayout>

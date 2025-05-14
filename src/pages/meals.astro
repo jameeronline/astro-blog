@@ -1,0 +1,71 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import axios from 'axios';
+
+import {textToSlug} from "../utils/helper";
+
+let responseDataCategories = null;
+let errorMessage = null;
+
+try {
+    const response = await axios.get('https://www.themealdb.com/api/json/v1/1/list.php?c=list');
+    responseDataCategories = response.data;
+} catch (error) {
+    console.error('Error fetching data:', error);
+    errorMessage = 'Failed to load data. Please try again later.';
+}
+
+let responseDataAreas = null;
+
+try {
+    const responseAreas = await axios.get('https://www.themealdb.com/api/json/v1/1/list.php?a=list');
+    responseDataAreas = responseAreas.data;
+} catch (error) {
+    console.error('Error fetching area data:', error);
+    errorMessage = 'Failed to load area data. Please try again later.';
+}
+---
+
+<BaseLayout title="MealsDB">
+    <h2>MealsDB</h2>
+
+        {errorMessage 
+            ? <div class="error-ui">
+            <p>{errorMessage}</p>
+              </div>
+            : (
+            <div>
+                {responseDataCategories && responseDataCategories.meals && (
+                    <div class="areas-section mt-8">
+                        <h3 class="text-xl font-bold mb-4">Categories</h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                            {responseDataCategories.meals.map((meal) => (
+                            <a href={`/categories/${textToSlug(meal.strCategory)}`} key={meal.strCategory} class="col-span-1 relative bg-white rounded-lg shadow-md overflow-hidden">
+                                <div class="p-4">
+                                    <h3 class="text-lg font-semibold">{meal.strCategory}</h3>
+                                </div>
+                            </a>
+                            ))}
+                        </div>
+                    </div>
+                )}
+
+                {responseDataAreas && responseDataAreas.meals && (
+                    <div class="areas-section mt-8">
+                        <h3 class="text-xl font-bold mb-4">Areas</h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                            {responseDataAreas.meals.map((area) => (
+                                <a href={`/areas/${textToSlug(area.strArea)}`} key={area.strArea} class="col-span-1 relative bg-white rounded-lg shadow-md overflow-hidden">
+                                    <div class="p-4">
+                                        <h3 class="text-lg font-semibold">{area.strArea}</h3>
+                                    </div>
+                                </a>
+                            ))}
+                        </div>
+                    </div>
+                )}
+            </div>
+            )
+        }
+    </div>
+</BaseLayout>

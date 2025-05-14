@@ -1,15 +1,12 @@
 ---
-import BaseLayout from "../../layouts/BaseLayout.astro";
+import ErrorMessage from '../../components/ErrorMessage.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
 import axios from 'axios';
+import { textToSlug } from '../../utils/helper';
 
-import ErrorMessage from "../../components/ErrorMessage.astro";
-
-import { textToSlug } from "../../utils/helper";
-
-// Define types for the API responses
-type Category = {
-    strCategory: string;
-};
+type Area = {
+    strArea: string;
+};  
 
 type Meal = {
     idMeal: string;
@@ -17,26 +14,27 @@ type Meal = {
     strMealThumb: string;
 };
 
-// Fetch static paths for categories
 export async function getStaticPaths() {
-    const response = await axios.get<{ meals: Category[] }>('https://www.themealdb.com/api/json/v1/1/list.php?c=list');
-    const categories = response.data.meals;
+    const response = await axios.get('https://www.themealdb.com/api/json/v1/1/list.php?a=list');
+    const areas = response.data.meals;
 
-    const paths = categories.map((category: Category) => ({
-        params: { category: textToSlug(category.strCategory) },
+    const paths = areas.map((area: Area) => ({
+        params: { area: textToSlug(area.strArea) },
     }));
 
     return paths;
 }
 
-const { category } = Astro.params;
+const { area } = Astro.params;
+
+
 
 // Fetch items for the specific category
 let items: Meal[] = [];
 let errorMessage: string | null = null;
 
 try {
-    const response = await axios.get<{ meals: Meal[] }>(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`);
+    const response = await axios.get<{ meals: Meal[] }>(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${area}`);
     items = response.data.meals;
 
     // Validate the structure of the items
@@ -49,8 +47,8 @@ try {
 }
 ---
 
-<BaseLayout title={`Category: ${category}`}>
-    <h2 class="text-2xl font-bold">Category: {category}</h2>
+<BaseLayout title={`Category: ${area}`}>
+    <h2 class="text-2xl font-bold">Category: {area}</h2>
 
     {errorMessage 
         ? <ErrorMessage message={errorMessage} /> 

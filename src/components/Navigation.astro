@@ -1,5 +1,13 @@
 ---
 import Hamburger from "./Hamburger.astro"
+const navigation = [
+  { name: "Home", href: "/", current: true },
+  { name: "Features", href: "/features", current: false },
+  { name: "Meals", href: "/meals", current: false },
+  { name: "Pricing", href: "/pricing", current: false },
+  { name: "Blog", href: "/blog", current: false },
+  { name: "About", href: "/about", current: false },
+]
 ---
 
 <!-- <Hamburger /> -->
@@ -26,27 +34,25 @@ import Hamburger from "./Hamburger.astro"
       </button>
       <!-- Navigation links -->
     <ul 
-      role="menubar" 
-      aria-label="Select page" 
-      class="absolute top-0 left-0 z-[-1] ml-auto h-screen w-full justify-center overflow-hidden overflow-y-auto overscroll-contain bg-white/90 px-8 pb-12 pt-28 font-medium opacity-0 transition-[opacity,visibility] duration-300 lg:relative lg:top-0 lg:z-0 lg:flex lg:h-full lg:w-auto lg:items-stretch lg:overflow-visible lg:bg-white/0 lg:px-0 lg:py-0 lg:pt-0 lg:opacity-100"
-      :class="{ 'opacity-100': open, 'opacity-0': !open }"
+        role="menubar" 
+        aria-label="Select page" 
+        class="absolute top-0 left-0 z-[-1] ml-auto h-screen w-full justify-center overflow-hidden overflow-y-auto overscroll-contain bg-white/90 px-8 pb-12 pt-28 font-medium opacity-0 transition-[opacity,visibility] duration-300 lg:relative lg:top-0 lg:z-0 lg:flex lg:h-full lg:w-auto lg:items-stretch lg:overflow-visible lg:bg-white/0 lg:px-0 lg:py-0 lg:pt-0 lg:opacity-100"
+        :class="{ 'opacity-100': open, 'opacity-0': !open }"
     >
-        <!-- <li role="none" class="flex items-stretch">
-          <a role="menuitem" aria-haspopup="false" class="flex items-center gap-2 py-4 transition-colors duration-300 hover:text-primary-900 focus:text-primary-950 focus:outline-none focus-visible:outline-none lg:px-8" href="/"> <span>Home</span></a>
-        </li> -->
-        <li role="none" class="flex items-stretch">
-          <a role="menuitem" aria-current="false" aria-haspopup="false" class="flex items-center gap-2 py-4 transition-colors duration-300 hover:text-primary-900 focus:text-primary-950 focus:outline-none focus-visible:outline-none lg:px-8" href="/features"> <span>Features</span> </a>
-        </li>
-        <li role="none" class="flex items-stretch">
-          <a role="menuitem" aria-current="false" aria-haspopup="false" class="flex items-center gap-2 py-4 transition-colors duration-300 hover:text-primary-900 focus:text-primary-950 focus:outline-none focus-visible:outline-none lg:px-8" href="/pricing"> <span>Pricing</span> </a>
-        </li>
-        <li role="none" class="flex items-stretch">
-          <a role="menuitem" aria-haspopup="false" class="flex items-center gap-2 py-4 transition-colors duration-300 hover:text-primary-900 focus:text-primary-950 focus:outline-none focus-visible:outline-none lg:px-8" href="/blog"> <span>Blog</span> </a>
-        </li>
-        <li role="none" class="flex items-stretch">
-          <a role="menuitem" aria-haspopup="false" class="flex items-center gap-2 py-4 transition-colors duration-300 hover:text-primary-900 focus:text-primary-950 focus:outline-none focus-visible:outline-none lg:px-8" href="/about"> <span>About</span> </a>
-        </li>
-      </ul>
+        {navigation.map((item) => (
+            <li role="none" class="flex items-stretch">
+                <a 
+                    role="menuitem" 
+                    aria-current={item.current ? "page" : undefined} 
+                    aria-haspopup="false" 
+                    href={item.href} 
+                    class={`flex items-center gap-2 py-4 transition-colors duration-300 hover:text-primary-900 focus:text-primary-950 focus:outline-none focus-visible:outline-none lg:px-8 ${Astro.url.pathname === item.href ? 'text-primary-900 underline' : ''}`}
+                >
+                    <span>{item.name}</span>
+                </a>
+            </li>
+        ))}
+    </ul>
     </nav>
   </div>
 </header>
