@@ -1,0 +1,52 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import axios from 'axios';
+
+import {textToSlug} from "../../utils/helper";
+
+type Category = {
+    strCategory: string;
+};
+
+export async function getStaticPaths() {
+    const response = await axios.get('https://www.themealdb.com/api/json/v1/1/list.php?c=list');
+    const categories = response.data.meals;
+
+    const paths = categories.map((category: Category) => ({
+            params: { category: textToSlug(category.strCategory) },
+        }));
+
+        return paths;
+}
+
+const { category } = Astro.params;
+// Fetch items for the specific category
+let items = [];
+let errorMessage = null;
+
+try {
+    const response = await axios.get(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`);
+    items = response.data.meals;
+} catch (error) {
+    console.error('Error fetching items:', error);
+    errorMessage = 'Failed to load items for this category. Please try again later.';
+}
+---
+
+<BaseLayout title={`Category: ${category}`}>
+    <h2>Category: {category}</h2>
+
+    {errorMessage 
+        ? <p>{errorMessage}</p> 
+        : (
+            <ul>
+                {items.map((item) => (
+                    <li key={item.idMeal}>
+                        <h3>{item.strMeal}</h3>
+                        <img src={item.strMealThumb} alt={item.strMeal} width="150" />
+                    </li>
+                ))}
+            </ul>
+        )
+    }
+</BaseLayout>

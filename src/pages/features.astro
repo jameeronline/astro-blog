@@ -1,15 +1,37 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import axios from 'axios';
+
+import {textToSlug} from "../utils/helper";
+
+let responseData = null;
+let errorMessage = null;
+
+try {
+    const response = await axios.get('https://www.themealdb.com/api/json/v1/1/list.php?c=list');
+    responseData = response.data;
+} catch (error) {
+    console.error('Error fetching data:', error);
+    errorMessage = 'Failed to load data. Please try again later.';
+}
 ---
 
 <BaseLayout title="Features Page">
     <h2>Features page</h2>
 
-    <div x-data="{ expanded: false }">
-        <button @click="expanded = ! expanded">Toggle Content</button>
-  
-        <p id="foo" x-show="expanded" x-collapse>
-          Lorem ipsum
-        </p>
-      </div>
+        {errorMessage 
+            ? <p>{errorMessage}</p> 
+            : (
+                <ul>
+                    {responseData && responseData.meals.map((meal) => (
+                        <li key={meal.idMeal}>
+                            <a href={`/categories/${textToSlug(meal.strCategory)}`}>
+                                <h3>{meal.strCategory}</h3>
+                            </a>
+                        </li>
+                    ))}
+                </ul>
+            )
+        }
+    </div>
 </BaseLayout>

@@ -6,6 +6,36 @@ const pageTitle = "Home Page";
 //blocks
 import Hero from "../blocks/Hero.astro";
 import Features from "../blocks/Features.astro";
+import { getStaticPaths } from "./tags/[tag].astro";
+
+export interface User {
+	id: number;
+	name: string;
+	username: string;
+	email: string;
+	address: {
+		street: string;
+		suite: string;
+		city: string;
+		zipcode: string;
+		geo: {
+			lat: string;
+			lng: string;
+		};
+	};
+	phone: string;
+	website: string;
+	company: {
+		name: string;
+		catchPhrase: string;
+		bs: string;
+	};
+}
+
+//fetch users
+const users: User[] = await fetch("https://jsonplaceholder.typicode.com/users")
+	.then((res) => res.json())
+	.then((data) => data);
 ---
 
 <BaseLayout title={pageTitle}>
@@ -20,4 +50,13 @@ import Features from "../blocks/Features.astro";
 		<button x-on:click="count++">Increment</button>
 		<span x-text="count"></span>
 	</div> -->
+	{
+		users.map((user: User) => (
+			<a key={user.id} class="p-4 m-2 bg-gray-100 rounded" href={`/users/${user.id}`}>
+				<h3 class="text-lg font-bold">{user.name}</h3>
+				<p>{user.email}</p>
+				<p>{user.phone}</p>
+			</a>
+		))
+	}
 </BaseLayout>
