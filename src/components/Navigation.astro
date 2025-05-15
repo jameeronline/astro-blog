@@ -1,5 +1,4 @@
 ---
-import Hamburger from "./Hamburger.astro"
 const navigation = [
   { name: "Home", href: "/", current: true },
   { name: "Features", href: "/features", current: false },
@@ -9,8 +8,6 @@ const navigation = [
   { name: "About", href: "/about", current: false },
 ]
 ---
-
-<!-- <Hamburger /> -->
 
 <!-- Component: Basic Navbar -->
 <header x-data="{open: false}" class="relative z-20 w-full border-b shadow-lg  border-slate-200 bg-white/90 shadow-slate-700/5 after:absolute after:top-full after:left-0 after:z-10 after:block after:h-px after:w-full after:bg-slate-200 lg:border-slate-200 lg:backdrop-blur-sm lg:after:hidden">
