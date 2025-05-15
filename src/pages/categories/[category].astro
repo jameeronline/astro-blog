@@ -48,35 +48,59 @@ try {
     console.error('Error fetching items:', error);
     errorMessage = 'Failed to load items for this category. Please try again later.';
 }
+
+
+// Reactive state for the search term
+let searchTerm = '';
 ---
 
 <BaseLayout title={`Category: ${category}`}>
+    <section class="container relative py-4">
+        <div class="flex flex-col items-center justify-center p-4 my-6">
+            <p class="text-sm text-gray-500 uppercase">Meals in Category</p>
+            <h1 class="text-3xl font-bold mb-4 capitalize">{category}</h1>
+            <p class="text-lg">Explore delicious meals from the {category} category.</p>
+        </div>
 
-    <!-- {errorMessage 
-        ? <ErrorMessage message={errorMessage} /> 
-        : (
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-                {items.map((item) => (
-                    <MealCard item={item} key={item.idMeal} />
-                ))}
+
+        <form class="max-w-md mx-auto mb-8">   
+            <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+            <div class="relative">
+                <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                    <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                    </svg>
+                </div>
+                <input id="searchInput" type="search" id="default-search" class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 placeholder:text-gray-400" placeholder="Search Mockups, Logos..." required />
+                <button type="submit" class="text-white absolute end-2.5 bottom-2.5 bg-primary-900 hover:bg-primary-950 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Search</button>
             </div>
-        )
-    } -->
+        </form>
 
-<section>
-    <div class="container relative py-4">
+        <div class="grid grid-cols-4 gap-6 md:grid-cols-8 lg:grid-cols-12" id="mealGrid">
+            {items.map((item) => (
+                <div class="meal-card col-span-4" data-name={item.strMeal.toLowerCase()} key={item.idMeal}>
+                    <MealCard item={item} />
+                </div>
+            ))}
+        </div>
+    </section>
 
-    <div class="flex flex-col items-center justify-center p-4 my-10">
-        <p class="text-sm text-gray-500 uppercase">Meals in Category</p>
-        <h1 class="text-3xl font-bold mb-4 capitalize"> {category}</h1>
-        <p class="text-lg">Explore delicious meals from the {category} category.</p>
-    </div>
+    <script>
+        const searchInput = document.getElementById('searchInput');
+        const mealGrid = document.getElementById('mealGrid');
 
-      <div class="grid w-full grid-cols-1 gap-4 lg:grid-cols-3">
-        {items.map((item) => (
-            <MealCard item={item} key={item.idMeal} />
-        ))}
-      </div>
-    </div>
-  </section>
+        searchInput.addEventListener('input', (event) => {
+            const searchTerm = event.target.value.toLowerCase();
+            const mealCards = mealGrid.querySelectorAll('.meal-card');
+
+            mealCards.forEach((card) => {
+                const mealName = card.querySelector('.meal-title').textContent.toLowerCase();
+                if (mealName.includes(searchTerm)) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    </script>
 </BaseLayout>
