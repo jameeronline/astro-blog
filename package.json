@@ -17,6 +17,8 @@
     "aos": "^2.3.4",
     "astro": "^5.7.12",
     "axios": "^1.9.0",
+    "embla-carousel": "^8.6.0",
+    "embla-carousel-autoplay": "^8.6.0",
     "remixicon": "^4.6.0",
     "tailwindcss": "^4.1.6"
   }

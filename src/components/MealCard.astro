@@ -1,18 +1,21 @@
 ---
 import { Image } from 'astro:assets';
-const { item } = Astro.props;
+const { item} = Astro.props;
+// const { strMeal, strMealThumb } = item;
+
 ---
 
 <article class="p-6 px-2 meal-card rounded-xl transition-all hover:bg-white/10 hover:shadow-2xl">
-    <Image class="object-cover object-center w-full mb-8 lg:h-48 md:h-36 rounded-xl bg-gray-50"
-      src={item.strMealThumb} alt={item.strMeal} format="webp" width={1600} height={900}/>
+    <!-- <Image class="object-cover object-center w-full mb-8 lg:h-48 md:h-36 rounded-xl bg-gray-50"
+      src={strMealThumb} alt={strMeal} format="webp" width={1600} height={900}/>
 
-    <h1 class="mx-auto mb-8 text-2xl font-semibold leading-snug tracking-tighter text-gray-800 lg:text-2xl meal-title">{item.strMeal}</h1>
+    <h1 class="mx-auto mb-8 text-2xl font-semibold leading-snug tracking-tighter text-gray-800 lg:text-2xl meal-title">{strMeal}</h1>
     <p class="mx-auto text-base leading-relaxed text-gray-600">Free and Premium themes, UI Kit's, templates and
       landing pages built with Tailwind CSS, HTML & Next.js.</p>
 
     <div class="mt-4">
       <a href={`/meals/${item.idMeal}`}  class="inline-flex items-center mt-4 font-semibold text-primary-900 lg:mb-0 hover:text-gray-600"
-        title="read more"> Read More » </a>
-    </div>
+        title="read more"> Read More </a>
+    </div> -->
+    {item}
   </article>

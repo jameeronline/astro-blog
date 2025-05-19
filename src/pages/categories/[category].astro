@@ -6,6 +6,7 @@ import ErrorMessage from "../../components/ErrorMessage.astro";
 
 import { textToSlug, capitalizeText } from "../../utils/helper";
 import MealCard from "../../components/MealCard.astro";
+import MealsGrid from "../../blocks/MealsGrid.astro";
 
 // Define types for the API responses
 type Category = {
@@ -63,7 +64,7 @@ let searchTerm = '';
         </div>
 
 
-        <form class="max-w-md mx-auto mb-8">   
+        <!-- <form class="max-w-md mx-auto mb-8">   
             <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
             <div class="relative">
                 <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -74,18 +75,22 @@ let searchTerm = '';
                 <input id="searchInput" type="search" id="default-search" class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 placeholder:text-gray-400" placeholder="Search Mockups, Logos..." required />
                 <button type="submit" class="text-white absolute end-2.5 bottom-2.5 bg-primary-900 hover:bg-primary-950 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Search</button>
             </div>
-        </form>
+        </form> -->
 
-        <div class="grid grid-cols-4 gap-6 md:grid-cols-8 lg:grid-cols-12" id="mealGrid">
+        <!-- <div class="grid grid-cols-4 gap-6 md:grid-cols-8 lg:grid-cols-12" id="mealGrid">
             {items.map((item) => (
                 <div class="meal-card col-span-4" data-name={item.strMeal.toLowerCase()} key={item.idMeal}>
                     <MealCard item={item} />
                 </div>
             ))}
-        </div>
+        </div> -->
+
+        <MealsGrid items={items} />
+        {errorMessage && <ErrorMessage message={errorMessage} />}
     </section>
 
-    <script>
+    <!-- <script define:vars={{ items }}>
+        console.log(items);
         const searchInput = document.getElementById('searchInput');
         const mealGrid = document.getElementById('mealGrid');
 
@@ -102,5 +107,5 @@ let searchTerm = '';
                 }
             });
         });
-    </script>
+    </script> -->
 </BaseLayout>

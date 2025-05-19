@@ -43,7 +43,7 @@ const navigation = [
                     aria-current={item.current ? "page" : undefined} 
                     aria-haspopup="false" 
                     href={item.href} 
-                    class={`flex items-center gap-2 py-4 transition-colors duration-300 hover:text-primary-900 focus:text-primary-950 focus:outline-none focus-visible:outline-none lg:px-8 ${Astro.url.pathname === item.href ? 'text-primary-900 underline' : ''}`}
+                    class={`flex items-center gap-2 py-4 transition-colors duration-300 hover:text-primary-900 focus:text-primary-950 focus:outline-none focus-visible:outline-none lg:px-6 ${Astro.url.pathname === item.href ? 'text-primary-900 underline' : ''}`}
                 >
                     <span>{item.name}</span>
                 </a>
