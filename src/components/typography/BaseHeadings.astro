@@ -1,0 +1,18 @@
+---
+// filepath: /src/components/typography/BaseHeading.astro
+const { level = 1, children, ...props } = Astro.props;
+const Tag = `h${level}`;
+
+const headingClasses = {
+  1: "text-4xl font-bold tracking-tight mb-4",
+  2: "text-3xl font-semibold tracking-tight mb-3",
+  3: "text-2xl font-semibold tracking-tight mb-2",
+  4: "text-xl font-medium tracking-tight mb-2",
+  5: "text-lg font-medium tracking-tight mb-1",
+  6: "text-base font-medium tracking-tight mb-1",
+};
+
+props.class = `${headingClasses[level] || ""} ${props.class || ""}`.trim();
+---
+
+<Tag {...props}>{children}</Tag>

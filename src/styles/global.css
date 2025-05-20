@@ -1,4 +1,8 @@
 @import "tailwindcss";
+@import "tailwindcss-animated";
+@import "tailwindcss-intersect";
+
+@custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
   --breakpoint-2xl: 72rem;

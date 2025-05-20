@@ -1,15 +1,292 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import BlogPost from "../components/BlogPost.astro";
+import BlogCard from "../components/BlogCard.astro";
+import { all } from "axios";
 const pageTitle = "Blog Page";
-const allPosts = Object.values(import.meta.glob('./posts/**/*.md', { eager: true }));
+const allPosts = Object.values(
+  import.meta.glob("./posts/**/*.md", { eager: true })
+);
+
+const allPostsData = [
+  {
+    image:
+      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80",
+    alt: "",
+    title: "Understanding Component Libraries and Their Benefits",
+    description:
+      "Pellentesque eget quam ligula. Sed felis ante, consequat nec ultrices ut, ornare quis metus. Vivamus sit amet tortor vel enim sollicitudin hendrerit.",
+    category: "Category",
+    url: "#",
+  },
+  {
+    image:
+      "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80",
+    alt: "Duis sem sem, gravida vel porttitor eu, volutpat ut arcu",
+    title: "Top 5 Component Libraries for React Developers",
+    description:
+      "Pellentesque eget quam ligula. Sed felis ante, consequat nec ultrices ut, ornare quis metus. Vivamus sit amet tortor vel enim sollicitudin hendrerit.",
+    category: "Category",
+    url: "#",
+  },
+  {
+    image:
+      "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=600&q=80",
+    alt: "Duis sem sem, gravida vel porttitor eu, volutpat ut arcu",
+    title: "How to Choose the Right Component Library for Your Project",
+    description:
+      "Pellentesque eget quam ligula. Sed felis ante, consequat nec ultrices ut, ornare quis metus. Vivamus sit amet tortor vel enim sollicitudin hendrerit.",
+    category: "Category",
+    url: "#",
+  },
+  {
+    image:
+      "https://images.unsplash.com/photo-1465101178521-c1a9136a3fdc?auto=format&fit=crop&w=600&q=80",
+    alt: "Duis sem sem, gravida vel porttitor eu, volutpat ut arcu",
+    title: "Building Custom Components with Popular Libraries",
+    description:
+      "Pellentesque eget quam ligula. Sed felis ante, consequat nec ultrices ut, ornare quis metus. Vivamus sit amet tortor vel enim sollicitudin hendrerit.",
+    category: "Category",
+    url: "#",
+  },
+  {
+    image:
+      "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80",
+    alt: "Duis sem sem, gravida vel porttitor eu, volutpat ut arcu",
+    title: "The Future of Component Libraries in Web Development",
+    description:
+      "Pellentesque eget quam ligula. Sed felis ante, consequat nec ultrices ut, ornare quis metus. Vivamus sit amet tortor vel enim sollicitudin hendrerit.",
+    category: "Category",
+    url: "#",
+  },
+  {
+    image:
+      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80",
+    alt: "Duis sem sem, gravida vel porttitor eu, volutpat ut arcu",
+    title: "Best Practices for Using Component Libraries in Your Projects",
+    description:
+      "Pellentesque eget quam ligula. Sed felis ante, consequat nec ultrices ut, ornare quis metus. Vivamus sit amet tortor vel enim sollicitudin hendrerit.",
+    category: "Category",
+    url: "#",
+  },
+];
 ---
 
-
 <BaseLayout title={pageTitle}>
-	<ul>
-		{
-			allPosts.map((post) => <BlogPost url={post.url} title={post.frontmatter.title} />)
-		}
-	</ul>
+  <ul>
+    {
+      allPosts.map((post) => (
+        <BlogPost url={post.url} title={post.frontmatter.title} />
+      ))
+    }
+  </ul>
+
+  <section class="py-32">
+    <div class="container">
+      <div class="mb-8 md:mb-10 lg:mb-12">
+        <h2
+          class="mb-6 w-full text-4xl font-medium md:mb-14 md:text-5xl lg:mb-16 lg:text-6xl"
+        >
+          All case studies
+        </h2>
+        <div
+          class="mb-10 flex flex-wrap items-center gap-x-4 gap-y-3 lg:gap-x-3"
+        >
+          <div class="shrink-0 md:w-52 lg:w-56">
+            <button
+              type="button"
+              role="combobox"
+              aria-controls="radix-:Rp:"
+              aria-expanded="false"
+              aria-autocomplete="none"
+              dir="ltr"
+              data-state="closed"
+              data-placeholder=""
+              class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-zinc-600 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1"
+            >
+              <span style="pointer-events: none">Industries</span><svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-chevron-down h-4 w-4 opacity-50"
+                aria-hidden="true"
+              >
+                <path d="m6 9 6 6 6-6"></path>
+              </svg></button
+            ><select
+              aria-hidden="true"
+              tabindex="-1"
+              style="
+              position: absolute;
+              border: 0;
+              width: 1px;
+              height: 1px;
+              padding: 0;
+              margin: -1px;
+              overflow: hidden;
+              clip: rect(0, 0, 0, 0);
+              white-space: nowrap;
+              word-wrap: normal;
+            "
+            >
+              <option value=""></option>
+            </select>
+          </div>
+          <div class="shrink-0 md:w-52 lg:w-56">
+            <button
+              type="button"
+              role="combobox"
+              aria-controls="radix-:R19:"
+              aria-expanded="false"
+              aria-autocomplete="none"
+              dir="ltr"
+              data-state="closed"
+              data-placeholder=""
+              class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-zinc-600 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1"
+            >
+              <span style="pointer-events: none">Use cases</span><svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-chevron-down h-4 w-4 opacity-50"
+                aria-hidden="true"
+              >
+                <path d="m6 9 6 6 6-6"></path>
+              </svg></button
+            ><select
+              aria-hidden="true"
+              tabindex="-1"
+              style="
+              position: absolute;
+              border: 0;
+              width: 1px;
+              height: 1px;
+              padding: 0;
+              margin: -1px;
+              overflow: hidden;
+              clip: rect(0, 0, 0, 0);
+              white-space: nowrap;
+              word-wrap: normal;
+            "
+            >
+              <option value=""></option>
+            </select>
+          </div>
+          <div class="shrink-0 md:w-52 lg:w-56">
+            <button
+              type="button"
+              role="combobox"
+              aria-controls="radix-:R1p:"
+              aria-expanded="false"
+              aria-autocomplete="none"
+              dir="ltr"
+              data-state="closed"
+              data-placeholder=""
+              class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-zinc-600 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1"
+            >
+              <span style="pointer-events: none">Functions</span><svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-chevron-down h-4 w-4 opacity-50"
+                aria-hidden="true"
+              >
+                <path d="m6 9 6 6 6-6"></path>
+              </svg></button
+            ><select
+              aria-hidden="true"
+              tabindex="-1"
+              style="
+              position: absolute;
+              border: 0;
+              width: 1px;
+              height: 1px;
+              padding: 0;
+              margin: -1px;
+              overflow: hidden;
+              clip: rect(0, 0, 0, 0);
+              white-space: nowrap;
+              word-wrap: normal;
+            "
+            >
+              <option value=""></option>
+            </select>
+          </div>
+          <div class="shrink-0 md:w-52 lg:w-56">
+            <button
+              type="button"
+              role="combobox"
+              aria-controls="radix-:R29:"
+              aria-expanded="false"
+              aria-autocomplete="none"
+              dir="ltr"
+              data-state="closed"
+              data-placeholder=""
+              class="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-zinc-600 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1"
+            >
+              <span style="pointer-events: none">Company size</span><svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-chevron-down h-4 w-4 opacity-50"
+                aria-hidden="true"
+              >
+                <path d="m6 9 6 6 6-6"></path>
+              </svg></button
+            ><select
+              aria-hidden="true"
+              tabindex="-1"
+              style="
+              position: absolute;
+              border: 0;
+              width: 1px;
+              height: 1px;
+              padding: 0;
+              margin: -1px;
+              overflow: hidden;
+              clip: rect(0, 0, 0, 0);
+              white-space: nowrap;
+              word-wrap: normal;
+            "
+            >
+              <option value=""></option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="grid gap-4 md:grid-cols-2 lg:gap-6 2xl:grid-cols-3">
+        {
+          allPostsData.map((item, index) => (
+            <div key={index} class="col-span-1">
+              <BlogCard item={item} />
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
 </BaseLayout>

@@ -1,45 +1,26 @@
 ---
+import { Image } from "astro:assets";
 import MealCard from "../components/MealCard.astro";
 import SearchForm from "./SearchForm.astro";
 
 const { items } = Astro.props;
-const { searchTerm } = Astro.props;
+const { searchTerm = "a" } = Astro.props;
 const { errorMessage } = Astro.props;
 
+interface Meal {
+    idMeal: string;
+    strMeal: string;
+    strMealThumb: string;
+}   
+
 ---
-<section x-data="mealSearch">
+<section>
     <SearchForm searchTerm={searchTerm} />
-    <!-- <div class="grid grid-cols-4 gap-6 md:grid-cols-8 lg:grid-cols-12" id="mealGrid">
-        {items.map((item) => (
+    <div class="grid grid-cols-4 gap-6 md:grid-cols-8 lg:grid-cols-12" id="mealGrid">
+        {(items as Meal[]).map((item: Meal) => (
             <div class="meal-card col-span-4" key={item.idMeal}>
                 <MealCard item={item} />
             </div>
         ))}
-    </div> -->
-    <div>
-        <h2>Filtered Meals</h2>
-        <ul>
-            <template x-for="item in filteredItems" :key="item.idMeal">
-                <li x-text="item.strMeal">
-                    
-                </li>
-            </template>
-        </ul>
-
     </div>
 </section>
-
-<script define:vars={{ items }}>
-        document.addEventListener('alpine:init', () => {
-            Alpine.data('mealSearch', () => ({
-                searchTerm: '',
-                items: items,
-                get filteredItems() {
-                    if (!this.searchTerm) return this.items;
-                    return this.items.filter(item =>
-                        item.strMeal.toLowerCase().includes(this.searchTerm.toLowerCase())
-                    );
-                }
-            }));
-        });
-</script>

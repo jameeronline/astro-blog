@@ -20,6 +20,10 @@
     "embla-carousel": "^8.6.0",
     "embla-carousel-autoplay": "^8.6.0",
     "remixicon": "^4.6.0",
-    "tailwindcss": "^4.1.6"
+    "tailwind-merge": "^3.3.0",
+    "tailwindcss": "^4.1.6",
+    "tailwindcss-animate": "^1.0.7",
+    "tailwindcss-animated": "^2.0.0",
+    "tailwindcss-intersect": "^2.2.0"
   }
 }

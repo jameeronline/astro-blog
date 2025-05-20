@@ -10,44 +10,51 @@ import Popular from "../blocks/Popular.astro";
 import Testimonial from "../blocks/Testimonial.astro";
 import { getStaticPaths } from "./tags/[tag].astro";
 import FeaturedCards from "../blocks/FeaturedCards.astro";
+import TrustedBrands from "../blocks/TrustedBrands.astro";
+import FAQ from "../blocks/FAQ.astro";
 
 export interface User {
-	id: number;
-	name: string;
-	username: string;
-	email: string;
-	address: {
-		street: string;
-		suite: string;
-		city: string;
-		zipcode: string;
-		geo: {
-			lat: string;
-			lng: string;
-		};
-	};
-	phone: string;
-	website: string;
-	company: {
-		name: string;
-		catchPhrase: string;
-		bs: string;
-	};
+  id: number;
+  name: string;
+  username: string;
+  email: string;
+  address: {
+    street: string;
+    suite: string;
+    city: string;
+    zipcode: string;
+    geo: {
+      lat: string;
+      lng: string;
+    };
+  };
+  phone: string;
+  website: string;
+  company: {
+    name: string;
+    catchPhrase: string;
+    bs: string;
+  };
 }
 
 //fetch users
 const users: User[] = await fetch("https://jsonplaceholder.typicode.com/users")
-	.then((res) => res.json())
-	.then((data) => data);
+  .then((res) => res.json())
+  .then((data) => data);
 ---
 
 <BaseLayout title={pageTitle}>
-	<Hero title="Welcome to my site" subtitle="This is a subtitle" />
-	<!-- <FeaturedCards /> -->
-	<Features title="Features" subtitle="This is a subtitle" />
-	<Popular />
-	<Testimonial />
-	<!-- <h2>My Awesome blog titles</h2>
+  <Hero title="Welcome to my site" subtitle="This is a subtitle" />
+  <TrustedBrands />
+  <!-- <FeaturedCards /> -->
+  <Features title="Features" subtitle="This is a subtitle" />
+  <Popular />
+  <Testimonial />
+  <FAQ />
+  <div class="opacity-0 intersect:opacity-100 transition-opacity duration-700">
+    Hello, I fade in!
+  </div>
+  <!-- <h2>My Awesome blog titles</h2>
 	<h1 class="text-3xl font-bold underline text-emerald-600">
 		Hello world!
 	  </h1>
@@ -56,7 +63,7 @@ const users: User[] = await fetch("https://jsonplaceholder.typicode.com/users")
 		<button x-on:click="count++">Increment</button>
 		<span x-text="count"></span>
 	</div> -->
-	<!-- {
+  <!-- {
 		users.map((user: User) => (
 			<a key={user.id} class="p-4 m-2 bg-gray-100 rounded" href={`/users/${user.id}`}>
 				<h3 class="text-lg font-bold">{user.name}</h3>
