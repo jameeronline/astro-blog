@@ -1,9 +1,11 @@
 ---
-const { item } = Astro.props;
+const { item, url } = Astro.props;
+const tags = item.tags.map((tag) => tag.trim());
+const categories = item.category.map((cat) => cat.trim());
 ---
 
 <a
-  href="#"
+  href={url}
   class="group flex flex-col justify-between rounded-xl border border-border bg-accent p-6"
 >
   <div>
@@ -13,7 +15,7 @@ const { item } = Astro.props;
           class="relative size-full origin-bottom transition duration-300 group-hover:scale-105"
         >
           <img
-            src={item.image}
+            src={item.image.url}
             alt=""
             class="size-full object-cover object-center"
           />
@@ -22,20 +24,39 @@ const { item } = Astro.props;
     </div>
   </div>
   <div
-    class="mb-2 line-clamp-3 break-words pt-4 text-lg font-medium md:mb-3 md:pt-4 md:text-xl lg:pt-4 lg:text-2xl"
+    class="mb-2 line-clamp-2 break-words pt-4 text-lg font-medium md:mb-3 md:pt-4 md:text-xl lg:pt-4 lg:text-2xl"
   >
     {item.title}
   </div>
   <div
-    class="mb-8 line-clamp-2 text-sm text-zinc-600 md:mb-12 md:text-base lg:mb-9"
+    class="mb-8 line-clamp-2 text-sm text-gray-600 md:mb-12 md:text-base lg:mb-9"
   >
     {item.description}
   </div>
   <div>
-    <div
-      class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-zinc-200 text-zinc-800 hover:bg-black/80"
-    >
-      {item.category}
-    </div>
+    {
+      categories.map((cat, index) => (
+        <div
+          key={index}
+          class="inline-flex items-center capitalize rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-gray-200 text-gray-800 hover:bg-black/80"
+        >
+          {cat}
+        </div>
+      ))
+    }
+  </div>
+  <div
+    class="flex items-center flex-wrap gap-2 mt-4 transition-colors hover:text-primary-800"
+  >
+    {
+      tags.map((tag, index) => (
+        <div
+          key={index}
+          class="inline-flex items-center capitalize rounded-full border whitespace-nowrap px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-gray-200 text-gray-800 hover:bg-black/80"
+        >
+          {tag}
+        </div>
+      ))
+    }
   </div>
 </a>
