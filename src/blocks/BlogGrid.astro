@@ -1,0 +1,39 @@
+---
+// filepath: /src/blocks/BlogGrid.astro
+import type { CollectionEntry } from "astro:content";
+import BlogCard from "../components/BlogCard.astro";
+
+// Define the expected props interface
+interface BlogGridProps {
+  posts: CollectionEntry<"posts">[];
+}
+
+// Type assertion for Astro.props
+const { posts } = Astro.props as BlogGridProps;
+
+const delayClasses = [
+  "intersect:animate-delay-[0ms]",
+  "intersect:animate-delay-[100ms]",
+  "intersect:animate-delay-[200ms]",
+  "intersect:animate-delay-[300ms]",
+  "intersect:animate-delay-[400ms]",
+  "intersect:animate-delay-[500ms]",
+  "intersect:animate-delay-[600ms]",
+  "intersect:animate-delay-[700ms]",
+  "intersect:animate-delay-[800ms]",
+  "intersect:animate-delay-[900ms]",
+];
+---
+
+<div class="grid grid-cols-4 gap-6 md:grid-cols-8 lg:grid-cols-12">
+  {
+    posts.map((post, index) => (
+      <div
+        key={index}
+        class={`col-span-4 intersect:animate-fade-up ${delayClasses[index]} `}
+      >
+        <BlogCard item={post.data} url={post.slug} />
+      </div>
+    ))
+  }
+</div>

@@ -1,0 +1,19 @@
+---
+const { label, href } = Astro.props;
+const isLink = !!href;
+---
+
+{
+  isLink ? (
+    <a
+      href={href}
+      class="inline-flex items-center justify-center gap-1 rounded-full bg-primary-700/10 px-2.5 py-1 text-sm text-primary-900 decoration-0 hover:bg-primary-900 hover:text-white transition-colors"
+    >
+      {label}
+    </a>
+  ) : (
+    <span class="inline-flex items-center justify-center gap-1 rounded-full bg-primary-700/10 px-2.5 py-1 text-sm text-primary-900">
+      {label}
+    </span>
+  )
+}

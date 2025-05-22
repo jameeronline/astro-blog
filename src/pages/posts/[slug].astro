@@ -1,0 +1,83 @@
+---
+import { Image } from "astro:assets";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import BlogAside from "../../blocks/BlogAside.astro";
+import { format } from "date-fns";
+import Badge from "../../components/ui/Badge.astro";
+
+// filepath: /src/pages/posts/[slug].astro
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("posts");
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+  }));
+}
+
+const { slug } = Astro.params;
+import { getEntryBySlug } from "astro:content";
+const post = await getEntryBySlug("posts", slug);
+
+const { Content, getHeadings } = await post.render();
+
+if (!post) {
+  throw new Error("Post not found");
+}
+
+//data transformation
+const formattedDate = format(post.data.pubDate, "MM/dd/yyyy");
+
+const tags = post.data.tags.map((tag) => tag.trim());
+const categories = post.data.category.map((cat) => cat.trim());
+---
+
+<BaseLayout title={post.data.title}>
+  <section class="container px-6 m-auto">
+    <header class="prose mb-8">
+      <h1>{post.data.title}</h1>
+    </header>
+    <div class="grid grid-cols-4 gap-6 md:grid-cols-8 lg:grid-cols-12">
+      <div class="col-span-4 lg:col-span-9">
+        <article>
+          <figure>
+            <Image
+              src={post.data.image.url}
+              alt={post.data.title}
+              width={1600}
+              height={900}
+              class="w-full rounded-xl object-cover object-center"
+            />
+            <!-- <figcaption>{post.data.image.alt}</figcaption> -->
+            <p class="text-sm text-gray-500 my-4">
+              Written by {post.data.author} on {formattedDate}
+            </p>
+            <!-- <p>{frontmatter.description}</p> -->
+          </figure>
+
+          <div class="prose max-w-none">
+            <Content />
+          </div>
+
+          <footer class="my-6">
+            <div
+              class="flex items-center flex-wrap gap-2 mt-4 transition-colors hover:text-primary-800"
+            >
+              {
+                tags.map((tag, index) => (
+                  <Badge key={index} label={tag} href={`/tags/${tag}`} />
+                ))
+              }
+            </div>
+
+            <a href="/blog" class="text-sm">Back to index</a>
+          </footer>
+        </article>
+      </div>
+
+      <div class="col-span-4 lg:col-span-3">
+        <BlogAside />
+      </div>
+    </div>
+  </section>
+</BaseLayout>

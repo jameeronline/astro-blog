@@ -1,89 +1,48 @@
 ---
+import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import BlogPost from "../components/BlogPost.astro";
 import BlogCard from "../components/BlogCard.astro";
-import { all } from "axios";
-const pageTitle = "Blog Page";
-const allPosts = Object.values(
-  import.meta.glob("./posts/**/*.md", { eager: true })
-);
+import BlogGrid from "../blocks/BlogGrid.astro";
 
-const allPostsData = [
-  {
-    image:
-      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80",
-    alt: "",
-    title: "Understanding Component Libraries and Their Benefits",
-    description:
-      "Pellentesque eget quam ligula. Sed felis ante, consequat nec ultrices ut, ornare quis metus. Vivamus sit amet tortor vel enim sollicitudin hendrerit.",
-    category: "Category",
-    url: "#",
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80",
-    alt: "Duis sem sem, gravida vel porttitor eu, volutpat ut arcu",
-    title: "Top 5 Component Libraries for React Developers",
-    description:
-      "Pellentesque eget quam ligula. Sed felis ante, consequat nec ultrices ut, ornare quis metus. Vivamus sit amet tortor vel enim sollicitudin hendrerit.",
-    category: "Category",
-    url: "#",
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=600&q=80",
-    alt: "Duis sem sem, gravida vel porttitor eu, volutpat ut arcu",
-    title: "How to Choose the Right Component Library for Your Project",
-    description:
-      "Pellentesque eget quam ligula. Sed felis ante, consequat nec ultrices ut, ornare quis metus. Vivamus sit amet tortor vel enim sollicitudin hendrerit.",
-    category: "Category",
-    url: "#",
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1465101178521-c1a9136a3fdc?auto=format&fit=crop&w=600&q=80",
-    alt: "Duis sem sem, gravida vel porttitor eu, volutpat ut arcu",
-    title: "Building Custom Components with Popular Libraries",
-    description:
-      "Pellentesque eget quam ligula. Sed felis ante, consequat nec ultrices ut, ornare quis metus. Vivamus sit amet tortor vel enim sollicitudin hendrerit.",
-    category: "Category",
-    url: "#",
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80",
-    alt: "Duis sem sem, gravida vel porttitor eu, volutpat ut arcu",
-    title: "The Future of Component Libraries in Web Development",
-    description:
-      "Pellentesque eget quam ligula. Sed felis ante, consequat nec ultrices ut, ornare quis metus. Vivamus sit amet tortor vel enim sollicitudin hendrerit.",
-    category: "Category",
-    url: "#",
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80",
-    alt: "Duis sem sem, gravida vel porttitor eu, volutpat ut arcu",
-    title: "Best Practices for Using Component Libraries in Your Projects",
-    description:
-      "Pellentesque eget quam ligula. Sed felis ante, consequat nec ultrices ut, ornare quis metus. Vivamus sit amet tortor vel enim sollicitudin hendrerit.",
-    category: "Category",
-    url: "#",
-  },
+const allPostsCollection = await getCollection("posts");
+
+const pageTitle = "Blog Page";
+// const allPosts = Object.values(
+//   import.meta.glob("./posts/**/*.md", { eager: true })
+// );
+
+const delayClasses = [
+  "intersect:animate-delay-[0ms]",
+  "intersect:animate-delay-[100ms]",
+  "intersect:animate-delay-[200ms]",
+  "intersect:animate-delay-[300ms]",
+  "intersect:animate-delay-[400ms]",
+  "intersect:animate-delay-[500ms]",
+  "intersect:animate-delay-[600ms]",
+  "intersect:animate-delay-[700ms]",
+  "intersect:animate-delay-[800ms]",
+  "intersect:animate-delay-[900ms]",
 ];
 ---
 
 <BaseLayout title={pageTitle}>
-  <!-- <ul>
-    {
-      allPosts.map((post) => (
-        <BlogPost url={post.url} title={post.frontmatter.title} />
-      ))
-    }
-  </ul> -->
-
-  <section class="py-32">
+  <section class="py-16">
     <div class="container px-6 m-auto">
-      <div class="mb-8 md:mb-10 lg:mb-12">
+      <header
+        class="mx-auto flex max-w-screen-md flex-col items-center gap-6 mb-16 intersect:animate-delay-150 intersect:animate-fade-up"
+      >
+        <h2 class="mb-4 text-center text-3xl font-semibold lg:text-5xl">
+          Welcome to the Blog
+        </h2>
+        <p class="text-balance text-center text-zinc-600 lg:text-xl">
+          Explore our latest articles, tutorials, and insights on web
+          development, Astro, and more. Stay updated with tips, guides, and case
+          studies from our team.
+        </p>
+      </header>
+
+      <!-- <div class="mb-8 md:mb-10 lg:mb-12">
         <h2
           class="mb-6 w-full text-4xl font-medium md:mb-14 md:text-5xl lg:mb-16 lg:text-6xl"
         >
@@ -277,17 +236,9 @@ const allPostsData = [
             </select>
           </div>
         </div>
-      </div>
+      </div> -->
 
-      <div class="grid grid-cols-4 gap-6 md:grid-cols-8 lg:grid-cols-12">
-        {
-          allPosts.map((item, index) => (
-            <div key={index} class="col-span-4">
-              <BlogCard item={item.frontmatter} url={item.url} />
-            </div>
-          ))
-        }
-      </div>
+      <BlogGrid posts={allPostsCollection} />
     </div>
   </section>
 </BaseLayout>

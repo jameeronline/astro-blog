@@ -1,5 +1,5 @@
 ---
-layout: ../../layouts/MarkdownPostLayout.astro
+# layout: ../../layouts/MarkdownPostLayout.astro
 title: JavaScript ES6 Features
 author: Jamal Mohamed Ameer
 description: "This post highlights key JavaScript ES6 features such as arrow functions, template literals, destructuring, and modules, explaining how they simplify and modernize JavaScript development."
@@ -57,5 +57,3 @@ This code creates a flexible grid that adapts to different screen sizes.
 For more information, check out [MDN Web Docs on Responsive Design](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Responsive_Design).
 
 Visit my portfolio: [https://yourwebsite.com](https://yourwebsite.com)
-
-[Return to Blog List](/blog)
