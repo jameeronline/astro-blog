@@ -1,0 +1,99 @@
+---
+interface Skill {
+  name: string;
+  level: number; // 1-5
+  category: "frontend" | "backend" | "tools" | "soft";
+}
+
+interface SkillsMatrixProps {
+  skills: Skill[];
+}
+
+const categories = [
+  { id: "all", name: "All Skills" },
+  { id: "frontend", name: "Frontend" },
+  { id: "backend", name: "Backend" },
+  { id: "tools", name: "Tools" },
+  { id: "soft", name: "Soft Skills" },
+];
+
+const { skills } = Astro.props as SkillsMatrixProps;
+const isAnimated = true;
+let activeCategory = "all";
+---
+
+<div class="space-y-8">
+  <div class="flex flex-wrap gap-2" id="categories">
+    {
+      categories.map((category) => (
+        <button
+          key={category.id}
+          data-category={category.id}
+          type="button"
+          class={`px-4 py-2 text-sm rounded-full transition-all ${
+            activeCategory === category.id
+              ? "bg-primary-900 text-white hover:bg-gray-400"
+              : "bg-mint text-navy"
+          }`}
+        >
+          {category.name}
+        </button>
+      ))
+    }
+  </div>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" id="skills">
+    {
+      skills.map((skill, index) => (
+        <div
+          key={skill.name}
+          data-category={skill.category}
+          class={`flex flex-col gap-4 rounded-lg border border-gray-100 bg-white p-8 animate-fade-up`}
+        >
+          <div class="flex justify-between items-center mb-2">
+            <h4 class="font-bold">{skill.name}</h4>
+            <span class="text-xs font-mono bg-gray-200 px-2 py-1 rounded-full">
+              {skill.category}
+            </span>
+          </div>
+
+          <div class="w-full h-2 bg-gray-400/20 rounded-full overflow-hidden">
+            <div
+              class="h-full bg-primary-900/80 rounded-full transition-all duration-1000 ease-out w-0 intersect:w-[calc(var(--level)*20%)]"
+              style={{ "--level": skill.level }}
+            />
+          </div>
+
+          <div class="flex justify-between mt-1 text-xs text-muted-foreground">
+            <span>Beginner</span>
+            <span>Expert</span>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const categories = document.querySelectorAll("#categories button");
+    const skills = document.querySelectorAll("#skills > [data-category]");
+
+    categories.forEach((category) => {
+      category.addEventListener("click", function () {
+        //alert("Category clicked: " + this.getAttribute("data-category"));
+        const selectedCategory = this.getAttribute("data-category");
+
+        skills.forEach((skill) => {
+          if (
+            selectedCategory === "all" ||
+            skill.dataset.category === selectedCategory
+          ) {
+            skill.classList.remove("hidden");
+          } else {
+            skill.classList.add("hidden");
+          }
+        });
+      });
+    });
+  });
+</script>

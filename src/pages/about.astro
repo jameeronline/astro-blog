@@ -3,6 +3,9 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 const pageTitle = "About Me";
 
+import Button from "../components/ui/Button.astro";
+import AboutCard from "../components/AboutCard.astro";
+
 const identity = {
   firstName: "Sarah",
   country: "Canada",
@@ -15,270 +18,295 @@ const skills = ["HTML", "CSS", "JavaScript", "React", "Astro", "Writing Docs"];
 const happy = true;
 const finished = false;
 const goal = 3;
+
+import SkillMatrix from "../components/SkillMatrix.astro";
+
+const summaryItems = [
+  {
+    title: "Background",
+    description:
+      "I hold a Bachelor's degree in Computer Science and started my career as a frontend developer in 2016. Since then, I've worked with startups, agencies, and enterprise companies across a variety of industries.",
+  },
+  {
+    title: "Philosophy",
+    description:
+      "I believe in a user-first approach to development, where accessibility, performance, and intuitive design work together to create exceptional experiences. Good code is readable, maintainable, and inclusive.",
+  },
+  {
+    title: "Current Focus",
+    description:
+      "I'm currently exploring the intersection of AI and frontend development, building accessible component systems, and deepening my knowledge of performance optimization techniques.",
+  },
+];
+
+// Sample data
+const skillsData = [
+  // Frontend
+  { name: "React", level: 5, category: "frontend" },
+  { name: "TypeScript", level: 5, category: "frontend" },
+  { name: "JavaScript", level: 5, category: "frontend" },
+  { name: "HTML/CSS", level: 5, category: "frontend" },
+  { name: "Redux", level: 4, category: "frontend" },
+  { name: "Next.js", level: 4, category: "frontend" },
+  { name: "Vue.js", level: 3, category: "frontend" },
+  { name: "Tailwind CSS", level: 5, category: "frontend" },
+  { name: "SCSS/Sass", level: 4, category: "frontend" },
+  { name: "CSS-in-JS", level: 4, category: "frontend" },
+  { name: "Web Accessibility", level: 5, category: "frontend" },
+  { name: "Responsive Design", level: 5, category: "frontend" },
+
+  // Backend
+  { name: "Node.js", level: 4, category: "backend" },
+  { name: "Express", level: 4, category: "backend" },
+  { name: "Firebase", level: 4, category: "backend" },
+  { name: "REST APIs", level: 5, category: "backend" },
+  { name: "GraphQL", level: 3, category: "backend" },
+  { name: "MongoDB", level: 3, category: "backend" },
+  { name: "PostgreSQL", level: 3, category: "backend" },
+
+  // Tools
+  { name: "Git/GitHub", level: 5, category: "tools" },
+  { name: "Webpack", level: 4, category: "tools" },
+  { name: "Vite", level: 4, category: "tools" },
+  { name: "Jest", level: 4, category: "tools" },
+  { name: "Testing Library", level: 4, category: "tools" },
+  { name: "Cypress", level: 3, category: "tools" },
+  { name: "CI/CD", level: 3, category: "tools" },
+  { name: "Figma", level: 4, category: "tools" },
+  { name: "Adobe XD", level: 3, category: "tools" },
+
+  // Soft Skills
+  { name: "Problem Solving", level: 5, category: "soft" },
+  { name: "Communication", level: 5, category: "soft" },
+  { name: "Teamwork", level: 5, category: "soft" },
+  { name: "Adaptability", level: 4, category: "soft" },
+  { name: "Time Management", level: 4, category: "soft" },
+  { name: "Leadership", level: 4, category: "soft" },
+  { name: "Mentoring", level: 4, category: "soft" },
+  { name: "User Empathy", level: 5, category: "soft" },
+];
+
+const experiences = [
+  {
+    id: 1,
+    title: "Lead Frontend Developer",
+    company: "TechCorp Inc.",
+    logo: "https://via.placeholder.com/100",
+    location: "San Francisco, CA",
+    period: "2021 - Present",
+    description:
+      "Leading a team of frontend developers, architecting scalable web applications, implementing best practices, and mentoring junior developers.",
+    achievements: [
+      "Redesigned the company's flagship product, resulting in a 35% increase in user engagement",
+      "Implemented a component library that reduced development time by 40%",
+      "Set up automated testing and CI/CD pipelines that improved release reliability by 80%",
+    ],
+  },
+  {
+    id: 2,
+    title: "Senior Frontend Developer",
+    company: "InnoTech Solutions",
+    logo: "https://via.placeholder.com/100",
+    location: "Austin, TX",
+    period: "2018 - 2021",
+    description:
+      "Developed responsive web applications using React, TypeScript, and modern frontend tools. Collaborated with UX/UI designers to implement pixel-perfect interfaces.",
+    achievements: [
+      "Rebuilt the core application using React, improving performance by 60%",
+      "Implemented accessibility standards (WCAG 2.1) across all company products",
+      "Reduced bundle sizes by 45% through code splitting and optimization techniques",
+    ],
+  },
+  {
+    id: 3,
+    title: "Frontend Developer",
+    company: "WebSolutions LLC",
+    logo: "https://via.placeholder.com/100",
+    location: "Chicago, IL",
+    period: "2016 - 2018",
+    description:
+      "Built responsive websites and web applications for clients across various industries. Worked in an agile team environment.",
+    achievements: [
+      "Developed 20+ client websites with modern JavaScript frameworks",
+      "Created a custom CMS solution that improved content management workflows",
+      "Integrated third-party APIs for payment processing, maps, and social media",
+    ],
+  },
+];
 ---
 
-<style>
-  .skill {
-    color: #ff6347;
-    font-weight: bold;
-  }
-  .skill:hover {
-    color: #4c1d95;
-  }
-</style>
 <BaseLayout title={pageTitle}>
-  <section class="py-32">
-    <div class="container">
-      <div class="mx-auto flex max-w-screen-md flex-col items-center gap-6">
-        <h2 class="mb-4 text-center text-3xl font-semibold lg:text-5xl">
-          This is where your feature goes
-        </h2>
-        <p class="text-balance text-center text-zinc-600 lg:text-2xl">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vitae aut
-          doloribus voluptatum distinctio! Eum
-        </p>
-      </div>
-      <div class="mt-24">
-        <div
-          dir="ltr"
-          data-orientation="horizontal"
-          class="mx-auto flex w-fit flex-col items-center gap-8 md:gap-12"
+  {/* Hero Section */}
+  <section class="container my-16">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div class="space-y-6">
+        <p class="subtitle animate-fade-up">About Me</p>
+        <h1 class="animate-fade-up" style={{ animationDelay: "200ms" }}>
+          Frontend Developer & <span class="text-mint">UI Specialist</span>
+        </h1>
+        <p
+          class="text-lg text-muted-foreground animate-fade-up"
+          style={{ animationDelay: "400ms" }}
         >
-          <div
-            role="tablist"
-            aria-orientation="horizontal"
-            class="items-center justify-center rounded-md bg-zinc-100 text-zinc-600 flex h-auto flex-wrap gap-x-2 p-2"
-            tabindex="-1"
-            data-orientation="horizontal"
-            style="outline: none"
+          With over 7 years of experience in building user-centered web
+          applications, I combine technical expertise with a passion for
+          creating intuitive, accessible interfaces.
+        </p>
+        <div
+          class="flex flex-col sm:flex-row gap-4 animate-fade-up"
+          style={{ animationDelay: "600ms" }}
+        >
+          <a
+            href="/resume.pdf"
+            download
+            class="inline-flex items-center justify-center h-12 gap-2 px-6 font-medium tracking-wide text-white transition duration-300 rounded focus-visible:outline-none whitespace-nowrap bg-primary-900 hover:bg-primary-950 focus:bg-primary-700 disabled:cursor-not-allowed disabled:border-primary-300 disabled:bg-primary-300 disabled:shadow-none"
           >
-            <button
-              type="button"
-              role="tab"
-              aria-selected="true"
-              aria-controls="radix-:R2:-content-1"
-              data-state="active"
-              id="radix-:R2:-trigger-1"
-              class="inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-white data-[state=active]:text-foreground data-[state=active]:shadow-sm text-sm hover:bg-white md:text-base"
-              tabindex="-1"
-              data-orientation="horizontal"
-              data-radix-collection-item=""
-            >
-              Product</button
-            ><button
-              type="button"
-              role="tab"
-              aria-selected="false"
-              aria-controls="radix-:R2:-content-2"
-              data-state="inactive"
-              id="radix-:R2:-trigger-2"
-              class="inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-white data-[state=active]:text-foreground data-[state=active]:shadow-sm text-sm hover:bg-white md:text-base"
-              tabindex="-1"
-              data-orientation="horizontal"
-              data-radix-collection-item=""
-            >
-              Services</button
-            ><button
-              type="button"
-              role="tab"
-              aria-selected="false"
-              aria-controls="radix-:R2:-content-3"
-              data-state="inactive"
-              id="radix-:R2:-trigger-3"
-              class="inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-white data-[state=active]:text-foreground data-[state=active]:shadow-sm text-sm hover:bg-white md:text-base"
-              tabindex="-1"
-              data-orientation="horizontal"
-              data-radix-collection-item=""
-            >
-              Company</button
-            ><button
-              type="button"
-              role="tab"
-              aria-selected="false"
-              aria-controls="radix-:R2:-content-4"
-              data-state="inactive"
-              id="radix-:R2:-trigger-4"
-              class="inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-white data-[state=active]:text-foreground data-[state=active]:shadow-sm text-sm hover:bg-white md:text-base"
-              tabindex="-1"
-              data-orientation="horizontal"
-              data-radix-collection-item=""
-            >
-              Portfolio</button
-            ><button
-              type="button"
-              role="tab"
-              aria-selected="false"
-              aria-controls="radix-:R2:-content-5"
-              data-state="inactive"
-              id="radix-:R2:-trigger-5"
-              class="inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-white data-[state=active]:text-foreground data-[state=active]:shadow-sm text-sm hover:bg-white md:text-base"
-              tabindex="-1"
-              data-orientation="horizontal"
-              data-radix-collection-item=""
-            >
-              Blog
-            </button>
+            <span>Download Resume</span>
+          </a>
+        </div>
+      </div>
+
+      <div
+        class="relative rounded-xl overflow-hidden h-96 animate-fade-up"
+        style={{ animationDelay: "800ms" }}
+      >
+        <img
+          src="https://images.unsplash.com/photo-1603575448878-868a20723f5d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&q=80"
+          alt="John Developer working at desk"
+          class="w-full h-full object-cover"
+        />
+        <div
+          class="absolute inset-0 bg-gradient-to-t from-primary-900-dark/70 to-transparent"
+        >
+        </div>
+        <div class="absolute bottom-0 left-0 p-6 flex space-x-4">
+          <div class="glass-card p-3 flex items-center space-x-2">
+            <!-- <Calendar size={18} class="text-mint" /> -->
+            <span class="text-sm font-medium">7+ Years Experience</span>
           </div>
-          <div
-            data-state="active"
-            data-orientation="horizontal"
-            role="tabpanel"
-            aria-labelledby="radix-:R2:-trigger-1"
-            id="radix-:R2:-content-1"
-            tabindex="0"
-            class="mt-2 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 max-w-screen-lg"
-            style="animation-duration: 0s"
-          >
-            <div class="grid grid-cols-1 items-center gap-10 md:grid-cols-2">
-              <div>
-                <h2 class="mb-4 text-2xl font-semibold md:text-4xl">
-                  Ready to use blocks
-                </h2>
-                <p class="text-xl text-zinc-600">
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                  Suscipit, voluptatibus.
-                </p>
-                <ul class="mt-8 grid grid-cols-1 gap-2 lg:grid-cols-2">
-                  <li class="flex items-center gap-2">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      class="lucide lucide-circle-check w-4"
-                    >
-                      <circle cx="12" cy="12" r="10"></circle>
-                      <path d="m9 12 2 2 4-4"></path>
-                    </svg><span class="font-medium">Integrations</span>
-                  </li>
-                  <li class="flex items-center gap-2">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      class="lucide lucide-circle-check w-4"
-                    >
-                      <circle cx="12" cy="12" r="10"></circle>
-                      <path d="m9 12 2 2 4-4"></path>
-                    </svg><span class="font-medium">Components</span>
-                  </li>
-                  <li class="flex items-center gap-2">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      class="lucide lucide-circle-check w-4"
-                    >
-                      <circle cx="12" cy="12" r="10"></circle>
-                      <path d="m9 12 2 2 4-4"></path>
-                    </svg><span class="font-medium">Blocks</span>
-                  </li>
-                  <li class="flex items-center gap-2">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      class="lucide lucide-circle-check w-4"
-                    >
-                      <circle cx="12" cy="12" r="10"></circle>
-                      <path d="m9 12 2 2 4-4"></path>
-                    </svg><span class="font-medium">Templates</span>
-                  </li>
-                </ul>
-                <a
-                  href="#"
-                  class="mt-8 flex items-center gap-2 font-medium hover:underline"
-                  >Learn more<svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    class="lucide lucide-arrow-right w-4"
-                  >
-                    <path d="M5 12h14"></path>
-                    <path d="m12 5 7 7-7 7"></path>
-                  </svg></a
+          <div class="glass-card p-3 flex items-center space-x-2">
+            <!-- <MapPin size={18} class="text-mint" /> -->
+            <span class="text-sm font-medium">San Francisco, CA</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* Professional Introduction */}
+  <section class="container py-16 space-y-12">
+    <div>
+      <p class="subtitle">My Story</p>
+      <h2 class="text-3xl font-bold mb-8">Professional Journey</h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {summaryItems.map((summary) => <AboutCard data={summary} />)}
+      </div>
+    </div>
+  </section>
+
+  {/* Skills Matrix */}
+  <section class="py-16 bg-secondary/30">
+    <div class="container space-y-12">
+      <div>
+        <p class="subtitle">My Expertise</p>
+        <h2 class="text-3xl font-bold mb-8">Skills & Technologies</h2>
+        <SkillMatrix skills={skillsData} />
+      </div>
+    </div>
+  </section>
+
+  {/* Experience Timeline */}
+  <section class="container py-16 space-y-12">
+    <div>
+      <p class="subtitle">Work History</p>
+      <h2 class="text-3xl font-bold mb-8">Experience Timeline</h2>
+
+      <div class="space-y-12">
+        {
+          experiences.map((exp, index) => (
+            <div
+              key={exp.id}
+              class={`relative pl-8 md:pl-0 ${index !== experiences.length - 1 ? "pb-12" : ""}`}
+            >
+              {/* Timeline line */}
+              {index !== experiences.length - 1 && (
+                <div class="absolute left-0 md:left-1/2 top-0 bottom-0 w-0.5 bg-border md:-translate-x-px" />
+              )}
+
+              <div
+                class={`md:flex ${index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"}`}
+              >
+                {/* Timeline dot */}
+                <div class="absolute left-0 md:left-1/2 top-0 h-8 w-8 bg-mint rounded-full border-4 border-background flex items-center justify-center md:-translate-x-1/2 z-10">
+                  <span class="h-3 w-3 bg-background rounded-full" />
+                </div>
+
+                {/* Content */}
+                <div
+                  class={`md:w-1/2 pt-3 ${index % 2 === 0 ? "md:pr-12" : "md:pl-12"}`}
                 >
+                  <div class="glass-card p-6 space-y-6">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center">
+                      <div class="flex items-center space-x-4">
+                        <div class="h-12 w-12 rounded-full bg-secondary/80 flex-shrink-0 flex items-center justify-center">
+                          <img
+                            src={exp.logo}
+                            alt={`${exp.company} logo`}
+                            class="w-8 h-8"
+                          />
+                        </div>
+                        <div>
+                          <h3 class="font-bold text-xl">{exp.title}</h3>
+                          <p class="text-sm text-muted-foreground">
+                            {exp.company}
+                          </p>
+                        </div>
+                      </div>
+                      <div class="mt-2 md:mt-0 glass-card py-1 px-3 text-xs font-mono">
+                        {exp.period}
+                      </div>
+                    </div>
+
+                    <p class="text-muted-foreground">{exp.description}</p>
+
+                    <div>
+                      <h4 class="font-bold text-sm mb-2">Key Achievements:</h4>
+                      <ul class="space-y-2">
+                        {exp.achievements.map((achievement, i) => (
+                          <li key={i} class="flex items-start">
+                            <span class="h-1.5 w-1.5 bg-mint rounded-full mt-2 mr-2 flex-shrink-0" />
+                            <span class="text-sm text-muted-foreground">
+                              {achievement}
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <img
-                src="/images/placeholders/minima/placeholder-1.jpg"
-                alt="Ready to use blocks"
-                class="order-first max-h-[400px] w-full rounded-lg object-cover md:order-last"
-              />
             </div>
-          </div>
-          <div
-            data-state="inactive"
-            data-orientation="horizontal"
-            role="tabpanel"
-            aria-labelledby="radix-:R2:-trigger-2"
-            hidden=""
-            id="radix-:R2:-content-2"
-            tabindex="0"
-            class="mt-2 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 max-w-screen-lg"
-          >
-          </div>
-          <div
-            data-state="inactive"
-            data-orientation="horizontal"
-            role="tabpanel"
-            aria-labelledby="radix-:R2:-trigger-3"
-            hidden=""
-            id="radix-:R2:-content-3"
-            tabindex="0"
-            class="mt-2 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 max-w-screen-lg"
-          >
-          </div>
-          <div
-            data-state="inactive"
-            data-orientation="horizontal"
-            role="tabpanel"
-            aria-labelledby="radix-:R2:-trigger-4"
-            hidden=""
-            id="radix-:R2:-content-4"
-            tabindex="0"
-            class="mt-2 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 max-w-screen-lg"
-          >
-          </div>
-          <div
-            data-state="inactive"
-            data-orientation="horizontal"
-            role="tabpanel"
-            aria-labelledby="radix-:R2:-trigger-5"
-            hidden=""
-            id="radix-:R2:-content-5"
-            tabindex="0"
-            class="mt-2 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 max-w-screen-lg"
-          >
-          </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  {/* CTA Section */}
+  <section class="bg-primary-900 text-white py-16">
+    <div class="container text-center">
+      <div class="max-w-3xl mx-auto space-y-6">
+        <p class="subtitle">Let's Connect</p>
+        <h2 class="text-3xl font-bold text-white">
+          Interested in Working Together?
+        </h2>
+        <p class="text-lg text-slate-light">
+          I'm always open to discussing new projects, creative ideas, or
+          opportunities to be part of your vision.
+        </p>
+        <div class="pt-4">
+          <a href="/contact" class="btn-primary"> Get in Touch </a>
         </div>
       </div>
     </div>

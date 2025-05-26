@@ -24,6 +24,83 @@
 /* Icons */
 @import "remixicon/fonts/remixicon.css";
 
+@layer base {
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply font-sans antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-sans tracking-tight;
+  }
+
+  h1 {
+    @apply text-4xl font-bold md:text-5xl lg:text-6xl;
+  }
+
+  h2 {
+    @apply text-3xl font-bold md:text-4xl lg:text-5xl;
+  }
+
+  h3 {
+    @apply text-2xl font-bold md:text-3xl;
+  }
+
+  h4 {
+    @apply text-xl font-bold;
+  }
+
+  p {
+    @apply leading-relaxed;
+  }
+
+  .section {
+    @apply py-16 md:py-24;
+  }
+
+  .container-tight {
+    @apply max-w-5xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+}
+
+@layer components {
+  /* Glass Card */
+  .glass-card {
+    @apply bg-white/10 backdrop-blur-lg rounded-xl border border-white/20 shadow-lg;
+  }
+
+  .dark .glass-card {
+    @apply bg-primary-100/30 border-white/10;
+  }
+
+  /* Button Styles */
+  .btn-primary {
+    @apply inline-flex items-center justify-center rounded-md bg-primary-900 text-gray-800 font-medium transition-all hover:bg-gray-200/80 focus:outline-none focus:ring-2 focus:ring-primary-100/50 active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center rounded-md border border-gray-200 bg-transparent text-gray-500 font-medium transition-all hover:bg-gray-200/10 focus:outline-none focus:ring-2 focus:ring-primary-100/50 active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2;
+  }
+
+  /* Typography Styles */
+  .subtitle {
+    @apply text-sm md:text-base font-mono uppercase tracking-wider;
+  }
+
+  /* Transition utility */
+  .page-transition {
+    @apply transition-all duration-500 ease-out;
+  }
+}
+
 /* html {
   background-color: #f1f5f9;
   font-family: monospace, sans-serif;

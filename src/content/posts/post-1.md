@@ -1,8 +1,7 @@
 ---
-# layout: ../../layouts/MarkdownPostLayout.astro
 title: "10 Essential Web Development Skills Every Developer Should Master in 2025"
 author: "Astro Learner"
-description: "This is the first post of my new Astro blog."
+description: "Explore the top 10 essential web development skills every developer should master in 2025, including modern JavaScript, responsive design, frontend and backend frameworks, APIs, performance optimization, security, testing, and CI/CD best practices."
 image:
   url: "https://docs.astro.build/assets/rose.webp"
   alt: "The Astro logo on a dark background with a pink glow."

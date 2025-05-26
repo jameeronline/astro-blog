@@ -1,0 +1,68 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+//import projects from "../data/projects.json";
+
+import Counter from "../components/framework-ui/Counter";
+import ProjectCard from "../components/ProjectCard.astro";
+
+import { slugify } from "../utils/helper";
+
+import Github from "../assets/icons/github-fill.svg";
+import Facebook from "../assets/icons/facebook-box-fill.svg";
+
+const delayClasses = [
+  "intersect:animate-delay-[0ms]",
+  "intersect:animate-delay-[100ms]",
+  "intersect:animate-delay-[200ms]",
+  "intersect:animate-delay-[300ms]",
+  "intersect:animate-delay-[400ms]",
+  "intersect:animate-delay-[500ms]",
+  "intersect:animate-delay-[600ms]",
+  "intersect:animate-delay-[700ms]",
+  "intersect:animate-delay-[800ms]",
+  "intersect:animate-delay-[900ms]",
+];
+
+//config
+const title = "Projects Page";
+const description = "This is the projects page";
+import { getCollection, getEntry } from "astro:content";
+
+const projects = await getCollection("projects");
+const portfolio = await getCollection("portfolio");
+---
+
+<BaseLayout title={title} description={description}>
+  <!-- <Counter client:load /> -->
+  <section class="py-16">
+    <header
+      class="mx-auto flex max-w-screen-md flex-col items-center gap-6 mb-16 intersect:animate-delay-150 intersect:animate-fade-up"
+      transition:name="blog-title"
+    >
+      <h2 class="mb-4 text-center text-3xl font-semibold lg:text-5xl">
+        Projects and Portfolio
+      </h2>
+      <p class="text-balance text-center text-zinc-600 lg:text-xl">
+        Browse through my featured projects showcasing my skills in frontend
+        development, UX design, and creative problem-solving.
+      </p>
+    </header>
+
+    <div class="grid grid-cols-4 gap-6 md:grid-cols-8 lg:grid-cols-12">
+      {
+        portfolio.map((project, index) => (
+          <div
+            key={index}
+            class={`col-span-4 intersect:animate-fade-up ${delayClasses[index]} `}
+          >
+            <ProjectCard
+              data={project.data}
+              url={slugify(project.data.title)}
+            />
+          </div>
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>

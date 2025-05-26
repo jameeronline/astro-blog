@@ -1,0 +1,285 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { Clock, Mail, MapPin, MessageSquare, Phone } from "@lucide/astro";
+// import ContactForm from "../blocks/ContactForm.astro";
+import ContactForm from "../components/framework-ui/ContactForm";
+
+// const Contact = () => {
+//   const [selectedTab, setSelectedTab] = useState("contact");
+
+const selectedTab = "contact";
+
+//config
+const title = "Contact";
+
+// Contact info data
+const contactInfo = [
+  {
+    icon: Mail,
+    title: "Email",
+    content: "hello@johndeveloper.com",
+    link: "mailto:hello@johndeveloper.com",
+  },
+  {
+    icon: Phone,
+    title: "Phone",
+    content: "+1 (555) 123-4567",
+    link: "tel:+15551234567",
+  },
+  {
+    icon: MapPin,
+    title: "Location",
+    content: "San Francisco, CA",
+    link: "#",
+  },
+  {
+    icon: Clock,
+    title: "Availability",
+    content: "Mon-Fri: 9AM - 6PM PST",
+    link: "#",
+  },
+];
+---
+
+<BaseLayout title={title}>
+  {/* Page Title */}
+  {/* Hero Section */}
+  <section class="container-tight my-16">
+    <div class="max-w-3xl mx-auto text-center space-y-6">
+      <p class="subtitle opacity-0 animate-fade-in">Get in Touch</p>
+      <h1 class="opacity-0 animate-fade-in" style={{ animationDelay: "200ms" }}>
+        Let's Work <span class="text-mint">Together</span>
+      </h1>
+      <p
+        class="text-lg text-muted-foreground opacity-0 animate-fade-in"
+        style={{ animationDelay: "400ms" }}
+      >
+        Have a project in mind or just want to say hello? Feel free to reach
+        out. I'm always open to discussing new opportunities and ideas.
+      </p>
+    </div>
+  </section>
+
+  <ContactForm />
+
+  {/* Contact Section */}
+  <section class="container-tight mb-20">
+    <div class="glass-card overflow-hidden">
+      <div class="grid grid-cols-1 lg:grid-cols-5">
+        {/* Contact info sidebar */}
+        <div class="lg:col-span-2 bg-navy text-white p-8 lg:p-12 space-y-8">
+          <div class="space-y-3">
+            <h2 class="text-2xl font-bold text-white">Contact Information</h2>
+            <p class="text-slate-light">
+              Fill out the form and I'll get back to you as soon as possible.
+            </p>
+          </div>
+
+          <div class="space-y-6">
+            {
+              contactInfo.map((item, index) => (
+                <a
+                  key={index}
+                  href={item.link}
+                  class="flex items-start space-x-4 hover:text-mint transition-colors"
+                >
+                  <div class="p-3 rounded-full bg-navy-light">
+                    <item.icon />
+                  </div>
+                  <div>
+                    <h3 class="font-bold text-white">{item.title}</h3>
+                    <p class="text-slate-light">{item.content}</p>
+                  </div>
+                </a>
+              ))
+            }
+          </div>
+
+          {/* Social links */}
+          <div class="pt-8 border-t border-white/10">
+            <h3 class="font-bold text-white mb-4">Connect With Me</h3>
+            <div class="flex space-x-4">
+              <a
+                href="https://github.com/yourusername"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="p-3 rounded-full bg-navy-light hover:bg-mint hover:text-navy transition-colors"
+                aria-label="GitHub profile"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  ><path
+                    d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"
+                  ></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg
+                >
+              </a>
+              <a
+                href="https://linkedin.com/in/yourusername"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="p-3 rounded-full bg-navy-light hover:bg-mint hover:text-navy transition-colors"
+                aria-label="LinkedIn profile"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  ><path
+                    d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"
+                  ></path><rect width="4" height="12" x="2" y="9"></rect><circle
+                    cx="4"
+                    cy="4"
+                    r="2"></circle></svg
+                >
+              </a>
+              <a
+                href="https://twitter.com/yourusername"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="p-3 rounded-full bg-navy-light hover:bg-mint hover:text-navy transition-colors"
+                aria-label="Twitter profile"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  ><path
+                    d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"
+                  ></path></svg
+                >
+              </a>
+            </div>
+          </div>
+        </div>
+
+        {/* Form container */}
+        <div class="lg:col-span-3 p-8 lg:p-12">
+          <div class="mb-8">
+            <div class="flex border-b border-border">
+              <button
+                class={`pb-4 px-4 font-medium transition-colors ${
+                  selectedTab === "contact"
+                    ? "text-mint border-b-2 border-mint"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
+                onClick={() => setSelectedTab("contact")}
+              >
+                <MessageSquare size={18} class="inline-block mr-2" />
+                Contact Form
+              </button>
+              <button
+                class={`pb-4 px-4 font-medium transition-colors ${
+                  selectedTab === "calendar"
+                    ? "text-mint border-b-2 border-mint"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
+                onClick={() => setSelectedTab("calendar")}
+              >
+                <Clock size={18} class="inline-block mr-2" />
+                Book a Call
+              </button>
+            </div>
+          </div>
+
+          {
+            selectedTab === "contact" ? (
+              <ContactForm />
+            ) : (
+              <div class="space-y-6">
+                <p class="text-muted-foreground">
+                  Prefer a direct conversation? Schedule a 30-minute call at
+                  your convenience.
+                </p>
+
+                <div class="glass-card p-6">
+                  <iframe
+                    src="about:blank"
+                    Replace
+                    with
+                    actual
+                    calendar
+                    embed
+                    title="Book a call"
+                    class="w-full h-[450px] border-0"
+                  />
+                </div>
+
+                <p class="text-sm text-muted-foreground">
+                  Can't find a suitable time? Send me an email, and we'll find a
+                  time that works for both of us.
+                </p>
+              </div>
+            )
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* FAQ Section */}
+  <section class="container-tight py-16 mb-20">
+    <div class="text-center mb-12">
+      <p class="subtitle">FAQ</p>
+      <h2 class="text-3xl font-bold">Frequently Asked Questions</h2>
+    </div>
+
+    <div class="grid gap-6 md:grid-cols-2">
+      <div class="glass-card p-6 space-y-3">
+        <h3 class="text-xl font-bold">What services do you offer?</h3>
+        <p class="text-muted-foreground">
+          I specialize in frontend development, UI/UX implementation, web
+          application development, and performance optimization. I can help with
+          everything from small components to full-scale applications.
+        </p>
+      </div>
+
+      <div class="glass-card p-6 space-y-3">
+        <h3 class="text-xl font-bold">What is your typical process?</h3>
+        <p class="text-muted-foreground">
+          My process typically involves an initial consultation, proposal/scope
+          definition, design implementation, development, testing, and
+          deployment. I maintain clear communication throughout each phase.
+        </p>
+      </div>
+
+      <div class="glass-card p-6 space-y-3">
+        <h3 class="text-xl font-bold">How long does a typical project take?</h3>
+        <p class="text-muted-foreground">
+          Project timelines vary based on scope and complexity. A small project
+          might take 2-4 weeks, while larger applications can take several
+          months. I'll provide a detailed timeline during our initial
+          consultation.
+        </p>
+      </div>
+
+      <div class="glass-card p-6 space-y-3">
+        <h3 class="text-xl font-bold">Do you offer ongoing maintenance?</h3>
+        <p class="text-muted-foreground">
+          Yes, I offer maintenance packages to ensure your application stays
+          up-to-date, secure, and performs well. This can include regular
+          updates, performance monitoring, and feature additions.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

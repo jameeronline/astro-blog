@@ -1,6 +1,4 @@
 ---
-# layout: ../../../layouts/MarkdownPostLayout.astro
-layout:
 title: "API Integration 101: Connecting Your Frontend to the Real World"
 author: Astro Learner
 description: "I had some challenges, but asking in the community really helped!"

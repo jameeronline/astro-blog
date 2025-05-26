@@ -1,0 +1,82 @@
+---
+// src/pages/blog/[...page].astro
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import BlogPost from "../../components/BlogPost.astro";
+import BlogCard from "../../components/BlogCard.astro";
+import BlogGrid from "../../blocks/BlogGrid.astro";
+import { slugify } from "../../utils/helper";
+
+const pageTitle = "Blog Page Listing";
+
+// Pagination setup
+export async function getStaticPaths({ paginate }) {
+  // Get all posts (you can add sorting/filtering here)
+  const allPosts = await getCollection("posts");
+
+  // Sort posts by date (newest first)
+  const sortedPosts = allPosts.sort(
+    (a, b) => new Date(b.data.pubDate) - new Date(a.data.pubDate)
+  );
+
+  return paginate(sortedPosts, {
+    pageSize: 3, // Number of posts per page
+  });
+}
+
+// Get the current page data from Astro props
+const { page } = Astro.props;
+---
+
+<BaseLayout title={pageTitle}>
+  <section class="py-16">
+    <header
+      class="mx-auto flex max-w-screen-md flex-col items-center gap-6 mb-16 intersect:animate-delay-150 intersect:animate-fade-up"
+      transition:name="blog-title"
+    >
+      <h2 class="mb-4 text-center text-3xl font-semibold lg:text-5xl">
+        Welcome to the Blog
+      </h2>
+      <p class="text-balance text-center text-zinc-600 lg:text-xl">
+        Explore our latest articles, tutorials, and insights on web development,
+        Astro, and more. Stay updated with tips, guides, and case studies from
+        our team.
+      </p>
+    </header>
+
+    <BlogGrid posts={page.data} />
+
+    <!-- Pagination Controls -->
+    <nav class="flex justify-center gap-4 mt-12">
+      {
+        page.url.prev ? (
+          <a
+            href={page.url.prev}
+            class="px-4 py-2 border rounded-lg hover:bg-gray-100 transition-colors"
+          >
+            &larr; Previous
+          </a>
+        ) : (
+          <span class="px-4 py-2 text-gray-400">&larr; Previous</span>
+        )
+      }
+
+      <span class="px-4 py-2">
+        Page {page.currentPage} of {page.lastPage}
+      </span>
+
+      {
+        page.url.next ? (
+          <a
+            href={page.url.next}
+            class="px-4 py-2 border rounded-lg hover:bg-gray-100 transition-colors"
+          >
+            Next &rarr;
+          </a>
+        ) : (
+          <span class="px-4 py-2 text-gray-400">Next &rarr;</span>
+        )
+      }
+    </nav>
+  </section>
+</BaseLayout>

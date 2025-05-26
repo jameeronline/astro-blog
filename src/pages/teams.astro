@@ -1,0 +1,48 @@
+---
+import Image from "astro/components/Image.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+//config
+const title = "Teams Page";
+const description = "This is the projects page";
+import { getCollection, getEntry } from "astro:content";
+
+const teams = await getCollection("teams");
+---
+
+<BaseLayout title={title} description={description}>
+  <section class="py-32">
+    <div class="container flex flex-col items-start text-left">
+      <p class="semibold">Our team</p>
+      <h2 class="my-6 text-pretty text-2xl font-bold lg:text-4xl">
+        The team you&#x27;ll be working with
+      </h2>
+      <p class="mb-8 max-w-3xl text-zinc-600 lg:text-xl">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+      </p>
+    </div>
+    <div
+      class="container mt-16 grid gap-x-12 gap-y-16 md:grid-cols-2 lg:grid-cols-4"
+    >
+      {
+        teams.map(({ data }) => (
+          <article>
+            <div class="flex flex-col items-start">
+              <Image
+                src={data.picture}
+                alt={data.name}
+                class="relative flex shrink-0 overflow-hidden rounded-full mb-4 grayscale size-20 md:mb-5 lg:size-24"
+                width={96}
+                height={96}
+              />
+            </div>
+            <p class="font-medium">{data.name}</p>
+            <p class="text-zinc-600">{data.role}</p>
+            <p class="py-3 text-sm text-zinc-600">{data.description}</p>
+            <div class="mt-2 flex gap-4" />
+          </article>
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>

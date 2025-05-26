@@ -1,0 +1,19 @@
+{
+  "projects": [
+    {
+      "id": 1,
+      "title": "Personal Portfolio Website",
+      "description": "A responsive website to showcase my projects and skills.",
+      "image": "https://source.unsplash.com/featured/?portfolio,developer",
+      "type": "Frontend",
+      "tags": ["portfolio", "responsive", "personal"],
+      "challenge": "Creating a visually appealing and mobile-friendly portfolio that highlights all my work and skills.",
+      "solution": "Designed a clean UI with responsive layouts using CSS Grid and Flexbox, and optimized images for fast loading.",
+      "technologies": ["HTML", "CSS", "JavaScript"],
+      "github": "https://github.com/username/portfolio",
+      "liveDemo": "https://username.github.io/portfolio",
+      "year": 2023,
+      "role": "Frontend Developer"
+    }
+  ]
+}

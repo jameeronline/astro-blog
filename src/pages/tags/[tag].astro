@@ -1,14 +1,9 @@
 ---
-import { glob, file } from "astro/loaders";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import BlogGrid from "../../blocks/BlogGrid.astro";
 import { getCollection } from "astro:content";
 
 export async function getStaticPaths() {
-  // const allPosts = Object.values(
-  //   import.meta.glob("./posts/**/*.md", { eager: true })
-  // );
-
   const posts = await getCollection("posts");
 
   // Collect all unique tags from posts
@@ -27,14 +22,24 @@ export async function getStaticPaths() {
 }
 
 const { tag } = Astro.params;
-const { posts } = Astro.props;
 
-const filteredPosts = posts.filter(
-  (post) => post.data.tags && post.data.tags.includes(tag)
+const filteredPosts = await getCollection(
+  "posts",
+  ({ data }) => Array.isArray(data.tags) && data.tags.includes(tag as string)
 );
+
+const noPosts = !filteredPosts || filteredPosts.length === 0;
 ---
 
 <BaseLayout pageTitle={tag}>
   <p>Posts tagged with {tag}</p>
-  <BlogGrid posts={filteredPosts} />
+  {
+    noPosts ? (
+      <div class="text-red-600 py-8 text-center font-semibold">
+        No posts found for tag: {tag}
+      </div>
+    ) : (
+      <BlogGrid posts={filteredPosts} />
+    )
+  }
 </BaseLayout>

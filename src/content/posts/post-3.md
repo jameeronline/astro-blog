@@ -1,5 +1,4 @@
 ---
-# layout: ../../layouts/MarkdownPostLayout.astro
 title: "From HTML to Full Stack: A Beginner’s Roadmap to Web Development"
 author: Astro Learner
 description: "I had some challenges, but asking in the community really helped!"

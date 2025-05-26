@@ -1,0 +1,29 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+import { slugify } from "../../utils/helper";
+
+export async function getStaticPaths() {
+  // Define static paths for dynamic routing
+  const projectCollection = await getCollection("portfolio");
+
+  return projectCollection.map((project) => ({
+    params: { projectid: slugify(project.data.title) },
+  }));
+}
+
+const { projectid } = Astro.params;
+---
+
+<BaseLayout title="Project Details">
+  <section>
+    <h1 class="text-3xl font-bold underline text-emerald-600">
+      Project Details {projectid}
+    </h1>
+    <p class="text-gray-700">
+      This is the project details page. Here you can find more information about
+      the project.
+    </p>
+    <!-- Add your project details here -->
+  </section>
+</BaseLayout>

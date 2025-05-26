@@ -1,5 +1,4 @@
 ---
-# layout: ../../layouts/MarkdownPostLayout.astro
 title: JavaScript ES6 Features
 author: Jamal Mohamed Ameer
 description: "This post highlights key JavaScript ES6 features such as arrow functions, template literals, destructuring, and modules, explaining how they simplify and modernize JavaScript development."

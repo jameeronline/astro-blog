@@ -1,6 +1,4 @@
 ---
-# layout: ../../../layouts/MarkdownPostLayout.astro
-layout:
 title: "Modern CSS Techniques You Should Be Using Today"
 author: Astro Learner
 description: "I had some challenges, but asking in the community really helped!"

@@ -1,5 +1,30 @@
 ---
+import Badge from "../components/ui/Badge.astro";
 
+const { headings, tags, categories } = Astro.props;
+
+const socialLinks = [
+  {
+    href: "#",
+    src: "/images/placeholders/logos/instagram-icon.svg",
+    alt: "Instagram",
+  },
+  {
+    href: "#",
+    src: "/images/placeholders/logos/linkedin-icon.svg",
+    alt: "LinkedIn",
+  },
+  {
+    href: "#",
+    src: "/images/placeholders/logos/producthunt-icon.svg",
+    alt: "Product Hunt",
+  },
+  {
+    href: "#",
+    src: "/images/placeholders/logos/twitter-icon.svg",
+    alt: "Twitter",
+  },
+];
 ---
 
 <aside class="top-20 mb-8 w-full self-start md:sticky">
@@ -37,44 +62,55 @@
   <div
     class="flex flex-col rounded-xl border border-gray-200 bg-white py-6 md:py-8"
   >
-    <div class="md:mb-4.5 mb-6 px-6 font-medium leading-5">
-      About Case Study
+    <div>
+      {
+        headings && headings.length > 0 && (
+          <nav class="mb-8 px-6">
+            <div class="md:mb-4.5 mb-6 font-medium leading-5">On this page</div>
+
+            <ul class="space-y-1">
+              {headings
+                .filter((h) => h.depth === 2 || h.depth === 3) // Show h2/h3 only, adjust as needed
+                .map((h) => (
+                  <li class={`ml-${(h.depth - 2) * 4}`}>
+                    <a
+                      href={`#${h.slug ?? h.id}`}
+                      class="text-xs text-zinc-600 hover:text-primary-900 transition-colors"
+                    >
+                      {h.text}
+                    </a>
+                  </li>
+                ))}
+            </ul>
+          </nav>
+        )
+      }
     </div>
+
     <div class="mb-5 px-6 last:mb-0">
-      <div class="mb-2 text-xs font-semibold">Company</div>
-      <div class="overflow-hidden text-xs text-zinc-600 md:text-sm">
-        Suspendisse vel euismod sem. Sed sollicitudin augue eu facilisis
-        scelerisque. Nullam pharetra tortor ut massa accumsan egestas.
+      <div class="mb-2 text-xs font-semibold">Categories</div>
+      <div class="flex items-center flex-wrap gap-2">
+        {
+          categories.map((category, index) => (
+            <Badge key={index} label={category} href={`/tags/${category}`} />
+          ))
+        }
       </div>
     </div>
     <div class="mb-5 px-6 last:mb-0">
-      <div class="mb-2 text-xs font-semibold">Industry</div>
-      <div class="overflow-hidden text-xs text-zinc-600 md:text-sm">
-        Suspendisse volutpat
-      </div>
-    </div>
-    <div class="mb-5 border-t border-border px-6 pt-5 last:mb-0">
-      <div class="mb-2 text-xs font-semibold">Location</div>
-      <div class="overflow-hidden text-xs text-zinc-600 md:text-sm">
-        London, United Kingdom
-      </div>
-    </div>
-    <div class="mb-5 px-6 last:mb-0">
-      <div class="mb-2 text-xs font-semibold">Company size</div>
-      <div class="overflow-hidden text-xs text-zinc-600 md:text-sm">11-50</div>
-    </div>
-    <div class="mb-5 px-6 last:mb-0">
-      <div class="mb-2 text-xs font-semibold">Website</div>
-      <div class="overflow-hidden text-xs text-zinc-600 md:text-sm">
-        <a href="#" class="underline hover:text-foreground"
-          >https://example.com/</a
-        >
-      </div>
-    </div>
-    <div class="mb-5 px-6 last:mb-0">
-      <div class="mb-2 text-xs font-semibold">Topics</div>
-      <div class="overflow-hidden text-xs text-zinc-600 md:text-sm">
-        Sed sollicitudin augue eu facilisis scelerisque
+      <div class="mb-2 text-xs font-semibold">Tags</div>
+      <div class="flex items-center flex-wrap gap-2">
+        {
+          tags.map((tag, index) => (
+            <a
+              href={`/tags/${tag}`}
+              class="text-sm underline hover:text-primary-900 transition-colors"
+              key={index}
+            >
+              #{tag}
+            </a>
+          ))
+        }
       </div>
     </div>
   </div>
