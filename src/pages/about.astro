@@ -1,138 +1,25 @@
 ---
+//config
+const pageTitle = "About Me";
+
 //layouts
 import BaseLayout from "../layouts/BaseLayout.astro";
-const pageTitle = "About Me";
 
 import Button from "../components/ui/Button.astro";
 import AboutCard from "../components/AboutCard.astro";
-
-const identity = {
-  firstName: "Sarah",
-  country: "Canada",
-  occupation: "Technical Writer",
-  hobbies: ["photography", "birdwatching", "baseball"],
-};
-
-const skills = ["HTML", "CSS", "JavaScript", "React", "Astro", "Writing Docs"];
-
-const happy = true;
-const finished = false;
-const goal = 3;
-
 import SkillMatrix from "../components/SkillMatrix.astro";
 
-const summaryItems = [
-  {
-    title: "Background",
-    description:
-      "I hold a Bachelor's degree in Computer Science and started my career as a frontend developer in 2016. Since then, I've worked with startups, agencies, and enterprise companies across a variety of industries.",
-  },
-  {
-    title: "Philosophy",
-    description:
-      "I believe in a user-first approach to development, where accessibility, performance, and intuitive design work together to create exceptional experiences. Good code is readable, maintainable, and inclusive.",
-  },
-  {
-    title: "Current Focus",
-    description:
-      "I'm currently exploring the intersection of AI and frontend development, building accessible component systems, and deepening my knowledge of performance optimization techniques.",
-  },
-];
+// icons
+import { FileText, Phone } from "@lucide/astro";
 
-// Sample data
-const skillsData = [
-  // Frontend
-  { name: "React", level: 5, category: "frontend" },
-  { name: "TypeScript", level: 5, category: "frontend" },
-  { name: "JavaScript", level: 5, category: "frontend" },
-  { name: "HTML/CSS", level: 5, category: "frontend" },
-  { name: "Redux", level: 4, category: "frontend" },
-  { name: "Next.js", level: 4, category: "frontend" },
-  { name: "Vue.js", level: 3, category: "frontend" },
-  { name: "Tailwind CSS", level: 5, category: "frontend" },
-  { name: "SCSS/Sass", level: 4, category: "frontend" },
-  { name: "CSS-in-JS", level: 4, category: "frontend" },
-  { name: "Web Accessibility", level: 5, category: "frontend" },
-  { name: "Responsive Design", level: 5, category: "frontend" },
-
-  // Backend
-  { name: "Node.js", level: 4, category: "backend" },
-  { name: "Express", level: 4, category: "backend" },
-  { name: "Firebase", level: 4, category: "backend" },
-  { name: "REST APIs", level: 5, category: "backend" },
-  { name: "GraphQL", level: 3, category: "backend" },
-  { name: "MongoDB", level: 3, category: "backend" },
-  { name: "PostgreSQL", level: 3, category: "backend" },
-
-  // Tools
-  { name: "Git/GitHub", level: 5, category: "tools" },
-  { name: "Webpack", level: 4, category: "tools" },
-  { name: "Vite", level: 4, category: "tools" },
-  { name: "Jest", level: 4, category: "tools" },
-  { name: "Testing Library", level: 4, category: "tools" },
-  { name: "Cypress", level: 3, category: "tools" },
-  { name: "CI/CD", level: 3, category: "tools" },
-  { name: "Figma", level: 4, category: "tools" },
-  { name: "Adobe XD", level: 3, category: "tools" },
-
-  // Soft Skills
-  { name: "Problem Solving", level: 5, category: "soft" },
-  { name: "Communication", level: 5, category: "soft" },
-  { name: "Teamwork", level: 5, category: "soft" },
-  { name: "Adaptability", level: 4, category: "soft" },
-  { name: "Time Management", level: 4, category: "soft" },
-  { name: "Leadership", level: 4, category: "soft" },
-  { name: "Mentoring", level: 4, category: "soft" },
-  { name: "User Empathy", level: 5, category: "soft" },
-];
-
-const experiences = [
-  {
-    id: 1,
-    title: "Lead Frontend Developer",
-    company: "TechCorp Inc.",
-    logo: "https://via.placeholder.com/100",
-    location: "San Francisco, CA",
-    period: "2021 - Present",
-    description:
-      "Leading a team of frontend developers, architecting scalable web applications, implementing best practices, and mentoring junior developers.",
-    achievements: [
-      "Redesigned the company's flagship product, resulting in a 35% increase in user engagement",
-      "Implemented a component library that reduced development time by 40%",
-      "Set up automated testing and CI/CD pipelines that improved release reliability by 80%",
-    ],
-  },
-  {
-    id: 2,
-    title: "Senior Frontend Developer",
-    company: "InnoTech Solutions",
-    logo: "https://via.placeholder.com/100",
-    location: "Austin, TX",
-    period: "2018 - 2021",
-    description:
-      "Developed responsive web applications using React, TypeScript, and modern frontend tools. Collaborated with UX/UI designers to implement pixel-perfect interfaces.",
-    achievements: [
-      "Rebuilt the core application using React, improving performance by 60%",
-      "Implemented accessibility standards (WCAG 2.1) across all company products",
-      "Reduced bundle sizes by 45% through code splitting and optimization techniques",
-    ],
-  },
-  {
-    id: 3,
-    title: "Frontend Developer",
-    company: "WebSolutions LLC",
-    logo: "https://via.placeholder.com/100",
-    location: "Chicago, IL",
-    period: "2016 - 2018",
-    description:
-      "Built responsive websites and web applications for clients across various industries. Worked in an agile team environment.",
-    achievements: [
-      "Developed 20+ client websites with modern JavaScript frameworks",
-      "Created a custom CMS solution that improved content management workflows",
-      "Integrated third-party APIs for payment processing, maps, and social media",
-    ],
-  },
-];
+//load data
+import {
+  identity,
+  skills,
+  summaryItems,
+  skillsData,
+  experiences,
+} from "../data/about.ts";
 ---
 
 <BaseLayout title={pageTitle}>
@@ -156,13 +43,20 @@ const experiences = [
           class="flex flex-col sm:flex-row gap-4 animate-fade-up"
           style={{ animationDelay: "600ms" }}
         >
-          <a
+          <Button
+            as="a"
             href="/resume.pdf"
+            variant="primary"
             download
-            class="inline-flex items-center justify-center h-12 gap-2 px-6 font-medium tracking-wide text-white transition duration-300 rounded focus-visible:outline-none whitespace-nowrap bg-primary-900 hover:bg-primary-950 focus:bg-primary-700 disabled:cursor-not-allowed disabled:border-primary-300 disabled:bg-primary-300 disabled:shadow-none"
+            size="lg"
           >
-            <span>Download Resume</span>
-          </a>
+            <FileText size={18} class="mr-2" />
+            Download Resume
+          </Button>
+          <Button as="a" href="/contact" variant="secondary" size="lg">
+            <Phone size={18} class="mr-2" />
+            Get in Touch
+          </Button>
         </div>
       </div>
 

@@ -1,34 +1,29 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import BlogGrid from "../../blocks/BlogGrid.astro";
+import TagFilter from "../../components/TagFilter.astro";
 import { getCollection } from "astro:content";
 
-// Get all posts
-const posts = await getCollection("posts");
+const { tag } = Astro.params;
 
-// Collect all unique tags
-const tagsSet = new Set();
-posts.forEach((post) => {
-  if (Array.isArray(post.data.tags)) {
-    post.data.tags.forEach((tag) => tagsSet.add(tag));
-  }
-});
-const tags = Array.from(tagsSet).sort();
+const selected = "all";
+
+const filteredPosts = await getCollection("posts");
+
+const noPosts = !filteredPosts || filteredPosts.length === 0;
 ---
 
-<BaseLayout pageTitle="All Tags">
-  <h1 class="text-2xl font-bold mb-6">All Tags</h1>
-  <ul class="flex flex-wrap gap-2">
+<BaseLayout pageTitle={selected}>
+  <section class="py-16">
+    <TagFilter selected={selected} />
     {
-      tags.map((tag) => (
-        <li>
-          <a
-            href={`/tags/${tag}/`}
-            class="px-3 py-1 rounded bg-mint text-navy hover:bg-primary-900 hover:text-white transition"
-          >
-            {tag}
-          </a>
-        </li>
-      ))
+      noPosts ? (
+        <div class="text-red-600 py-8 text-center font-semibold">
+          No posts found for tag: {selected}
+        </div>
+      ) : (
+        <BlogGrid posts={filteredPosts} />
+      )
     }
-  </ul>
+  </section>
 </BaseLayout>

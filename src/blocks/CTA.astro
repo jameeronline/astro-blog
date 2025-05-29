@@ -1,8 +1,9 @@
 ---
-
+import { Mail } from "@lucide/astro";
+import Button from "../components/ui/Button.astro";
 ---
 
-<section class="section">
+<section class="section bg-gray-200">
   <div class="container-tight text-center">
     <div class="max-w-3xl mx-auto space-y-6">
       <p class="subtitle">Get in Touch</p>
@@ -12,26 +13,10 @@
         full-time positions. Let's create something amazing together.
       </p>
       <div class="pt-4">
-        <a
-          href="/contact"
-          class="px-6 py-3.5 text-base font-medium text-white inline-flex items-center bg-primary-900 hover:bg-primary-950 focus:ring-4 focus:outline-none focus:ring-primary-300 rounded-lg text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-        >
-          <svg
-            class="w-4 h-4 text-white me-3"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="currentColor"
-            viewBox="0 0 20 16"
-          >
-            <path
-              d="m10.036 8.278 9.258-7.79A1.979 1.979 0 0 0 18 0H2A1.987 1.987 0 0 0 .641.541l9.395 7.737Z"
-            ></path>
-            <path
-              d="M11.241 9.817c-.36.275-.801.425-1.255.427-.428 0-.845-.138-1.187-.395L0 2.6V14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2.5l-8.759 7.317Z"
-            ></path>
-          </svg>
+        <Button as="a" href="/contact" size="lg" variant="primary">
+          <Mail class="mr-2 h-5 w-5" />
           Contact Me
-        </a>
+        </Button>
       </div>
     </div>
   </div>

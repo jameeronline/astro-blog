@@ -1,12 +1,9 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
-
 //import projects from "../data/projects.json";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ProjectCard from "../../components/ProjectCard.astro";
 
-import Counter from "../components/framework-ui/Counter";
-import ProjectCard from "../components/ProjectCard.astro";
-
-import { slugify } from "../utils/helper";
+import { slugify } from "../../utils/helper";
 
 import Github from "../assets/icons/github-fill.svg";
 import Facebook from "../assets/icons/facebook-box-fill.svg";
@@ -29,16 +26,20 @@ const title = "Projects Page";
 const description = "This is the projects page";
 import { getCollection, getEntry } from "astro:content";
 
-const projects = await getCollection("projects");
-const portfolio = await getCollection("portfolio");
+// Pagination setup
+export async function getStaticPaths({ paginate }) {
+  const allProjects = await getCollection("projects");
+  return paginate(allProjects, { pageSize: 3 });
+}
+
+// Get the current page data from Astro props
+const { page } = Astro.props;
 ---
 
 <BaseLayout title={title} description={description}>
-  <!-- <Counter client:load /> -->
   <section class="py-16">
     <header
       class="mx-auto flex max-w-screen-md flex-col items-center gap-6 mb-16 intersect:animate-delay-150 intersect:animate-fade-up"
-      transition:name="blog-title"
     >
       <h2 class="mb-4 text-center text-3xl font-semibold lg:text-5xl">
         Projects and Portfolio
@@ -51,10 +52,10 @@ const portfolio = await getCollection("portfolio");
 
     <div class="grid grid-cols-4 gap-6 md:grid-cols-8 lg:grid-cols-12">
       {
-        portfolio.map((project, index) => (
+        page.data.map((project, index) => (
           <div
             key={index}
-            class={`col-span-4 intersect:animate-fade-up ${delayClasses[index]} `}
+            class={`col-span-4 intersect:animate-fade-up ${delayClasses[index % delayClasses.length]}`}
           >
             <ProjectCard
               data={project.data}
@@ -64,5 +65,33 @@ const portfolio = await getCollection("portfolio");
         ))
       }
     </div>
+
+    <nav class="flex justify-center gap-4 mt-8">
+      {
+        page.url.prev ? (
+          <a
+            href={page.url.prev}
+            class="px-4 py-2 rounded bg-gray-200 hover:bg-gray-300"
+          >
+            Previous
+          </a>
+        ) : (
+          <span class="px-4 py-2 text-gray-400">Previous</span>
+        )
+      }
+      <span class="px-4 py-2">{page.currentPage} / {page.lastPage}</span>
+      {
+        page.url.next ? (
+          <a
+            href={page.url.next}
+            class="px-4 py-2 rounded bg-gray-200 hover:bg-gray-300"
+          >
+            Next
+          </a>
+        ) : (
+          <span class="px-4 py-2 text-gray-400">Next</span>
+        )
+      }
+    </nav>
   </section>
 </BaseLayout>

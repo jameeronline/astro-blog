@@ -1,24 +1,48 @@
 ---
-const { type = "button", size = "md", variant = "primary", ...props } = Astro.props;
+const {
+  type = "button",
+  size = "md",
+  variant = "primary",
+  as = "button",
+  href,
+  ...props
+} = Astro.props;
+
+const baseClasses =
+  "inline-flex items-center justify-center rounded-lg text-base font-medium text-center focus:outline-none focus:ring-2 focus:ring-offset-2 transition-colors duration-200";
 
 const sizeClasses = {
-    sm: "px-2 py-1 text-sm",
-    md: "px-4 py-2 text-base",
-    lg: "px-6 py-3 text-lg",
+  sm: "px-2 h-8 text-sm",
+  md: "px-4 h-10 text-base",
+  lg: "px-6 h-14 text-base",
 };
 
 const variantClasses = {
-    primary: "bg-blue-600 text-white",
-    secondary: "bg-gray-600 text-white",
-    outline: "border border-blue-600 text-blue-600 bg-transparent",
-    link: "bg-transparent text-blue-600 underline",
+  primary:
+    "bg-primary-900 text-white hover:bg-primary-950 focus:ring-primary-500",
+  secondary: "bg-gray-900 text-white hover:bg-gray-800 focus:ring-gray-500",
+  outline:
+    "border border-primary-900 text-primary-900 bg-transparent hover:bg-primary-50 focus:ring-primary-500",
+  link: "bg-transparent text-primary-900 underline hover:text-primary-800 focus:ring-primary-500",
 };
 ---
 
-<button
-    type={type}
-    class={`rounded ${sizeClasses[size] ?? sizeClasses.md} ${variantClasses[variant] ?? variantClasses.primary}`}
-    {...props}
->
-    <slot />
-</button>
+{
+  Astro.props.as === "a" ? (
+    <a
+      href={Astro.props.href}
+      class={`${baseClasses} ${sizeClasses[size] ?? sizeClasses.md} ${variantClasses[variant] ?? variantClasses.primary}`}
+      {...props}
+    >
+      <slot />
+    </a>
+  ) : (
+    <button
+      type={type}
+      class={`${baseClasses} ${sizeClasses[size] ?? sizeClasses.md} ${variantClasses[variant] ?? variantClasses.primary}`}
+      {...props}
+    >
+      <slot />
+    </button>
+  )
+}

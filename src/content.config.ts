@@ -23,12 +23,12 @@ const posts = defineCollection({
   }),
 });
 
-const works = defineCollection({
-  loader: glob({ pattern: "**/*.md", base: "src/content/works" }),
-  schema: z.object({
-    title: z.string(),
-  }),
-});
+// const works = defineCollection({
+//   loader: glob({ pattern: "**/*.md", base: "src/content/works" }),
+//   schema: z.object({
+//     title: z.string(),
+//   }),
+// });
 
 const teams = defineCollection({
   loader: file("src/content/teams.json"),
@@ -50,7 +50,7 @@ const teams = defineCollection({
   }),
 });
 
-const portfolio = defineCollection({
+const projects = defineCollection({
   loader: glob({ pattern: "**/*.mdx", base: "src/content/projects" }),
   schema: z.object({
     id: z.number(),
@@ -67,24 +67,24 @@ const portfolio = defineCollection({
   }),
 });
 
-const projects = defineCollection({
-  loader: file("src/content/projects.json"),
-  schema: z.object({
-    id: z.string(),
-    title: z.string(),
-    description: z.string(),
-    image: z.string(),
-    type: z.string(),
-    tags: z.array(z.string()),
-    challenge: z.string(),
-    solution: z.string(),
-    technologies: z.array(z.string()),
-    github: z.string().url(),
-    liveDemo: z.string().url(),
-    year: z.number(),
-    role: z.string(),
-  }),
-});
+// const projects = defineCollection({
+//   loader: file("src/content/projects.json"),
+//   schema: z.object({
+//     id: z.string(),
+//     title: z.string(),
+//     description: z.string(),
+//     image: z.string(),
+//     type: z.string(),
+//     tags: z.array(z.string()),
+//     challenge: z.string(),
+//     solution: z.string(),
+//     technologies: z.array(z.string()),
+//     github: z.string().url(),
+//     liveDemo: z.string().url(),
+//     year: z.number(),
+//     role: z.string(),
+//   }),
+// });
 
 // 4. Export a single `collections` object to register your collection(s)
-export const collections = { posts, works, projects, teams, portfolio };
+export const collections = { posts, projects, teams };

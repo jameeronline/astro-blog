@@ -1,0 +1,76 @@
+---
+import ErrorMessage from "../../../components/ErrorMessage.astro";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import MealsLayout from "../mealsLayout.astro";
+import axios from "axios";
+import { textToSlug } from "../../../utils/helper";
+import MealCard from "../../../components/MealCard.astro";
+
+type Area = {
+  strArea: string;
+};
+
+type Meal = {
+  idMeal: string;
+  strMeal: string;
+  strMealThumb: string;
+};
+
+export async function getStaticPaths() {
+  const response = await axios.get(
+    "https://www.themealdb.com/api/json/v1/1/list.php?a=list"
+  );
+  const areas = response.data.meals;
+
+  const paths = areas.map((area: Area) => ({
+    params: { area: textToSlug(area.strArea) },
+  }));
+
+  return paths;
+}
+
+const { area } = Astro.params;
+
+// Fetch items for the specific area
+let items: Meal[] = [];
+let errorMessage: string | null = null;
+
+try {
+  const response = await axios.get<{ meals: Meal[] }>(
+    `https://www.themealdb.com/api/json/v1/1/filter.php?a=${area}`
+  );
+  items = response.data.meals;
+
+  // Validate the structure of the items
+  if (
+    !Array.isArray(items) ||
+    items.some((item) => !item.idMeal || !item.strMeal || !item.strMealThumb)
+  ) {
+    throw new Error("Invalid data structure received from the API.");
+  }
+} catch (error) {
+  console.error("Error fetching items:", error);
+  errorMessage =
+    "Failed to load items for this category. Please try again later.";
+}
+---
+
+<MealsLayout title={`Cuisine: ${area}`}>
+  <div class="flex flex-col items-center justify-center p-4 my-10">
+    <p class="text-sm text-gray-500 uppercase">Meals in Area</p>
+    <h1 class="text-3xl font-bold mb-4 capitalize">{area}</h1>
+    <p class="text-lg">Explore delicious meals from the {area} area.</p>
+  </div>
+
+  {
+    errorMessage ? (
+      <ErrorMessage message={errorMessage} />
+    ) : (
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        {items.map((item) => (
+          <MealCard item={item} key={item.idMeal} />
+        ))}
+      </div>
+    )
+  }
+</MealsLayout>

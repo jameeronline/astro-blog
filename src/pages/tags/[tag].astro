@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import BlogGrid from "../../blocks/BlogGrid.astro";
+import TagFilter from "../../components/TagFilter.astro";
 import { getCollection } from "astro:content";
 
 export async function getStaticPaths() {
@@ -32,14 +33,16 @@ const noPosts = !filteredPosts || filteredPosts.length === 0;
 ---
 
 <BaseLayout pageTitle={tag}>
-  <p>Posts tagged with {tag}</p>
-  {
-    noPosts ? (
-      <div class="text-red-600 py-8 text-center font-semibold">
-        No posts found for tag: {tag}
-      </div>
-    ) : (
-      <BlogGrid posts={filteredPosts} />
-    )
-  }
+  <section class="py-16">
+    <TagFilter selected={tag} />
+    {
+      noPosts ? (
+        <div class="text-red-600 py-8 text-center font-semibold">
+          No posts found for tag: {tag}
+        </div>
+      ) : (
+        <BlogGrid posts={filteredPosts} />
+      )
+    }
+  </section>
 </BaseLayout>
