@@ -1,0 +1,69 @@
+---
+const { posts } = Astro.props;
+import { Image } from "astro:assets";
+---
+
+<section class="py-32">
+  <!-- <div class="text-center mx-auto lg:max-w-3xl">
+    <p class="mb-6 text-xs font-medium uppercase tracking-wider">
+      Featured Posts
+    </p>
+    <h2
+      class="mb-3 text-pretty text-3xl font-semibold md:mb-4 md:text-4xl lg:mb-6 lg:text-4xl"
+    >
+      Our Top Picks
+    </h2>
+    <p class="mb-8 text-gray-700 mx-auto md:text-base lg:max-w-2xl lg:text-lg">
+      Discover our handpicked articles that offer valuable insights and tips.
+    </p>
+  </div> -->
+
+  <div class="glide">
+    <div class="glide__track" data-glide-el="track">
+      <ul class="glide__slides">
+        {
+          posts.map((post, index) => (
+            <li key={index} class="glide__slide">
+              <article class="rounded-lg shadow hover:shadow-lg transition-shadow duration-300">
+                <Image
+                  src={post.data.image.url}
+                  alt={post.data.title}
+                  class="w-full aspect-[4/1.5] object-cover rounded-lg mb-4"
+                  loading="lazy"
+                  width={1600}
+                  height={600}
+                />
+                {/* <h3 class="text-xl font-semibold mb-2">{post.data.title}</h3>
+            <p class="text-gray-600 mb-4">{post.data.description}</p>
+            <a
+              href={`/posts/${post.slug}`}
+              class="text-primary-600 hover:underline"
+            >
+              Read more
+            </a> */}
+              </article>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <div data-glide-el="controls">
+      <button data-glide-dir="<<">Start</button>
+      <button data-glide-dir=">>">End</button>
+    </div>
+
+    <div class="glide__bullets" data-glide-el="controls[nav]">
+      <button class="glide__bullet" data-glide-dir="=0"></button>
+      <button class="glide__bullet" data-glide-dir="=1"></button>
+      <button class="glide__bullet" data-glide-dir="=2"></button>
+      <button class="glide__bullet" data-glide-dir="=3"></button>
+    </div>
+  </div>
+</section>
+
+<script>
+  import Glide from "@glidejs/glide";
+
+  new Glide(".glide").mount();
+</script>

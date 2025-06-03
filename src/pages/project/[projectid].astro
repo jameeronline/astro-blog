@@ -5,7 +5,7 @@ import { slugify } from "../../utils/helper";
 
 export async function getStaticPaths() {
   // Define static paths for dynamic routing
-  const projectCollection = await getCollection("portfolio");
+  const projectCollection = await getCollection("projects");
 
   return projectCollection.map((project) => ({
     params: { projectid: slugify(project.data.title) },

@@ -13,6 +13,8 @@ import TrustedBrands from "../blocks/TrustedBrands.astro";
 import FAQ from "../blocks/FAQ.astro";
 import CTA from "../blocks/CTA.astro";
 import HomeBlogGrid from "../blocks/HomeBlogGrid.astro";
+import { getCollection } from "astro:content";
+import FeaturedPosts from "../blocks/FeaturedPosts.astro";
 
 export interface User {
   id: number;
@@ -47,11 +49,17 @@ export interface User {
 
 //config
 const pageTitle = "Home Page";
+
+//posts
+const posts = await getCollection("posts");
+
+const featuredPosts = posts.filter((post) => post.data.featured);
 ---
 
 <BaseLayout title={pageTitle}>
+  <FeaturedPosts posts={featuredPosts} />
   <Hero title="Welcome to my site" subtitle="This is a subtitle" />
-  <TrustedBrands />
+  <!-- <TrustedBrands /> -->
   <!-- <FeaturedCards /> -->
   <!-- <Features title="Features" subtitle="This is a subtitle" /> -->
   <Popular />

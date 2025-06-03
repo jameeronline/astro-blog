@@ -1,0 +1,46 @@
+---
+const themes = [
+  { id: "theme1", name: "Blue/Yellow", swatch: ["#2563eb", "#fbbf24"] },
+  { id: "theme2", name: "Pink", swatch: ["#be185d", "#f472b6"] },
+  { id: "theme3", name: "Green/Gold", swatch: ["#059669", "#facc15"] },
+];
+---
+
+<div class="flex gap-4 items-center">
+  {
+    themes.map((theme) => (
+      <button
+        type="button"
+        class="flex flex-col items-center group"
+        onClick={() => {
+          document.documentElement.classList.remove(
+            "theme1",
+            "theme2",
+            "theme3"
+          );
+          document.documentElement.classList.add(theme.id);
+          localStorage.setItem("theme", theme.id);
+        }}
+      >
+        <div class="flex gap-1 mb-1">
+          {theme.swatch.map((color) => (
+            <span
+              style={`background:${color}`}
+              class="w-5 h-5 rounded-full border"
+            />
+          ))}
+        </div>
+        <span class="text-xs">{theme.name}</span>
+      </button>
+    ))
+  }
+</div>
+
+<script>
+  // On load, set theme from localStorage
+  if (typeof window !== "undefined") {
+    const saved = localStorage.getItem("theme") || "theme1";
+    document.documentElement.classList.remove("theme1", "theme2", "theme3");
+    document.documentElement.classList.add(saved);
+  }
+</script>

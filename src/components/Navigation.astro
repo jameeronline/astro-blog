@@ -90,7 +90,7 @@ import { navigation } from "../config/siteconfig.ts";
                 href={item.href}
                 class={`flex items-center gap-2 py-4 transition-colors duration-300 hover:text-primary-900 focus:text-primary-950 focus:outline-none focus-visible:outline-none lg:px-6 ${Astro.url.pathname === item.href ? "text-primary-900 underline" : ""}`}
               >
-                <span>{item.name}</span>
+                {item.icon ? <item.icon /> : <span>{item.name}</span>}
               </a>
             </li>
           ))

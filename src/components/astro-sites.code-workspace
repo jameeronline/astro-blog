@@ -1,0 +1,14 @@
+{
+  "folders": [
+    {
+      "path": "../.."
+    },
+    {
+      "path": "../../../astro-uidocs"
+    },
+    {
+      "path": "../../../project"
+    }
+  ],
+  "settings": {}
+}

@@ -2,12 +2,25 @@
 import { Sun, Moon } from "@lucide/astro";
 ---
 
-<button id="themeToggle">
+<!-- <button id="themeToggle">
   <Moon class="moon w-6 h-6" />
   <Sun class="sun w-6 h-6" />
-</button>
+</button> -->
+<label class="inline-flex items-center cursor-pointer gap-2">
+  <span class="text-sm font-medium text-gray-600 dark:text-gray-300"
+    ><Sun class="sun w-5 h-5" /></span
+  >
+  <input type="checkbox" value="" class="sr-only peer" id="themeToggle" />
+  <div
+    class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600 dark:peer-checked:bg-blue-600"
+  >
+  </div>
+  <span class="text-sm font-medium text-gray-600 dark:text-gray-300"
+    ><Moon class="moon w-5 h-5" /></span
+  >
+</label>
 
-<style>
+<!-- <style>
   #themeToggle {
     border: 0;
     background: none;
@@ -28,9 +41,9 @@ import { Sun, Moon } from "@lucide/astro";
     stroke: transparent;
     display: initial;
   }
-</style>
+</style> -->
 
-<style>
+<!-- <style>
   .sun {
     fill: black;
   }
@@ -44,7 +57,7 @@ import { Sun, Moon } from "@lucide/astro";
   :global(.dark) .moon {
     fill: white;
   }
-</style>
+</style> -->
 
 <script client:only>
   const theme = (() => {
@@ -62,6 +75,7 @@ import { Sun, Moon } from "@lucide/astro";
     document.documentElement.classList.remove("dark");
   } else {
     document.documentElement.classList.add("dark");
+    document.getElementById("themeToggle").checked = true;
   }
 
   window.localStorage.setItem("theme", theme);

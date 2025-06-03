@@ -2,11 +2,25 @@
 @plugin "@tailwindcss/typography";
 @import "tailwindcss-animated";
 @import "tailwindcss-intersect";
+@import "@glidejs/glide/dist/css/glide.core.min.css";
+@import "@glidejs/glide/dist/css/glide.theme.min.css";
 
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
   --breakpoint-2xl: 72rem;
+
+  /* --color-primary-50: #eeeeff;
+  --color-primary-100: #e0e1ff;
+  --color-primary-200: #c7c8fe;
+  --color-primary-300: #a5a7fc;
+  --color-primary-400: #8184f8;
+  --color-primary-500: #6366f1;
+  --color-primary-600: #4649e5;
+  --color-primary-700: #383bca;
+  --color-primary-800: #3032a3;
+  --color-primary-900: #2e3081;
+  --color-primary-950: #1b1c4b; */
 
   --color-primary-50: #ecfff6;
   --color-primary-100: #d2ffed;
@@ -17,7 +31,7 @@
   --color-primary-600: #00d068;
   --color-primary-700: #00a255;
   --color-primary-800: #007e47;
-  --color-primary-900: #00663d; /*base color*/
+  --color-primary-900: #00663d;
   --color-primary-950: #003b20;
 }
 

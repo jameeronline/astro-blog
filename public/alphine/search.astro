@@ -1,0 +1,75 @@
+---
+// src/components/Search.astro
+import { getSearchIndex } from "../utils/search";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SearchForm from "../../src/blocks/SearchForm.astro";
+
+import { getCollection } from "astro:content";
+
+const posts = await getCollection("posts");
+const searchIndex = await getSearchIndex(posts);
+
+// let searchTerm = "";
+// let results = [];
+
+// function handleSearch() {
+//   if (!searchTerm.trim()) {
+//     results = [];
+//     return;
+//   }
+
+//   const term = searchTerm.toLowerCase();
+//   results = searchIndex.filter(
+//     (post) =>
+//       post.title.toLowerCase().includes(term) ||
+//       post.description.toLowerCase().includes(term) ||
+//       post.tags.some((tag) => tag.toLowerCase().includes(term))
+//   );
+// }
+---
+
+<BaseLayout title="Search Articles">
+  <h1 class="text-3xl font-bold mb-6">Search Articles</h1>
+  <p class="mb-4">Type to search for articles by title, content, or tags.</p>
+  <div
+    class="search-container"
+    x-data={`{
+      searchTerm: '',
+      results: [],
+      searchIndex: ${JSON.stringify(searchIndex)},
+      search() {
+        const term = this.searchTerm.toLowerCase();
+        if (!term.trim()) {
+          this.results = [];
+          return;
+        }
+        this.results = this.searchIndex.filter(post =>
+          post.title.toLowerCase().includes(term) ||
+          post.description.toLowerCase().includes(term) ||
+          (post.tags && post.tags.some(tag => tag.toLowerCase().includes(term)))
+        );
+      }
+    }`}
+  >
+    <input
+      type="text"
+      placeholder="Search articles..."
+      class="search-input"
+      x-model="searchTerm"
+      @input="search"
+    />
+
+    <template x-if="results.length > 0">
+      <div class="search-results">
+        <template x-for="post in results" :key="post.id">
+          <a :href="post.url" class="search-result">
+            <h3 x-text="post.title"></h3>
+            <template x-if="post.description">
+              <p x-text="post.description"></p>
+            </template>
+          </a>
+        </template>
+      </div>
+    </template>
+  </div>
+</BaseLayout>

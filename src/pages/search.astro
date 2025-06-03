@@ -1,0 +1,48 @@
+---
+import { getSearchIndex } from "../utils/search";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SearchForm from "../blocks/SearchForm.astro";
+import { getCollection } from "astro:content";
+
+export const prerender = false; // <-- Add this line
+
+const posts = await getCollection("posts");
+const searchIndex = await getSearchIndex(posts);
+
+// Get the search term from the URL query
+const url = new URL(Astro.request.url);
+const searchTerm = url.searchParams.get("q") || "";
+
+// Filter results on the server
+let results = [];
+if (searchTerm.trim()) {
+  const term = searchTerm.toLowerCase();
+  results = searchIndex.filter(
+    (post) =>
+      post.title.toLowerCase().includes(term) ||
+      post.description.toLowerCase().includes(term) ||
+      (post.tags && post.tags.some((tag) => tag.toLowerCase().includes(term)))
+  );
+}
+---
+
+<BaseLayout title="Search Articles">
+  <h1 class="text-3xl font-bold mb-6">Search Articles</h1>
+  <p class="mb-4">Type to search for articles by title, content, or tags.</p>
+  <SearchForm value={searchTerm} />
+
+  {
+    results.length > 0 ? (
+      <div class="search-results">
+        {results.map((post) => (
+          <a href={post.url} class="search-result" key={post.id}>
+            <h3>{post.title}</h3>
+            {post.description && <p>{post.description}</p>}
+          </a>
+        ))}
+      </div>
+    ) : searchTerm ? (
+      <p>No results found.</p>
+    ) : null
+  }
+</BaseLayout>

@@ -8,6 +8,7 @@ image:
 pubDate: 2022-07-01
 tags: ["astro", "blogging", "learning in public"]
 category: ["javascript"]
+featured: true
 ---
 
 Web development is a rapidly evolving field, and staying ahead means continuously updating your skill set. Here are ten essential skills every web developer should master to remain competitive and effective in 2025:

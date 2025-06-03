@@ -38,7 +38,7 @@ const { skills } = Astro.props as SkillsMatrixProps;
       <button
         type="button"
         :class="activeCategory === category.id
-          ? 'bg-primary-900 text-white hover:bg-gray-400'
+          ? 'bg-primary-900 text-white '
           : 'bg-mint text-navy'"
         class="px-4 py-2 text-sm rounded-full transition-all"
         @click="activeCategory = category.id"
