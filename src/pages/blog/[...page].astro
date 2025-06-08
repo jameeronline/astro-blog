@@ -7,12 +7,16 @@ import BlogCard from "../../components/BlogCard.astro";
 import BlogGrid from "../../blocks/BlogGrid.astro";
 import { slugify } from "../../utils/helper";
 
-const pageTitle = "Blog Page Listing";
+//site config
+import { siteConfig } from "../../config/siteconfig.ts";
+
+const pageTitle = "Blog Index";
 
 // Pagination setup
 export async function getStaticPaths({ paginate }) {
   // Get all posts (you can add sorting/filtering here)
   const allPosts = await getCollection("posts");
+  const { pageLength } = siteConfig;
 
   // Sort posts by date (newest first)
   const sortedPosts = allPosts.sort(
@@ -20,7 +24,7 @@ export async function getStaticPaths({ paginate }) {
   );
 
   return paginate(sortedPosts, {
-    pageSize: 3, // Number of posts per page
+    pageSize: pageLength, // Number of posts per page
   });
 }
 

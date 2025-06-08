@@ -7,6 +7,15 @@ interface NavigationItem {
 
 import { Search } from "@lucide/astro";
 
+export const siteConfig = {
+  title: "Astro",
+  description:
+    "A starter kit for building Astro sites with Tailwind CSS and Lucide icons.",
+  logo: "/logo.svg",
+  onlyLogo: false,
+  pageLength: 6,
+};
+
 export const navigation: NavigationItem[] = [
   // { name: "Home", href: "/", current: true },
   { name: "About", href: "/about", current: false },

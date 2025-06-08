@@ -2,7 +2,9 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import BlogGrid from "../../blocks/BlogGrid.astro";
 import TagFilter from "../../components/TagFilter.astro";
+
 import { getCollection } from "astro:content";
+import { slugify } from "../../utils/helper";
 
 export async function getStaticPaths() {
   const posts = await getCollection("posts");
@@ -17,28 +19,30 @@ export async function getStaticPaths() {
 
   // Generate a path for each unique tag
   return Array.from(tagsSet).map((tag) => ({
-    params: { tag },
-    props: { posts },
+    params: { tag: slugify(tag) },
+    props: { posts, tagName: tag },
   }));
 }
 
 const { tag } = Astro.params;
+const { posts, tagName } = Astro.props;
 
 const filteredPosts = await getCollection(
   "posts",
-  ({ data }) => Array.isArray(data.tags) && data.tags.includes(tag as string)
+  ({ data }) =>
+    Array.isArray(data.tags) && data.tags.includes(tagName as string)
 );
 
 const noPosts = !filteredPosts || filteredPosts.length === 0;
 ---
 
-<BaseLayout pageTitle={tag}>
+<BaseLayout pageTitle={tagName}>
   <section class="py-16">
-    <TagFilter selected={tag} />
+    <TagFilter selected={tagName} />
     {
       noPosts ? (
         <div class="text-red-600 py-8 text-center font-semibold">
-          No posts found for tag: {tag}
+          No posts found for tag: {tagName}
         </div>
       ) : (
         <BlogGrid posts={filteredPosts} />

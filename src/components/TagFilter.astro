@@ -5,6 +5,9 @@ import Tag from "../pages/tags/[tag].astro";
 // Accept an optional `selected` prop for the active tag
 const { selected = "all" } = Astro.props;
 
+//slugify function to format tag names
+import { slugify } from "../utils/helper";
+
 // Get all posts and collect unique tags
 const posts = await getCollection("posts");
 const tagsSet = new Set();
@@ -16,7 +19,7 @@ posts.forEach((post) => {
 const tags = Array.from(tagsSet).sort();
 ---
 
-<header class="mx-auto flex max-w-screen-md flex-col items-center gap-6 mb-16">
+<header class="mx-auto flex max-w-screen-md flex-col items-center gap-6 mb-10">
   <h2 class="mb-4 text-center text-2xl font-semibold flex flex-col">
     <span class="text-sm font-normal uppercase text-gray-500"
       >Posts tagged with</span
@@ -25,31 +28,33 @@ const tags = Array.from(tagsSet).sort();
   </h2>
 </header>
 
-<ul class="flex flex-wrap gap-2 mb-8">
-  <li>
-    <a
-      href="/tags"
-      class={`px-2.5 h-6.5 inline-flex items-center justify-center text-sm rounded-full transition duration-300 bg-primary-800/10 ${
-        selected === "all"
-          ? "bg-primary-900 text-white"
-          : " hover:bg-primary-900 hover:text-white"
-      }`}>All</a
-    >
-  </li>
-  {
-    tags.map((tag) => (
-      <li>
-        <a
-          href={`/tags/${encodeURIComponent(tag)}`}
-          class={`px-2.5 h-6.5 inline-flex items-center justify-center text-sm rounded-full transition duration-300 bg-primary-800/10 ${
-            selected === tag
-              ? "bg-primary-900/100 text-white"
-              : " hover:bg-primary-900 hover:text-white"
-          }`}
-        >
-          {tag.charAt(0).toUpperCase() + tag.slice(1)}
-        </a>
-      </li>
-    ))
-  }
-</ul>
+<div class="max-w-screen-md mx-auto mb-16">
+  <ul class="flex flex-wrap justify-center gap-3 mb-8">
+    <li>
+      <a
+        href="/tags"
+        class={`px-4 h-8 inline-flex items-center justify-center text-sm rounded-full transition duration-300 bg-primary-800/10 ${
+          selected === "all"
+            ? "bg-primary-900 text-white"
+            : " hover:bg-primary-900 hover:text-white"
+        }`}>All</a
+      >
+    </li>
+    {
+      tags.map((tag) => (
+        <li>
+          <a
+            href={`/tags/${slugify(tag)}`}
+            class={`px-4 h-8 inline-flex items-center justify-center text-sm rounded-full transition duration-300 bg-primary-800/10 ${
+              selected === tag
+                ? "bg-primary-900/100 text-white"
+                : " hover:bg-primary-900 hover:text-white"
+            }`}
+          >
+            {tag.charAt(0).toUpperCase() + tag.slice(1)}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</div>

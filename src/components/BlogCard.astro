@@ -6,7 +6,7 @@ const { item, url = "#" } = Astro.props;
 ---
 
 <a href={`/posts/${url}`}>
-  <article class="p-6 px-2 meal-card rounded-xl transition-all">
+  <article class="meal-card rounded-xl transition-all">
     <div class="relative overflow-hidden bg-cover bg-no-repeat rounded-xl mb-8">
       <Image
         class="object-cover object-center w-full lg:h-48 md:h-36 bg-gray-50 transition duration-300 ease-in-out hover:scale-110"
@@ -18,11 +18,11 @@ const { item, url = "#" } = Astro.props;
       />
     </div>
 
-    <h1
+    <h3
       class="mx-auto mb-8 text-2xl font-semibold leading-snug tracking-tighter text-gray-800 lg:text-2xl meal-title"
     >
       {item.title}
-    </h1>
+    </h3>
     <p class="mx-auto text-base leading-relaxed text-gray-600 line-clamp-3">
       {item.description}
     </p>

@@ -2,6 +2,8 @@
 import { getSearchIndex } from "../utils/search";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SearchForm from "../blocks/SearchForm.astro";
+import BlogGrid from "../blocks/BlogGrid.astro";
+
 import { getCollection } from "astro:content";
 
 export const prerender = false; // <-- Add this line
@@ -14,16 +16,18 @@ const url = new URL(Astro.request.url);
 const searchTerm = url.searchParams.get("q") || "";
 
 // Filter results on the server
-let results = [];
+let results: typeof posts = [];
 if (searchTerm.trim()) {
   const term = searchTerm.toLowerCase();
-  results = searchIndex.filter(
-    (post) =>
-      post.title.toLowerCase().includes(term) ||
-      post.description.toLowerCase().includes(term) ||
-      (post.tags && post.tags.some((tag) => tag.toLowerCase().includes(term)))
+  results = posts.filter(
+    ({ data }) =>
+      data.title.toLowerCase().includes(term) ||
+      data.description.toLowerCase().includes(term) ||
+      (data.tags && data.tags.some((tag) => tag.toLowerCase().includes(term)))
   );
 }
+
+console.log("Search results:", results); // Debugging line to check search results
 ---
 
 <BaseLayout title="Search Articles">
@@ -34,15 +38,12 @@ if (searchTerm.trim()) {
   {
     results.length > 0 ? (
       <div class="search-results">
-        {results.map((post) => (
-          <a href={post.url} class="search-result" key={post.id}>
-            <h3>{post.title}</h3>
-            {post.description && <p>{post.description}</p>}
-          </a>
-        ))}
+        <BlogGrid posts={results} />
       </div>
     ) : searchTerm ? (
-      <p>No results found.</p>
+      <div class="text-red-600 py-8 text-center font-semibold">
+        No results found.
+      </div>
     ) : null
   }
 </BaseLayout>

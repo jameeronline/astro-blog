@@ -66,7 +66,7 @@ const { page } = Astro.props;
       }
     </div>
 
-    <nav class="flex justify-center gap-4 mt-8">
+    <!-- <nav class="flex justify-center gap-4 mt-8">
       {
         page.url.prev ? (
           <a
@@ -90,6 +90,39 @@ const { page } = Astro.props;
           </a>
         ) : (
           <span class="px-4 py-2 text-gray-400">Next</span>
+        )
+      }
+    </nav> -->
+
+    <!-- Pagination Controls -->
+    <nav class="flex justify-center gap-4 mt-12">
+      {
+        page.url.prev ? (
+          <a
+            href={page.url.prev}
+            class="px-4 py-2 border rounded-lg hover:bg-gray-100 transition-colors"
+          >
+            &larr; Previous
+          </a>
+        ) : (
+          <span class="px-4 py-2 text-gray-400">&larr; Previous</span>
+        )
+      }
+
+      <span class="px-4 py-2">
+        Page {page.currentPage} of {page.lastPage}
+      </span>
+
+      {
+        page.url.next ? (
+          <a
+            href={page.url.next}
+            class="px-4 py-2 border rounded-lg hover:bg-gray-100 transition-colors"
+          >
+            Next &rarr;
+          </a>
+        ) : (
+          <span class="px-4 py-2 text-gray-400">Next &rarr;</span>
         )
       }
     </nav>

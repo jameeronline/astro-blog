@@ -7,7 +7,7 @@ image:
   alt: "The Astro logo on a dark background with a purple gradient arc."
 pubDate: 2022-07-08
 tags: ["astro", "blogging", "learning in public", "successes"]
-category: ["javascript"]
+categories: ["javascript"]
 featured: true
 ---
 
@@ -19,7 +19,7 @@ If you’ve been to New York City and have walked the streets, it is easy to fig
 
 Responsive web design ensures your website looks great on all devices, from desktops to smartphones. By using flexible layouts, images, and CSS media queries, you can create a seamless user experience.
 
-![Responsive Design Example](https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=800&q=80)
+![Responsive Design Example](https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=900&q=80)
 
 ### Example: Simple Responsive Layout
 

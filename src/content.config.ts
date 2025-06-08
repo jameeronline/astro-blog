@@ -19,7 +19,7 @@ const posts = defineCollection({
       .optional(),
     pubDate: zod.date(),
     tags: zod.array(zod.string()),
-    category: zod.array(zod.string()),
+    categories: zod.array(zod.string()),
     featured: zod.boolean().optional(),
   }),
 });

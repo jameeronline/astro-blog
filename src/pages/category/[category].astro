@@ -1,0 +1,53 @@
+---
+import { getCollection } from "astro:content";
+
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import BlogGrid from "../../blocks/BlogGrid.astro";
+import TagFilter from "../../components/TagFilter.astro";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("posts");
+
+  // Collect all unique categories from posts
+  const categoriesSet = new Set();
+  posts.forEach((post) => {
+    if (Array.isArray(post.data.categories)) {
+      post.data.categories.forEach((category) => categoriesSet.add(category));
+    }
+  });
+
+  // Generate a path for each unique category
+  return Array.from(categoriesSet).map((category) => ({
+    params: { category },
+    props: { posts, categoryName: category },
+  }));
+}
+
+const { category } = Astro.params;
+const { posts, categoryName } = Astro.props;
+
+const selected = "all";
+
+const filteredPosts = posts.filter(
+  (post) =>
+    Array.isArray(post.data.categories) &&
+    post.data.categories.includes(categoryName)
+);
+
+const noPosts = !filteredPosts || filteredPosts.length === 0;
+---
+
+<BaseLayout pageTitle={selected}>
+  <section class="py-16">
+    <!-- <TagFilter selected={selected} /> -->
+    {
+      noPosts ? (
+        <div class="text-red-600 py-8 text-center font-semibold">
+          No posts found for category: {category}
+        </div>
+      ) : (
+        <BlogGrid posts={filteredPosts} />
+      )
+    }
+  </section>
+</BaseLayout>

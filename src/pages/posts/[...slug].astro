@@ -9,18 +9,20 @@ import { slugify } from "../../utils/helper";
 
 import { getCollection, getEntry, render } from "astro:content";
 import { ArrowLeft } from "@lucide/astro";
+import BlogGrid from "../../blocks/BlogGrid.astro";
+import RelatedBlogCard from "../../components/RelatedBlogCard.astro";
 
 //define static paths for dynamic routing
 export async function getStaticPaths() {
   const posts = await getCollection("posts");
   return posts.map((post) => ({
     params: { slug: slugify(post.data.title) },
-    props: { id: post.id },
+    props: { id: post.id, posts: posts },
   }));
 }
 
 const { slug } = Astro.params;
-const { id } = Astro.props;
+const { id, posts } = Astro.props;
 
 // Fetch the post entry using the ID from the dynamic route
 const post = await getEntry("posts", id);
@@ -38,19 +40,37 @@ const { Content, headings } = await render(post);
 const formattedDate = format(data.pubDate, "MMM d, yyyy");
 
 const tags = data.tags.map((tag) => tag.trim());
-const categories = data.category.map((cat) => cat.trim());
+const categories = data.categories.map((cat) => cat.trim());
+
+// Get related posts: share at least one tag or category, exclude current post
+const relatedPosts = posts
+  .filter(
+    (p) =>
+      p.id !== post.id &&
+      (p.data.tags.some((tag) => tags.includes(tag.trim())) ||
+        p.data.categories.some((cat) => categories.includes(cat.trim())))
+  )
+  .slice(0, 4); // Limit to 4
 ---
 
 <BaseLayout title={data.title}>
   <section class="py-6">
     <header class="prose mb-8" transition:name="blog-title">
-      <h1>{data.title}</h1>
-    </header>
+      <!-- <a
+        href="/blog"
+        class="inline-flex items-center justify-center gap-2 text-gray-800 bg-gray-400/10 hover:bg-gray-200 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-sm px-4 py-2.5 me-2 mb-2 dark:bg-gray-200 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
+      >
+        <ArrowLeft class="w-5 h-5" /> Back to Blog</a
+      > -->
+      <h1 class="mb-4">{data.title}</h1>
 
-    <p class="text-sm text-gray-600 my-4">
-      Written by {post.data.author} on {formattedDate}
-    </p>
-    <div class="grid grid-cols-4 gap-6 md:grid-cols-8 lg:grid-cols-12">
+      <p class="text-sm text-gray-600 my-4">
+        Written by {post.data.author} on {formattedDate}
+      </p>
+    </header>
+    <div
+      class="grid grid-cols-4 gap-6 md:grid-cols-8 md:gap-10 lg:grid-cols-12"
+    >
       <div class="col-span-4 lg:col-span-9">
         <article>
           <figure>
@@ -80,21 +100,38 @@ const categories = data.category.map((cat) => cat.trim());
           <div class="prose max-w-none">
             <Content />
           </div>
-
-          <footer class="my-10">
-            <a
-              href="/blog"
-              class="inline-flex items-center justify-center gap-2 text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
-            >
-              <ArrowLeft class="w-5 h-5" /> Back to Blog</a
-            >
-          </footer>
         </article>
       </div>
 
       <div class="col-span-4 lg:col-span-3">
         <BlogAside headings={headings} tags={tags} categories={categories} />
       </div>
+    </div>
+    <div>
+      {
+        relatedPosts.length > 0 && (
+          <section class="mt-12">
+            <h2 class="text-xl font-bold mb-4">Related Posts</h2>
+            <div class="grid grid-cols-4 gap-6 md:grid-cols-8 md:gap-10 lg:grid-cols-12">
+              {relatedPosts.map((post) => (
+                <RelatedBlogCard post={post} url={slugify(post.data.title)} />
+              ))}
+            </div>
+            {/* <BlogGrid posts={relatedPosts} /> */}
+            {/* <div class="grid gap-6 md:grid-cols-2">
+              {relatedPosts.map((p) => (
+                <a
+                  href={`/posts/${slugify(p.data.title)}`}
+                  class="block rounded-lg border border-gray-200 p-4 hover:bg-gray-50 transition"
+                >
+                  <h3 class="font-semibold text-lg mb-1">{p.data.title}</h3>
+                  <p class="text-gray-500 text-sm">{p.data.description}</p>
+                </a>
+              ))}
+            </div> */}
+          </section>
+        )
+      }
     </div>
   </section>
 </BaseLayout>
