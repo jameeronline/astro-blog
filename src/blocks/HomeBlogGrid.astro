@@ -1,6 +1,10 @@
 ---
+//icon imports
 import { ArrowRightIcon, MoveRight } from "@lucide/astro";
+
+//components imports
 import BlogCard from "../components/BlogCard.astro";
+
 // Astro imports
 import { getCollection, getEntry, render } from "astro:content";
 
@@ -33,7 +37,7 @@ const posts = (await getCollection("posts"))
       <MoveRight class="ml-2 h-4 w-4" />
     </button>
   </div>
-  <div class="grid grid-cols-4 gap-6 md:grid-cols-8 lg:grid-cols-12">
+  <div class="grid grid-cols-4 gap-6 md:grid-cols-8 md:gap-10 lg:grid-cols-12">
     {
       posts.map(({ data }, index) => (
         <div key={index} class="col-span-4 intersect:animate-fade-up">

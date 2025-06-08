@@ -97,7 +97,7 @@ const socialLinks = [
             <Badge
               key={index}
               label={category}
-              href={`/category/${slugify(category)}`}
+              href={`/blog/category/${slugify(category)}`}
             />
           ))
         }
@@ -109,7 +109,7 @@ const socialLinks = [
         {
           tags.map((tag, index) => (
             <a
-              href={`/tags/${slugify(tag)}`}
+              href={`/blog/tags/${slugify(tag)}`}
               class="text-sm underline hover:text-primary-900 transition-colors"
               key={index}
             >

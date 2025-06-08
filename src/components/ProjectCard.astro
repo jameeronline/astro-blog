@@ -1,9 +1,7 @@
 ---
 import Image from "astro/components/Image.astro";
+import { Icon } from "astro-icon/components";
 const { data, url = "#" } = Astro.props;
-
-import Github from "../assets/icons/github-line.svg";
-import LiveDemo from "../assets/icons/external-link-line.svg";
 ---
 
 <article class="p-6 px-2 meal-card rounded-xl transition-all">
@@ -13,6 +11,7 @@ import LiveDemo from "../assets/icons/external-link-line.svg";
       src={data.image}
       alt={data.title}
       format="webp"
+      loading="lazy"
       width={1600}
       height={900}
     />
@@ -42,13 +41,23 @@ import LiveDemo from "../assets/icons/external-link-line.svg";
       <a
         href={data.github}
         class="w-10 h-10 inline-flex items-center justify-center rounded-full transition duration-300 hover:bg-gray-200"
-        ><Github class="w-6 h-6" /></a
       >
+        <Icon
+          name="github-line"
+          class="w-6 h-6 text-gray-800 transition duration-300 hover:text-gray-900"
+          aria-label="GitHub Repository"
+        />
+      </a>
       <a
         href={data.liveDemo}
         class="w-10 h-10 inline-flex items-center justify-center rounded-full transition duration-300 hover:bg-gray-200"
-        ><LiveDemo class="w-6 h-6" /></a
       >
+        <Icon
+          name="external-link-line"
+          class="w-6 h-6 text-gray-800 transition duration-300 hover:text-gray-900"
+          aria-label="Live Demo"
+        />
+      </a>
     </div>
     <a href={`/project/${url}`} class="text-sm text-primary-800 underline"
       >View Details</a

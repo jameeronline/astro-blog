@@ -1,9 +1,11 @@
 ---
-// filepath: /src/blocks/BlogGrid.astro
+//astro imports
 import type { CollectionEntry } from "astro:content";
+
+//components imports
 import BlogCard from "../components/BlogCard.astro";
 
-//helper function to slugify titles
+//utils imports
 import { slugify } from "../utils/helper";
 
 // Define the expected props interface
@@ -33,7 +35,7 @@ const delayClasses = [
     posts.map((post, index) => (
       <div
         key={index}
-        class={`col-span-4 intersect:animate-fade-up ${delayClasses[index]} `}
+        class={`col-span-4 intersect:animate-fade-up ${delayClasses[index]} intersect-once`}
       >
         <BlogCard item={post.data} url={slugify(post.data.title)} />
       </div>

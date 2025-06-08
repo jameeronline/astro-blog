@@ -1,0 +1,121 @@
+---
+import { Image } from "astro:assets";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import BlogAside from "../../blocks/BlogAside.astro";
+import Badge from "../../components/ui/Badge.astro";
+import { Breadcrumbs } from "astro-breadcrumbs";
+
+import "astro-breadcrumbs/breadcrumbs.css";
+
+import { format } from "date-fns";
+import { slugify } from "../../utils/helper";
+
+import { getCollection, getEntry, render } from "astro:content";
+import { ArrowLeft } from "@lucide/astro";
+import BlogGrid from "../../blocks/BlogGrid.astro";
+import RelatedBlogCard from "../../components/RelatedBlogCard.astro";
+
+//define static paths for dynamic routing
+export async function getStaticPaths() {
+  const posts = await getCollection("posts");
+  return posts.map((post) => ({
+    params: { slug: slugify(post.data.title) },
+    props: { id: post.id, posts: posts },
+  }));
+}
+
+const { slug } = Astro.params;
+const { id, posts } = Astro.props;
+
+// Fetch the post entry using the ID from the dynamic route
+const post = await getEntry("posts", id);
+
+// If the post is not found, throw an error
+if (!post) {
+  throw new Error("Post not found");
+}
+
+// Extract data and content from the post
+const { data } = post;
+const { Content, headings } = await render(post);
+
+//data transformation
+const formattedDate = format(data.pubDate, "MMM d, yyyy");
+
+const tags = data.tags.map((tag) => tag.trim());
+const categories = data.categories.map((category) => category.trim());
+
+// Get related posts: share at least one tag or category, exclude current post
+const relatedPosts = posts
+  .filter(
+    (p) =>
+      p.id !== post.id &&
+      (p.data.tags.some((tag) => tags.includes(tag.trim())) ||
+        p.data.categories.some((cat) => categories.includes(cat.trim())))
+  )
+  .slice(0, 4); // Limit to 4
+---
+
+<BaseLayout title={data.title}>
+  <section class="py-6">
+    <header class="prose mb-8" transition:name="blog-title">
+      <!-- <Breadcrumbs /> -->
+      <!-- <a
+        href="/blog"
+        class="inline-flex items-center justify-center gap-2 text-gray-800 bg-gray-400/10 hover:bg-gray-200 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-sm px-4 py-2.5 me-2 mb-2 dark:bg-gray-200 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
+      >
+        <ArrowLeft class="w-5 h-5" /> Back to Blog</a
+      > -->
+      <h1 class="mb-4">{data.title}</h1>
+
+      <p class="text-sm text-gray-600 my-4">
+        Written by {post.data.author} on {formattedDate}
+      </p>
+    </header>
+    <div
+      class="grid grid-cols-4 gap-6 md:grid-cols-8 md:gap-10 lg:grid-cols-12"
+    >
+      <div class="col-span-4 md:col-span-8 lg:col-span-9">
+        <article>
+          <figure>
+            <div class="relative">
+              <Image
+                src={data.image.url}
+                alt={data.title}
+                width={1600}
+                height={900}
+                class="w-full rounded-xl object-cover object-center"
+              />
+            </div>
+            <figcaption class="sr-only">{data.image.alt}</figcaption>
+          </figure>
+
+          <!-- Summary -->
+          <p class="md:text-xl text-gray-500 my-10">{data.description}</p>
+
+          <div class="prose max-w-none">
+            <Content />
+          </div>
+        </article>
+      </div>
+
+      <div class="col-span-4 hidden lg:col-span-3 lg:block">
+        <BlogAside headings={headings} tags={tags} categories={categories} />
+      </div>
+    </div>
+    <div>
+      {
+        relatedPosts.length > 0 && (
+          <section class="my-16">
+            <h2 class="text-xl font-bold mb-4">Related Posts</h2>
+            <div class="grid grid-cols-4 gap-6 md:grid-cols-8 md:gap-10 lg:grid-cols-12">
+              {relatedPosts.map((post) => (
+                <RelatedBlogCard post={post} url={slugify(post.data.title)} />
+              ))}
+            </div>
+          </section>
+        )
+      }
+    </div>
+  </section>
+</BaseLayout>

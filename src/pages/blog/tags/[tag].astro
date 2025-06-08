@@ -1,10 +1,10 @@
 ---
-import BaseLayout from "../../layouts/BaseLayout.astro";
-import BlogGrid from "../../blocks/BlogGrid.astro";
-import TagFilter from "../../components/TagFilter.astro";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import BlogGrid from "../../../blocks/BlogGrid.astro";
+import TagFilter from "../../../components/TagFilter.astro";
 
 import { getCollection } from "astro:content";
-import { slugify } from "../../utils/helper";
+import { slugify } from "../../../utils/helper";
 
 export async function getStaticPaths() {
   const posts = await getCollection("posts");
@@ -19,7 +19,7 @@ export async function getStaticPaths() {
 
   // Generate a path for each unique tag
   return Array.from(tagsSet).map((tag) => ({
-    params: { tag: slugify(tag) },
+    params: { tag: slugify(tag as string) },
     props: { posts, tagName: tag },
   }));
 }

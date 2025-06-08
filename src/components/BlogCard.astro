@@ -1,11 +1,20 @@
 ---
+//components import
 import Image from "astro/components/Image.astro";
+import Badge from "./ui/Badge.astro";
+
+// utils import
+import { slugify } from "../utils/helper";
+
+// Astro props
 const { item, url = "#" } = Astro.props;
-// const tags = item.tags.map((tag) => tag.trim());
-// const categories = item.category.map((cat) => cat.trim());
+
+// get tags and categories from item
+const tags = item.tags.map((tag) => tag.trim());
+const categories = item.categories.map((category) => category.trim());
 ---
 
-<a href={`/posts/${url}`}>
+<a href={`/blog/${url}`}>
   <article class="meal-card rounded-xl transition-all">
     <div class="relative overflow-hidden bg-cover bg-no-repeat rounded-xl mb-8">
       <Image
@@ -13,6 +22,7 @@ const { item, url = "#" } = Astro.props;
         src={item.image.url}
         alt={item.title}
         format="webp"
+        loading="lazy"
         width={1600}
         height={900}
       />
@@ -26,5 +36,17 @@ const { item, url = "#" } = Astro.props;
     <p class="mx-auto text-base leading-relaxed text-gray-600 line-clamp-3">
       {item.description}
     </p>
+
+    <!-- <div class="mt-6 flex gap-4">
+      {
+        categories.map((category, index) => (
+          <Badge
+            key={index}
+            label={category}
+            href={`/blog/category/${slugify(category)}`}
+          />
+        ))
+      }
+    </div> -->
   </article>
 </a>

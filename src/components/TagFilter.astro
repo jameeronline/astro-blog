@@ -32,7 +32,7 @@ const tags = Array.from(tagsSet).sort();
   <ul class="flex flex-wrap justify-center gap-3 mb-8">
     <li>
       <a
-        href="/tags"
+        href="/blog/tags"
         class={`px-4 h-8 inline-flex items-center justify-center text-sm rounded-full transition duration-300 bg-primary-800/10 ${
           selected === "all"
             ? "bg-primary-900 text-white"
@@ -44,7 +44,7 @@ const tags = Array.from(tagsSet).sort();
       tags.map((tag) => (
         <li>
           <a
-            href={`/tags/${slugify(tag)}`}
+            href={`/blog/tags/${slugify(tag)}`}
             class={`px-4 h-8 inline-flex items-center justify-center text-sm rounded-full transition duration-300 bg-primary-800/10 ${
               selected === tag
                 ? "bg-primary-900/100 text-white"
