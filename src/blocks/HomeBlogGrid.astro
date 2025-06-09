@@ -16,34 +16,34 @@ const posts = (await getCollection("posts"))
   .slice(0, 3);
 ---
 
-<section class="py-32">
+<section class="py-16">
   <div class="text-center mx-auto lg:max-w-3xl">
-    <p class="mb-6 text-xs font-medium uppercase tracking-wider">
-      Recent Blogs
-    </p>
-    <h2
-      class="mb-3 text-pretty text-3xl font-semibold md:mb-4 md:text-4xl lg:mb-6 lg:text-4xl"
-    >
-      Blog Posts
-    </h2>
+    <p class="text-caption mb-4">Recent Blogs</p>
+    <h2 class="text-subheading">Blog Posts</h2>
     <p class="mb-8 text-gray-700 mx-auto md:text-base lg:max-w-2xl lg:text-lg">
       Check out our latest articles, tips, and insights on web development,
       design, and technology trends.
     </p>
-    <button
-      class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 text-gray-600 underline-offset-4 hover:underline h-10 px-4 py-2 w-full sm:w-auto"
-    >
-      Explore all Posts
-      <MoveRight class="ml-2 h-4 w-4" />
-    </button>
   </div>
   <div class="grid grid-cols-4 gap-6 md:grid-cols-8 md:gap-10 lg:grid-cols-12">
     {
       posts.map(({ data }, index) => (
-        <div key={index} class="col-span-4 intersect:animate-fade-up">
+        <div
+          key={index}
+          class="col-span-4 intersect:animate-fade-up intersect-once"
+        >
           <BlogCard item={data} url={slugify(data.title)} />
         </div>
       ))
     }
   </div>
+  <footer class="flex justify-center mt-14">
+    <a
+      href="/blog"
+      class="inline-flex items-center justify-center whitespace-nowrap rounded-md underline font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 text-gray-600 underline-offset-4 h-10 px-4 py-2 w-full sm:w-auto"
+    >
+      Explore all Posts
+      <MoveRight class="ml-2 h-4 w-4" />
+    </a>
+  </footer>
 </section>

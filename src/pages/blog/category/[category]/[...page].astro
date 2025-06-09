@@ -42,13 +42,19 @@ const { posts, categoryName, page } = Astro.props;
 
 const selected = "all";
 
-const noPosts = !posts || posts.length === 0;
+const noPosts = !page || page.data.length === 0;
 ---
 
 <BaseLayout pageTitle={selected}>
   <section class="py-16">
-    {categoryName}
-    {category}
+
+
+<header class="mx-auto flex max-w-screen-md flex-col items-center gap-2 mb-10">
+  <span class="text-caption">Posts in category</span>
+  <h2 class="mb-4 text-center text-2xl font-semibold">
+    <span class="capitalize">"{category}"</span>
+  </h2>
+</header>
     <!-- <TagFilter selected={selected} /> -->
     {
       noPosts ? (

@@ -16,8 +16,8 @@ const tags = item.tags.map((tag: string) => tag.trim());
 const categories = item.categories.map((category: string) => category.trim());
 ---
 
-<a href={`/blog/${url}`}>
-  <article class="meal-card rounded-xl transition-all">
+<article class="meal-card rounded-xl transition-all">
+  <a href={`/blog/${url}`}>
     <div class="relative overflow-hidden bg-cover bg-no-repeat rounded-xl mb-8">
       <Image
         class="object-cover object-center w-full lg:h-48 md:h-36 bg-gray-50 transition duration-300 ease-in-out hover:scale-110"
@@ -38,17 +38,18 @@ const categories = item.categories.map((category: string) => category.trim());
     <p class="mx-auto text-base leading-relaxed text-gray-600 line-clamp-3">
       {item.description}
     </p>
+  </a>
 
-    <div class="mt-6 flex gap-4">
-      {
-        categories.map((category: string, index: number) => (
-          <Badge
-            key={index}
-            label={category}
-            href={`/blog/category/${slugify(category)}`}
-          />
-        ))
-      }
-    </div>
-  </article>
-</a>
+  <div class="mt-6 flex gap-4">
+    {
+      categories.map((category: string, index: number) => (
+        <Badge
+          key={index}
+          label={category}
+          href={`/blog/category/${slugify(category)}`}
+          class="capitalize"
+        />
+      ))
+    }
+  </div>
+</article>

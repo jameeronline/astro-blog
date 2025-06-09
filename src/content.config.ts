@@ -21,6 +21,7 @@ const posts = defineCollection({
     tags: zod.array(zod.string()),
     categories: zod.array(zod.string()),
     featured: zod.boolean().optional(),
+    draft: zod.boolean().optional(),
   }),
 });
 

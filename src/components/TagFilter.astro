@@ -22,11 +22,9 @@ posts.forEach((post) => {
 const tags = Array.from(tagsSet).sort();
 ---
 
-<header class="mx-auto flex max-w-screen-md flex-col items-center gap-6 mb-10">
-  <h2 class="mb-4 text-center text-2xl font-semibold flex flex-col">
-    <span class="text-sm font-normal uppercase text-gray-500"
-      >Posts tagged with</span
-    >
+<header class="mx-auto flex max-w-screen-md flex-col items-center gap-2 mb-10">
+  <span class="text-caption">Posts tagged with</span>
+  <h2 class="mb-4 text-center text-2xl font-semibold">
     <span class="capitalize">"{selected}"</span>
   </h2>
 </header>
