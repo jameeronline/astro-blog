@@ -1,15 +1,19 @@
 ---
-// src/pages/blog/[...page].astro
+//astro imports
 import { getCollection } from "astro:content";
-import BaseLayout from "../../layouts/BaseLayout.astro";
-import BlogPost from "../../components/BlogPost.astro";
-import BlogCard from "../../components/BlogCard.astro";
-import BlogGrid from "../../blocks/BlogGrid.astro";
-import { slugify } from "../../utils/helper";
+
+//components import
+import BaseLayout from "@layouts/BaseLayout.astro";
+import BlogGrid from "@blocks/BlogGrid.astro";
+import Paginate from "@components/Paginate.astro";
+
+//utils import
+import { slugify } from "@utils/helper";
 
 //site config
 import { siteConfig } from "../../config/siteconfig.ts";
 
+//page meta data
 const pageTitle = "Blog Index";
 
 // Pagination setup
@@ -28,7 +32,7 @@ export async function getStaticPaths({ paginate }) {
   });
 }
 
-// Get the current page data from Astro props
+//props
 const { page } = Astro.props;
 ---
 
@@ -51,36 +55,11 @@ const { page } = Astro.props;
     <BlogGrid posts={page.data} />
 
     <!-- Pagination Controls -->
-    <nav class="flex justify-center gap-4 mt-12">
-      {
-        page.url.prev ? (
-          <a
-            href={page.url.prev}
-            class="px-4 py-2 border rounded-lg hover:bg-gray-100 transition-colors"
-          >
-            &larr; Previous
-          </a>
-        ) : (
-          <span class="px-4 py-2 text-gray-400">&larr; Previous</span>
-        )
-      }
-
-      <span class="px-4 py-2">
-        Page {page.currentPage} of {page.lastPage}
-      </span>
-
-      {
-        page.url.next ? (
-          <a
-            href={page.url.next}
-            class="px-4 py-2 border rounded-lg hover:bg-gray-100 transition-colors"
-          >
-            Next &rarr;
-          </a>
-        ) : (
-          <span class="px-4 py-2 text-gray-400">Next &rarr;</span>
-        )
-      }
-    </nav>
+    <Paginate
+      currentPage={page.currentPage}
+      lastPage={page.lastPage}
+      prevUrl={page.url.prev}
+      nextUrl={page.url.next}
+    />
   </section>
 </BaseLayout>

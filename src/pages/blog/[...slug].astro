@@ -1,19 +1,23 @@
 ---
+//astro imports
 import { Image } from "astro:assets";
-import BaseLayout from "../../layouts/BaseLayout.astro";
-import BlogAside from "../../blocks/BlogAside.astro";
-import Badge from "../../components/ui/Badge.astro";
 import { Breadcrumbs } from "astro-breadcrumbs";
+import { getCollection, getEntry, render } from "astro:content";
 
+//components import
+import BaseLayout from "@layouts/BaseLayout.astro";
+import BlogAside from "@blocks/BlogAside.astro";
+import BlogGrid from "@blocks/BlogGrid.astro";
+import Badge from "@components/ui/Badge.astro";
+import RelatedBlogCard from "@components/RelatedBlogCard.astro";
+
+//vendor style imports
 import "astro-breadcrumbs/breadcrumbs.css";
 
 import { format } from "date-fns";
-import { slugify } from "../../utils/helper";
 
-import { getCollection, getEntry, render } from "astro:content";
-import { ArrowLeft } from "@lucide/astro";
-import BlogGrid from "../../blocks/BlogGrid.astro";
-import RelatedBlogCard from "../../components/RelatedBlogCard.astro";
+//utils import
+import { slugify } from "@utils/helper";
 
 //define static paths for dynamic routing
 export async function getStaticPaths() {
@@ -39,7 +43,7 @@ if (!post) {
 const { data } = post;
 const { Content, headings } = await render(post);
 
-//data transformation
+//format date
 const formattedDate = format(data.pubDate, "MMM d, yyyy");
 
 const tags = data.tags.map((tag) => tag.trim());

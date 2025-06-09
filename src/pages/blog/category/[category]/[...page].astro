@@ -1,12 +1,12 @@
 ---
 import { getCollection } from "astro:content";
 
-import BaseLayout from "../../../../layouts/BaseLayout.astro";
-import BlogGrid from "../../../../blocks/BlogGrid.astro";
-import TagFilter from "../../../../components/TagFilter.astro";
-import Paginate from '../../../../components/Paginate.astro';
+import BaseLayout from "@layouts/BaseLayout.astro";
+import BlogGrid from "@blocks/BlogGrid.astro";
+import TagFilter from "@components/TagFilter.astro";
+import Paginate from '@components/Paginate.astro';
 
-import { slugify } from "../../../../utils/helper";
+import { slugify } from "@utils/helper";
 
 export async function getStaticPaths({ paginate }) {
   const posts = await getCollection("posts");
@@ -39,8 +39,6 @@ export async function getStaticPaths({ paginate }) {
 
 const { category } = Astro.params;
 const { posts, categoryName, page } = Astro.props;
-
-console.log(page.data);
 
 const selected = "all";
 
