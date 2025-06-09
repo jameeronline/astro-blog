@@ -1,5 +1,10 @@
 ---
+interface Props {
+  url: string;
+  title: string;
+}
+
 const { url, title } = Astro.props;
 ---
 
-<li><a href={url} class="underline text-emerald-500">{title}</a></li>
+<li><a href={url} class="underline text-primary-800">{title}</a></li>

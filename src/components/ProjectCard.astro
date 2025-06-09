@@ -1,6 +1,9 @@
 ---
+//astro imports
 import Image from "astro/components/Image.astro";
 import { Icon } from "astro-icon/components";
+
+//props
 const { data, url = "#" } = Astro.props;
 ---
 
@@ -59,7 +62,7 @@ const { data, url = "#" } = Astro.props;
         />
       </a>
     </div>
-    <a href={`/project/${url}`} class="text-sm text-primary-800 underline"
+    <a href={`/projects/${url}`} class="text-sm text-primary-800 underline"
       >View Details</a
     >
   </footer>

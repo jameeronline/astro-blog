@@ -1,11 +1,15 @@
 ---
+//astro imports
 import { Image } from "astro:assets";
+
+//vendor imports
 import { format } from "date-fns";
 
+//props
 const { post, url } = Astro.props;
 const { title, description, image, pubDate } = post.data;
 
-//data transformation
+//format date
 const formattedDate = format(pubDate, "MMM d, yyyy");
 ---
 

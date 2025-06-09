@@ -1,12 +1,16 @@
 ---
-import { getSearchIndex } from "../utils/search";
-import BaseLayout from "../layouts/BaseLayout.astro";
-import SearchForm from "../blocks/SearchForm.astro";
-import BlogGrid from "../blocks/BlogGrid.astro";
-
+//astro imports
 import { getCollection } from "astro:content";
 
-export const prerender = false; // <-- Add this line
+//utils imports
+import { getSearchIndex } from "@utils/search";
+
+//components imports
+import BaseLayout from "@layouts/BaseLayout.astro";
+import SearchForm from "@blocks/SearchForm.astro";
+import BlogGrid from "@blocks/BlogGrid.astro";
+
+export const prerender = false; // Disable prerendering for dynamic search results
 
 const posts = await getCollection("posts");
 const searchIndex = await getSearchIndex(posts);
@@ -26,8 +30,6 @@ if (searchTerm.trim()) {
       (data.tags && data.tags.some((tag) => tag.toLowerCase().includes(term)))
   );
 }
-
-console.log("Search results:", results); // Debugging line to check search results
 ---
 
 <BaseLayout title="Search Articles">

@@ -1,9 +1,11 @@
 ---
-import Badge from "../components/ui/Badge.astro";
+//component imports
+import Badge from "@components/ui/Badge.astro";
 
-//utities
-import { slugify } from "../utils/helper";
+//utils import
+import { slugify } from "@utils/helper";
 
+//props
 const { headings, tags, categories } = Astro.props;
 
 const socialLinks = [

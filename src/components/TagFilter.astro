@@ -1,12 +1,15 @@
 ---
+//astro imports
 import { getCollection } from "astro:content";
+
+//components imports
 import Tag from "../pages/tags/[tag].astro";
 
-// Accept an optional `selected` prop for the active tag
-const { selected = "all" } = Astro.props;
+//utils imports
+import { slugify } from "@utils/helper";
 
-//slugify function to format tag names
-import { slugify } from "../utils/helper";
+// props
+const { selected = "all" } = Astro.props;
 
 // Get all posts and collect unique tags
 const posts = await getCollection("posts");

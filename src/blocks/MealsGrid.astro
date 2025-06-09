@@ -1,26 +1,35 @@
 ---
+//astro imports
 import { Image } from "astro:assets";
+
+//components import
 import MealCard from "../components/MealCard.astro";
 import SearchForm from "./SearchForm.astro";
 
+//props
 const { items } = Astro.props;
 const { searchTerm = "a" } = Astro.props;
 const { errorMessage } = Astro.props;
 
 interface Meal {
-    idMeal: string;
-    strMeal: string;
-    strMealThumb: string;
-}   
-
+  idMeal: string;
+  strMeal: string;
+  strMealThumb: string;
+}
 ---
+
 <section>
-    <SearchForm searchTerm={searchTerm} />
-    <div class="grid grid-cols-4 gap-6 md:grid-cols-8 lg:grid-cols-12" id="mealGrid">
-        {(items as Meal[]).map((item: Meal) => (
-            <div class="meal-card col-span-4" key={item.idMeal}>
-                <MealCard item={item} />
-            </div>
-        ))}
-    </div>
+  <SearchForm searchTerm={searchTerm} />
+  <div
+    class="grid grid-cols-4 gap-6 md:grid-cols-8 lg:grid-cols-12"
+    id="mealGrid"
+  >
+    {
+      (items as Meal[]).map((item: Meal) => (
+        <div class="meal-card col-span-4" key={item.idMeal}>
+          <MealCard item={item} />
+        </div>
+      ))
+    }
+  </div>
 </section>

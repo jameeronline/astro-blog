@@ -1,6 +1,8 @@
 ---
-//components import
+//astro import
 import Image from "astro/components/Image.astro";
+
+//components import
 import Badge from "./ui/Badge.astro";
 
 // utils import
@@ -10,8 +12,8 @@ import { slugify } from "../utils/helper";
 const { item, url = "#" } = Astro.props;
 
 // get tags and categories from item
-const tags = item.tags.map((tag) => tag.trim());
-const categories = item.categories.map((category) => category.trim());
+const tags = item.tags.map((tag: string) => tag.trim());
+const categories = item.categories.map((category: string) => category.trim());
 ---
 
 <a href={`/blog/${url}`}>
@@ -37,9 +39,9 @@ const categories = item.categories.map((category) => category.trim());
       {item.description}
     </p>
 
-    <!-- <div class="mt-6 flex gap-4">
+    <div class="mt-6 flex gap-4">
       {
-        categories.map((category, index) => (
+        categories.map((category: string, index: number) => (
           <Badge
             key={index}
             label={category}
@@ -47,6 +49,6 @@ const categories = item.categories.map((category) => category.trim());
           />
         ))
       }
-    </div> -->
+    </div>
   </article>
 </a>

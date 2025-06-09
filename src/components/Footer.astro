@@ -3,11 +3,9 @@ const platform = "github";
 const username = "withastro";
 import Social from "./Social.astro";
 
-const siteConfig = {
-  title: "Wicked Blocks",
-  description: "Wicked templates for wicked dev's",
-  url: "https://wickedblocks.com",
-};
+//site config imports
+import { siteConfig } from "@config/siteconfig";
+const { title, description } = siteConfig;
 
 const solutions = {
   title: "Solutions",
@@ -39,10 +37,10 @@ const support = {
             href="#"
             class="text-lg font-bold tracking-tighter tracking-wide text-primary-100/40 transition duration-500 ease-in-out lg:pr-8"
           >
-            {siteConfig.title}
+            {title}
           </a>
           <p class="mt-2 w-1/2 text-sm text-gray-100">
-            {siteConfig.description}
+            {description}
           </p>
         </div>
         <div class="mt-12 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
@@ -274,8 +272,7 @@ const support = {
             Copyright © 2025 - 2026
             <a
               href="https://twitter.com/wickedtemplates"
-              class="mx-2 text-primary-900 hover:text-blue-700"
-              >@WickedTemplates</a
+              class="mx-2 text-primary-900 hover:text-blue-700">@{title}</a
             >
           </span>
         </div>

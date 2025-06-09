@@ -1,10 +1,17 @@
 ---
-import Header from "./components/Header.astro";
-import Footer from "./components/Footer.astro";
-import CTA from "../blocks/CTA.astro";
-import "../styles/global.css";
-const pageTitle = "Home Page";
-const { title } = Astro.props;
+// styles imports
+import "@styles/global.css";
+
+//components imports
+import Header from "@components/Header.astro";
+import Footer from "@components/Footer.astro";
+import CTA from "@blocks/CTA.astro";
+
+//site config imports
+import { siteConfig } from "@config/siteconfig.ts";
+
+//page meta data imports
+const { title = siteConfig.title } = Astro.props;
 
 import { ClientRouter } from "astro:transitions";
 ---
@@ -27,7 +34,7 @@ import { ClientRouter } from "astro:transitions";
       <main class="container mx-auto px-4 py-8">
         <slot />
       </main>
-      <CTA />
+      <!-- <CTA /> -->
       <Footer />
     </div>
     <script>

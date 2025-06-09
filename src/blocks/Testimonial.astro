@@ -1,67 +1,78 @@
 ---
-import TestimonialCard from '../components/TestimonialCard.astro'
-const title = 'Reviews from our happy customers'
+import TestimonialCard from "@components/TestimonialCard.astro";
+const title = "Reviews from our happy customers";
 const testimonialData = [
   {
-    name: 'Jared Smith',
-    role: 'Product Designer',
-    image: 'https://images.unsplash.com/photo-1527082395-e939b847da0d?auto=format&fit=crop&w=1180&q=80',
-    text: 'WickedBlocks has been a game-changer for my projects. The components are top-notch and easy to integrate. Highly recommended!'
+    name: "Jared Smith",
+    role: "Product Designer",
+    image:
+      "https://images.unsplash.com/photo-1527082395-e939b847da0d?auto=format&fit=crop&w=1180&q=80",
+    text: "WickedBlocks has been a game-changer for my projects. The components are top-notch and easy to integrate. Highly recommended!",
   },
   {
-    name: 'Samantha Lee',
-    role: 'Front-end Developer',
-    image: 'https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80',
-    text: 'I love using WickedBlocks! The variety and quality of components have significantly sped up my workflow.'
+    name: "Samantha Lee",
+    role: "Front-end Developer",
+    image:
+      "https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80",
+    text: "I love using WickedBlocks! The variety and quality of components have significantly sped up my workflow.",
   },
   {
-    name: 'Michael Brown',
-    role: 'Software Engineer',
-    image: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80',
-    text: 'WickedBlocks has transformed how I build web interfaces. The components are intuitive and save me a lot of time.'
+    name: "Michael Brown",
+    role: "Software Engineer",
+    image:
+      "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80",
+    text: "WickedBlocks has transformed how I build web interfaces. The components are intuitive and save me a lot of time.",
   },
   {
-    name: 'Emily Clark',
-    role: 'UI/UX Specialist',
-    image: 'https://images.unsplash.com/photo-1511367461989-f85a21fda167?auto=format&fit=crop&w=1180&q=80',
-    text: 'The flexibility of WickedBlocks is unmatched. It has made my design process much smoother and more efficient.'
+    name: "Emily Clark",
+    role: "UI/UX Specialist",
+    image:
+      "https://images.unsplash.com/photo-1511367461989-f85a21fda167?auto=format&fit=crop&w=1180&q=80",
+    text: "The flexibility of WickedBlocks is unmatched. It has made my design process much smoother and more efficient.",
   },
   {
-    name: 'David Kim',
-    role: 'Full Stack Developer',
-    image: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=1180&q=80',
-    text: 'WickedBlocks offers a wide range of components that are easy to customize. It’s my go-to resource for new projects.'
+    name: "David Kim",
+    role: "Full Stack Developer",
+    image:
+      "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=1180&q=80",
+    text: "WickedBlocks offers a wide range of components that are easy to customize. It’s my go-to resource for new projects.",
   },
   {
-    name: 'Olivia Martinez',
-    role: 'Web Developer',
-    image: 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=1180&q=80',
-    text: 'I appreciate the attention to detail in every component. WickedBlocks has saved me countless hours.'
+    name: "Olivia Martinez",
+    role: "Web Developer",
+    image:
+      "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=1180&q=80",
+    text: "I appreciate the attention to detail in every component. WickedBlocks has saved me countless hours.",
   },
   {
-    name: 'Chris Evans',
-    role: 'Backend Engineer',
-    image: 'https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=1180&q=80',
-    text: 'Integrating WickedBlocks into our workflow was seamless. The documentation is clear and the components are robust.'
+    name: "Chris Evans",
+    role: "Backend Engineer",
+    image:
+      "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=1180&q=80",
+    text: "Integrating WickedBlocks into our workflow was seamless. The documentation is clear and the components are robust.",
   },
   {
-    name: 'Sophia Turner',
-    role: 'Frontend Engineer',
-    image: 'https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=1180&q=80',
-    text: 'WickedBlocks has elevated the quality of our UI. The components are modern and easy to use.'
+    name: "Sophia Turner",
+    role: "Frontend Engineer",
+    image:
+      "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=1180&q=80",
+    text: "WickedBlocks has elevated the quality of our UI. The components are modern and easy to use.",
   },
   {
-    name: 'Liam Johnson',
-    role: 'DevOps Engineer',
-    image: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=1180&q=80',
-    text: 'The reliability and performance of WickedBlocks components are impressive. Highly recommended for any team.'
+    name: "Liam Johnson",
+    role: "DevOps Engineer",
+    image:
+      "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=1180&q=80",
+    text: "The reliability and performance of WickedBlocks components are impressive. Highly recommended for any team.",
   },
-]
+];
 ---
 
 <section class="embla">
   <div class="container py-24">
-    <h2 class="text-center text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+    <h2
+      class="text-center text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl"
+    >
       {title}
     </h2>
   </div>
@@ -81,7 +92,7 @@ const testimonialData = [
       }
     </div>
   </div>
-</div>
+</section>
 
 <div class="embla__controls">
   <div class="embla__buttons">
@@ -106,8 +117,6 @@ const testimonialData = [
 
   <div class="embla__dots"></div>
 </div>
-</section>
-
 
 <style>
   .embla {
@@ -243,7 +252,7 @@ const testimonialData = [
     border-radius: 50%;
     display: flex;
     align-items: center;
-    content: '';
+    content: "";
   }
   .embla__dot--selected:after {
     box-shadow: inset 0 0 0 0.2rem var(--text-body);
@@ -251,49 +260,45 @@ const testimonialData = [
 </style>
 
 <script>
+  import EmblaCarousel from "embla-carousel";
+  import { addPrevNextBtnsClickHandlers } from "../assets/js/EmblaCarouselArrowButtons";
+  import { addDotBtnsAndClickHandlers } from "../assets/js/EmblaCarouselDotButton";
+  import Autoplay from "embla-carousel-autoplay";
 
+  const OPTIONS = { dragFree: true, loop: true };
 
-import EmblaCarousel from 'embla-carousel'
-import { addPrevNextBtnsClickHandlers } from '../assets/js/EmblaCarouselArrowButtons'
-import { addDotBtnsAndClickHandlers } from '../assets/js/EmblaCarouselDotButton'
-import Autoplay from 'embla-carousel-autoplay'
+  const emblaNode = document.querySelector(".embla");
+  const viewportNode = emblaNode.querySelector(".embla__viewport");
+  const prevBtnNode = emblaNode.querySelector(".embla__button--prev");
+  const nextBtnNode = emblaNode.querySelector(".embla__button--next");
+  const dotsNode = emblaNode.querySelector(".embla__dots");
 
-const OPTIONS = { dragFree: true, loop: true }
+  const emblaApi = EmblaCarousel(viewportNode, OPTIONS, [Autoplay()]);
 
-const emblaNode = document.querySelector('.embla')
-const viewportNode = emblaNode.querySelector('.embla__viewport')
-const prevBtnNode = emblaNode.querySelector('.embla__button--prev')
-const nextBtnNode = emblaNode.querySelector('.embla__button--next')
-const dotsNode = emblaNode.querySelector('.embla__dots')
+  const onNavButtonClick = (emblaApi) => {
+    const autoplay = emblaApi?.plugins()?.autoplay;
+    if (!autoplay) return;
 
-const emblaApi = EmblaCarousel(viewportNode, OPTIONS, [Autoplay()])
+    const resetOrStop =
+      autoplay.options.stopOnInteraction === false
+        ? autoplay.reset
+        : autoplay.stop;
 
-const onNavButtonClick = (emblaApi) => {
-  const autoplay = emblaApi?.plugins()?.autoplay
-  if (!autoplay) return
+    resetOrStop();
+  };
 
-  const resetOrStop =
-    autoplay.options.stopOnInteraction === false
-      ? autoplay.reset
-      : autoplay.stop
+  const removePrevNextBtnsClickHandlers = addPrevNextBtnsClickHandlers(
+    emblaApi,
+    prevBtnNode,
+    nextBtnNode,
+    onNavButtonClick
+  );
+  const removeDotBtnsAndClickHandlers = addDotBtnsAndClickHandlers(
+    emblaApi,
+    dotsNode,
+    onNavButtonClick
+  );
 
-  resetOrStop()
-}
-
-const removePrevNextBtnsClickHandlers = addPrevNextBtnsClickHandlers(
-  emblaApi,
-  prevBtnNode,
-  nextBtnNode,
-  onNavButtonClick
-)
-const removeDotBtnsAndClickHandlers = addDotBtnsAndClickHandlers(
-  emblaApi,
-  dotsNode,
-  onNavButtonClick
-)
-
-emblaApi.on('destroy', removePrevNextBtnsClickHandlers)
-emblaApi.on('destroy', removeDotBtnsAndClickHandlers)
-
-
+  emblaApi.on("destroy", removePrevNextBtnsClickHandlers);
+  emblaApi.on("destroy", removeDotBtnsAndClickHandlers);
 </script>

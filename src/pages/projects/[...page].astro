@@ -1,12 +1,16 @@
 ---
-//import projects from "../data/projects.json";
-import BaseLayout from "../../layouts/BaseLayout.astro";
-import ProjectCard from "../../components/ProjectCard.astro";
+//astro imports
+import { getCollection, getEntry } from "astro:content";
 
-import { slugify } from "../../utils/helper";
+//components imports
+import BaseLayout from "@layouts/BaseLayout.astro";
+import ProjectCard from "@components/ProjectCard.astro";
 
-import Github from "../assets/icons/github-fill.svg";
-import Facebook from "../assets/icons/facebook-box-fill.svg";
+//utils imports
+import { slugify } from "@utils/helper";
+
+//site config
+import { siteConfig } from "@config/siteConfig.ts";
 
 const delayClasses = [
   "intersect:animate-delay-[0ms]",
@@ -21,15 +25,16 @@ const delayClasses = [
   "intersect:animate-delay-[900ms]",
 ];
 
-//config
+//page metadata
 const title = "Projects Page";
 const description = "This is the projects page";
-import { getCollection, getEntry } from "astro:content";
 
 // Pagination setup
 export async function getStaticPaths({ paginate }) {
+  const { pageLength } = siteConfig;
+
   const allProjects = await getCollection("projects");
-  return paginate(allProjects, { pageSize: 3 });
+  return paginate(allProjects, { pageSize: pageLength });
 }
 
 // Get the current page data from Astro props
@@ -39,7 +44,7 @@ const { page } = Astro.props;
 <BaseLayout title={title} description={description}>
   <section class="py-16">
     <header
-      class="mx-auto flex max-w-screen-md flex-col items-center gap-6 mb-16 intersect:animate-delay-150 intersect:animate-fade-up"
+      class="mx-auto flex max-w-screen-md flex-col items-center gap-6 mb-16 intersect:animate-delay-150 intersect:animate-fade-up intersect-once"
     >
       <h2 class="mb-4 text-center text-3xl font-semibold lg:text-5xl">
         Projects and Portfolio
@@ -55,7 +60,7 @@ const { page } = Astro.props;
         page.data.map((project, index) => (
           <div
             key={index}
-            class={`col-span-4 intersect:animate-fade-up ${delayClasses[index % delayClasses.length]}`}
+            class={`col-span-4 intersect:animate-fade-up ${delayClasses[index % delayClasses.length]}  intersect-once`}
           >
             <ProjectCard
               data={project.data}
