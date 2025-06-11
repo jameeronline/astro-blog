@@ -7,7 +7,7 @@ image:
   alt: "The Astro logo on a dark background with rainbow rays."
 pubDate: 2022-07-15
 tags: ["astro", "learning in public", "setbacks", "community"]
-categories: ["react"]
+categories: ["React"]
 featured: true
 ---
 

@@ -1,9 +1,14 @@
 ---
 //astro imports
-import { getCollection } from "astro:content";
+import { getCollection, getEntry, render } from "astro:content";
+import { Image } from "astro:assets";
+import { Icon } from "astro-icon/components";
 
 //components imports
 import BaseLayout from "@layouts/BaseLayout.astro";
+
+//icons import
+import { ExternalLink, Link } from "@lucide/astro";
 
 //utils imports
 import { slugify } from "@utils/helper";
@@ -19,17 +24,157 @@ export async function getStaticPaths() {
 
 const { slug } = Astro.params;
 const { title, projectid } = Astro.props;
+
+// Fetch the project details using the ID from the dynamic route
+const project = await getEntry("projects", projectid);
+
+// If the post is not found, throw an error
+if (!project) {
+  throw new Error("Post not found");
+}
+
+// Extract data and content from the post
+const { data } = project;
+const { Content, headings } = await render(project);
+
+const tags = data.tags.map((tag) => tag.trim());
+const technologies = data.technologies.map((technology) => technology.trim());
+
+//access data properties
+const {
+  title: projectTitle,
+  description,
+  thumbnail,
+  images,
+  type,
+  duration,
+  teamSize,
+  year,
+  liveDemo,
+  github,
+} = data;
 ---
 
 <BaseLayout title="Project Details">
-  <section>
-    <h1 class="text-3xl font-bold underline text-emerald-600">
-      Project Details {title}
-    </h1>
-    <p class="text-gray-700">
-      This is the project details page. Here you can find more information about
-      the project.
-    </p>
-    <!-- Add your project details here -->
+  <section class="py-8 md:py-16">
+    <header
+      class="mx-auto flex flex-col gap-2 items-center text-center lg:max-w-4xl md:gap-6 intersect:animate-delay-150 intersect:animate-fade-up intersect-once"
+    >
+      <h1 class="text-heading">{projectTitle}</h1>
+      <p class="text-lead hidden md:block">
+        {description}
+      </p>
+
+      <div class="flex flex-wrap gap-2">
+        {
+          tags.map((tag) => (
+            <a
+              href="/projects/tag"
+              class="capitalize bg-gray-200 text-gray-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-gray-700 dark:text-gray-300"
+            >
+              {tag}
+            </a>
+          ))
+        }
+      </div>
+    </header>
+
+    <figure class="my-8 md:my-16">
+      <Image
+        src={thumbnail}
+        alt={projectTitle}
+        decoding="async"
+        loading="lazy"
+        width={1600}
+        height={900}
+        class="w-full rounded-xl object-cover object-center"
+      />
+      <figcaption class="sr-only">{projectTitle}</figcaption>
+    </figure>
+
+    <div
+      class="grid grid-cols-4 gap-6 md:grid-cols-8 md:gap-12 lg:grid-cols-12"
+    >
+      <div class="col-span-4 md:col-span-8 lg:col-span-9">
+        <article>
+          <div class="prose max-w-none prose-li:marker:text-gray-800">
+            <Content />
+          </div>
+        </article>
+      </div>
+
+      <div class="col-span-4 hidden lg:col-span-3 lg:block">
+        <!-- <BlogAside headings={headings} tags={tags} categories={categories} /> -->
+        <div class="bg-white rounded-lg p-6 shadow-xl/5">
+          <h2 class="text-xl font-bold mb-4">Project Details</h2>
+
+          <div class="space-y-4">
+            <div>
+              <h3 class="text-sm font-medium text-gray-500">
+                Project Duration
+              </h3>
+              <p>{duration}</p>
+            </div>
+
+            <div>
+              <h3 class="text-sm font-medium text-gray-500">Team Size</h3>
+              <p>{teamSize} developers</p>
+            </div>
+
+            <div>
+              <h3 class="text-sm font-medium text-gray-500">Completed</h3>
+              <p>
+                {
+                  new Date(year).toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })
+                }
+              </p>
+            </div>
+          </div>
+
+          <div class="mt-6 pt-6 border-t border-t-gray-200 space-y-4">
+            <h2 class="text-xl font-bold mb-4">Technologies</h2>
+            <div class="flex flex-wrap gap-2">
+              {
+                technologies.map((tech) => (
+                  <a
+                    href={`/project/tech/${slugify(tech)}`}
+                    class="group bg-gray-100 text-gray-800 border-gray-200 hover:bg-primary-100/20 hover:text-primary-800 hover:border-primary-800 transition-colors duration-300 inline-flex gap-2 items-center justify-center text-sm font-medium px-2.5 py-0.5 rounded-full dark:bg-gray-700 dark:text-gray-400 border "
+                  >
+                    {tech}
+                    <Link class="size-0 group-hover:size-3 transition-all duration-300" />
+                  </a>
+                ))
+              }
+            </div>
+          </div>
+
+          <div class="mt-6 pt-6 border-t border-t-gray-200 space-y-4">
+            <a
+              href={liveDemo}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="px-4 h-11 rounded-md text-base font-medium flex items-center justify-center text-white bg-primary-900 hover:bg-primary-950 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+            >
+              <ExternalLink class="mr-2 h-4 w-4" />
+              Live Demo
+            </a>
+
+            <a
+              href={github}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="px-4 h-11 rounded-md text-base font-medium flex items-center justify-center text-white bg-gray-900 hover:bg-gray-950 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+            >
+              <Icon name="brands/github" class="mr-2 h-4 w-4" />
+              View Code
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 </BaseLayout>

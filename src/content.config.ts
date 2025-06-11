@@ -58,7 +58,8 @@ const projects = defineCollection({
     id: zod.number(),
     title: zod.string(),
     description: zod.string(),
-    image: zod.string(),
+    thumbnail: zod.string(),
+    images: zod.array(zod.string()),
     type: zod.string(),
     tags: zod.array(zod.string()),
     technologies: zod.array(zod.string()),
@@ -66,6 +67,8 @@ const projects = defineCollection({
     liveDemo: zod.string().url(),
     year: zod.number(),
     role: zod.string(),
+    duration: zod.string(),
+    teamSize: zod.number(),
   }),
 });
 

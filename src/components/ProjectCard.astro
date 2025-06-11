@@ -7,11 +7,11 @@ import { Icon } from "astro-icon/components";
 const { data, url = "#" } = Astro.props;
 ---
 
-<article class="p-6 px-2 meal-card rounded-xl transition-all">
+<article class="rounded-xl transition-all">
   <div class="relative overflow-hidden rounded-xl mb-8">
     <Image
       class="object-cover object-center w-full lg:h-48 md:h-36 bg-gray-50 transition duration-300 ease-in-out hover:scale-110"
-      src={data.image}
+      src={data.thumbnail}
       alt={data.title}
       format="webp"
       loading="lazy"
@@ -40,6 +40,9 @@ const { data, url = "#" } = Astro.props;
   </div>
 
   <footer class="flex items-center justify-between mt-10">
+    <a href={`/projects/${url}`} class="text-sm text-primary-800 underline"
+      >View Details</a
+    >
     <div class="flex items-center justify-between gap-4">
       <a
         href={data.github}
@@ -62,8 +65,5 @@ const { data, url = "#" } = Astro.props;
         />
       </a>
     </div>
-    <a href={`/projects/${url}`} class="text-sm text-primary-800 underline"
-      >View Details</a
-    >
   </footer>
 </article>

@@ -9,6 +9,7 @@ import BaseLayout from "@layouts/BaseLayout.astro";
 import BlogAside from "@blocks/BlogAside.astro";
 import BlogGrid from "@blocks/BlogGrid.astro";
 import Badge from "@components/ui/Badge.astro";
+import BackButton from "@components/BackButton.astro";
 import RelatedBlogCard from "@components/RelatedBlogCard.astro";
 
 //icons import
@@ -62,20 +63,23 @@ const { title, description, image, pubDate, author } = data;
 ---
 
 <BaseLayout title={title}>
-  <section class="py-6">
-    <header class="prose mb-8" transition:name="blog-title">
-      <!-- <Breadcrumbs /> -->
-      <a
-        href="/blog"
-        class="inline-flex items-center justify-center gap-2 text-gray-800 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-sm py-2.5 mb-4 dark:bg-gray-200 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
+  <section>
+    <header
+      class="prose max-w-none lg:prose-lg prose-h1:leading-[1.2] prose-h1:mb-3 md:prose-h1:mb-1 prose-p:my-2 mb-8"
+    >
+      <div
+        class="grid grid-cols-4 gap-6 md:grid-cols-8 md:gap-12 lg:grid-cols-12"
       >
-        <ArrowLeft class="w-5 h-5" /> Back to Blog</a
-      >
-      <h1 class="text-heading">{title}</h1>
+        <div class="col-span-4 md:col-span-8">
+          <!-- <Breadcrumbs /> -->
+          <BackButton label="Back to blog" href="/blog" />
+          <h1>{title}</h1>
 
-      <p class="text-sm text-gray-600 my-4">
-        Written by {author} on {formatDate(pubDate)}
-      </p>
+          <p class="text-sm text-gray-600">
+            Written by {author} on {formatDate(pubDate)}
+          </p>
+        </div>
+      </div>
     </header>
     <div
       class="grid grid-cols-4 gap-6 md:grid-cols-8 md:gap-12 lg:grid-cols-12"
@@ -96,9 +100,9 @@ const { title, description, image, pubDate, author } = data;
           </figure>
 
           <!-- Summary -->
-          <p class="md:text-xl text-gray-500 my-10">{description}</p>
+          <p class="text-xl md:text-2xl text-gray-500 my-10">{description}</p>
 
-          <div class="prose max-w-none">
+          <div class="prose lg:prose-lg max-w-none">
             <Content />
           </div>
         </article>
@@ -108,19 +112,17 @@ const { title, description, image, pubDate, author } = data;
         <BlogAside headings={headings} tags={tags} categories={categories} />
       </div>
     </div>
-    <div>
-      {
-        relatedPosts.length > 0 && (
-          <section class="my-16">
-            <h2 class="text-xl font-bold mb-4">Related Posts</h2>
-            <div class="grid grid-cols-4 gap-6 md:grid-cols-8 md:gap-10 lg:grid-cols-12">
-              {relatedPosts.map((post) => (
-                <RelatedBlogCard post={post} url={slugify(title)} />
-              ))}
-            </div>
-          </section>
-        )
-      }
-    </div>
+    {
+      relatedPosts.length > 0 && (
+        <footer class="my-16">
+          <h3 class="text-xl font-bold mb-8">Related Posts</h3>
+          <div class="grid grid-cols-4 gap-6 md:grid-cols-8 md:gap-10 lg:grid-cols-12">
+            {relatedPosts.map((post) => (
+              <RelatedBlogCard post={post} url={slugify(post.data.title)} />
+            ))}
+          </div>
+        </footer>
+      )
+    }
   </section>
 </BaseLayout>

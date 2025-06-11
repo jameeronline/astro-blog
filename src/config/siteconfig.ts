@@ -16,7 +16,7 @@ import { Search } from "@lucide/astro";
 export const siteConfig = {
   title: "Astro",
   description:
-    "A starter kit for building Astro sites with Tailwind CSS and Lucide icons.",
+    "A modern frontend developer portfolio built with Astro, Tailwind CSS, and Lucide icons.",
   logo: "/logo.svg",
   onlyLogo: false,
   pageLength: 6,

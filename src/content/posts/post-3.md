@@ -7,7 +7,7 @@ image:
   alt: "The Astro logo on a dark background with rainbow rays."
 pubDate: 2022-07-15
 tags: ["astro", "learning in public", "setbacks", "community", "tailwindcss"]
-categories: ["tailwind"]
+categories: ["Tailwind CSS"]
 featured: true
 ---
 

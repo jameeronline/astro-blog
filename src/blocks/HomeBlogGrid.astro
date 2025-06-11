@@ -17,7 +17,7 @@ const posts = (await getCollection("posts"))
 ---
 
 <section class="py-16">
-  <div class="text-center mx-auto lg:max-w-3xl">
+  <div class="text-center mx-auto lg:max-w-3xl mb-16">
     <p class="text-caption mb-4">Recent Blogs</p>
     <h2 class="text-subheading">Blog Posts</h2>
     <p class="mb-8 text-gray-700 mx-auto md:text-base lg:max-w-2xl lg:text-lg">
@@ -25,7 +25,7 @@ const posts = (await getCollection("posts"))
       design, and technology trends.
     </p>
   </div>
-  <div class="grid grid-cols-4 gap-6 md:grid-cols-8 md:gap-10 lg:grid-cols-12">
+  <div class="grid grid-cols-4 gap-6 md:grid-cols-8 md:gap-12 lg:grid-cols-12">
     {
       posts.map(({ data }, index) => (
         <div
@@ -37,7 +37,7 @@ const posts = (await getCollection("posts"))
       ))
     }
   </div>
-  <footer class="flex justify-center mt-14">
+  <footer class="flex justify-center mt-16">
     <a
       href="/blog"
       class="inline-flex items-center justify-center whitespace-nowrap rounded-md underline font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 text-gray-600 underline-offset-4 h-10 px-4 py-2 w-full sm:w-auto"

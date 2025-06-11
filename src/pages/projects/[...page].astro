@@ -5,6 +5,7 @@ import { getCollection, getEntry } from "astro:content";
 //components imports
 import BaseLayout from "@layouts/BaseLayout.astro";
 import ProjectCard from "@components/ProjectCard.astro";
+import Paginate from "@components/Paginate.astro";
 
 //utils imports
 import { slugify } from "@utils/helper";
@@ -44,7 +45,7 @@ const { page } = Astro.props;
 <BaseLayout title={title} description={description}>
   <section class="py-16">
     <header
-      class="mx-auto flex max-w-screen-md flex-col items-center gap-6 mb-16 intersect:animate-delay-150 intersect:animate-fade-up intersect-once"
+      class="mx-auto flex flex-col items-center text-center lg:max-w-3xl gap-6 mb-16 intersect:animate-delay-150 intersect:animate-fade-up intersect-once"
     >
       <h1 class="text-heading">Projects and Portfolio</h1>
       <p class="text-lead">
@@ -53,7 +54,9 @@ const { page } = Astro.props;
       </p>
     </header>
 
-    <div class="grid grid-cols-4 gap-6 md:grid-cols-8 lg:grid-cols-12">
+    <div
+      class="grid grid-cols-4 gap-6 md:grid-cols-8 md:gap-12 lg:grid-cols-12"
+    >
       {
         page.data.map((project, index) => (
           <div
@@ -69,65 +72,11 @@ const { page } = Astro.props;
       }
     </div>
 
-    <!-- <nav class="flex justify-center gap-4 mt-8">
-      {
-        page.url.prev ? (
-          <a
-            href={page.url.prev}
-            class="px-4 py-2 rounded bg-gray-200 hover:bg-gray-300"
-          >
-            Previous
-          </a>
-        ) : (
-          <span class="px-4 py-2 text-gray-400">Previous</span>
-        )
-      }
-      <span class="px-4 py-2">{page.currentPage} / {page.lastPage}</span>
-      {
-        page.url.next ? (
-          <a
-            href={page.url.next}
-            class="px-4 py-2 rounded bg-gray-200 hover:bg-gray-300"
-          >
-            Next
-          </a>
-        ) : (
-          <span class="px-4 py-2 text-gray-400">Next</span>
-        )
-      }
-    </nav> -->
-
-    <!-- Pagination Controls -->
-    <nav class="flex justify-center gap-4 mt-12">
-      {
-        page.url.prev ? (
-          <a
-            href={page.url.prev}
-            class="px-4 py-2 border rounded-lg hover:bg-gray-100 transition-colors"
-          >
-            &larr; Previous
-          </a>
-        ) : (
-          <span class="px-4 py-2 text-gray-400">&larr; Previous</span>
-        )
-      }
-
-      <span class="px-4 py-2">
-        Page {page.currentPage} of {page.lastPage}
-      </span>
-
-      {
-        page.url.next ? (
-          <a
-            href={page.url.next}
-            class="px-4 py-2 border rounded-lg hover:bg-gray-100 transition-colors"
-          >
-            Next &rarr;
-          </a>
-        ) : (
-          <span class="px-4 py-2 text-gray-400">Next &rarr;</span>
-        )
-      }
-    </nav>
+    <Paginate
+      currentPage={page.currentPage}
+      lastPage={page.lastPage}
+      prevUrl={page.url.prev}
+      nextUrl={page.url.next}
+    />
   </section>
 </BaseLayout>
