@@ -11,13 +11,14 @@ import BlogGrid from "@blocks/BlogGrid.astro";
 import Badge from "@components/ui/Badge.astro";
 import RelatedBlogCard from "@components/RelatedBlogCard.astro";
 
+//icons import
+import { ArrowLeft } from "@lucide/astro";
+
 //vendor style imports
 // import "astro-breadcrumbs/breadcrumbs.css";
 
-import { format } from "date-fns";
-
 //utils import
-import { slugify } from "@utils/helper";
+import { slugify, formatDate } from "@utils/helper";
 
 //define static paths for dynamic routing
 export async function getStaticPaths() {
@@ -43,9 +44,6 @@ if (!post) {
 const { data } = post;
 const { Content, headings } = await render(post);
 
-//format date
-const formattedDate = format(data.pubDate, "MMM d, yyyy");
-
 const tags = data.tags.map((tag) => tag.trim());
 const categories = data.categories.map((category) => category.trim());
 
@@ -58,22 +56,25 @@ const relatedPosts = posts
         p.data.categories.some((cat) => categories.includes(cat.trim())))
   )
   .slice(0, 4); // Limit to 4
+
+//access data properties
+const { title, description, image, pubDate, author } = data;
 ---
 
-<BaseLayout title={data.title}>
+<BaseLayout title={title}>
   <section class="py-6">
     <header class="prose mb-8" transition:name="blog-title">
       <!-- <Breadcrumbs /> -->
-      <!-- <a
+      <a
         href="/blog"
-        class="inline-flex items-center justify-center gap-2 text-gray-800 bg-gray-400/10 hover:bg-gray-200 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-sm px-4 py-2.5 me-2 mb-2 dark:bg-gray-200 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
+        class="inline-flex items-center justify-center gap-2 text-gray-800 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-sm py-2.5 mb-4 dark:bg-gray-200 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
       >
         <ArrowLeft class="w-5 h-5" /> Back to Blog</a
-      > -->
-      <h1 class="mb-4">{data.title}</h1>
+      >
+      <h1 class="text-heading">{title}</h1>
 
       <p class="text-sm text-gray-600 my-4">
-        Written by {post.data.author} on {formattedDate}
+        Written by {author} on {formatDate(pubDate)}
       </p>
     </header>
     <div
@@ -84,18 +85,18 @@ const relatedPosts = posts
           <figure>
             <div class="relative">
               <Image
-                src={data.image.url}
-                alt={data.title}
+                src={image.url}
+                alt={title}
                 width={1600}
                 height={900}
                 class="w-full rounded-xl object-cover object-center"
               />
             </div>
-            <figcaption class="sr-only">{data.image.alt}</figcaption>
+            <figcaption class="sr-only">{image.alt}</figcaption>
           </figure>
 
           <!-- Summary -->
-          <p class="md:text-xl text-gray-500 my-10">{data.description}</p>
+          <p class="md:text-xl text-gray-500 my-10">{description}</p>
 
           <div class="prose max-w-none">
             <Content />
@@ -114,7 +115,7 @@ const relatedPosts = posts
             <h2 class="text-xl font-bold mb-4">Related Posts</h2>
             <div class="grid grid-cols-4 gap-6 md:grid-cols-8 md:gap-10 lg:grid-cols-12">
               {relatedPosts.map((post) => (
-                <RelatedBlogCard post={post} url={slugify(post.data.title)} />
+                <RelatedBlogCard post={post} url={slugify(title)} />
               ))}
             </div>
           </section>

@@ -1,0 +1,26 @@
+---
+import siteConfig from "@config/siteConfig";
+
+export interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+---
+<meta name="description" content={siteConfig.description} />
+<meta name="keywords" content={siteConfig.keywords?.join(", ")} />
+<meta name="author" content={siteConfig.author} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={siteConfig.description} />
+<meta property="og:type" content="website" />
+<meta property="og:url" content={siteConfig.url} />
+<meta property="og:image" content={siteConfig.ogImage} />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={siteConfig.description} />
+<meta name="twitter:image" content={siteConfig.ogImage} />
+<meta name="twitter:site" content={siteConfig.twitter} />
+<meta name="robots" content="index, follow" />
+<link rel="canonical" href={siteConfig.url} />

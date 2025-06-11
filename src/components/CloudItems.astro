@@ -1,0 +1,61 @@
+---
+//astro imports
+import { getCollection } from "astro:content";
+
+//components imports
+import Tag from "../pages/tags/[tag].astro";
+
+//utils imports
+import { slugify } from "@utils/helper";
+
+// props
+const { selected = "all", type = "tag" } = Astro.props;
+
+// Get all posts and collect unique tags
+const posts = await getCollection("posts");
+const tagsSet = new Set();
+posts.forEach((post) => {
+  if (Array.isArray(post.data.tags)) {
+    post.data.tags.forEach((tag) => tagsSet.add(tag));
+  }
+});
+const tags = Array.from(tagsSet).sort();
+---
+
+<header class="mx-auto flex max-w-screen-md flex-col items-center gap-2 mb-10">
+  <span class="text-caption">Posts tagged with</span>
+  <h2 class="mb-4 text-center text-2xl font-semibold">
+    <span class="capitalize">"{selected}"</span>
+  </h2>
+</header>
+
+<div class="max-w-screen-md mx-auto mb-16">
+  <ul class="flex flex-wrap justify-center gap-3 mb-8">
+    <li>
+      <a
+        href="/blog/tags"
+        class={`px-4 h-8 inline-flex items-center justify-center text-sm rounded-full transition duration-300 bg-primary-800/10 ${
+          selected === "all"
+            ? "bg-primary-900 text-white"
+            : " hover:bg-primary-900 hover:text-white"
+        }`}>All</a
+      >
+    </li>
+    {
+      tags.map((tag) => (
+        <li>
+          <a
+            href={`/blog/tags/${slugify(tag)}`}
+            class={`px-4 h-8 inline-flex items-center justify-center text-sm rounded-full transition duration-300 bg-primary-800/10 ${
+              selected === tag
+                ? "bg-primary-900/100 text-white"
+                : " hover:bg-primary-900 hover:text-white"
+            }`}
+          >
+            {tag.charAt(0).toUpperCase() + tag.slice(1)}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</div>

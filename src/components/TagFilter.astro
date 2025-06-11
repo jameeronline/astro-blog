@@ -19,7 +19,24 @@ posts.forEach((post) => {
     post.data.tags.forEach((tag) => tagsSet.add(tag));
   }
 });
-const tags = Array.from(tagsSet).sort();
+
+// Collect unique tags and count posts per tag
+const tagCounts = {};
+posts.forEach((post) => {
+  if (Array.isArray(post.data.tags)) {
+    post.data.tags.forEach((tag) => {
+      tagsSet.add(tag);
+      tagCounts[tag] = (tagCounts[tag] || 0) + 1;
+    });
+  }
+});
+
+// Sort tagCounts by key (tag name)
+const sortedTagCounts = Object.fromEntries(
+  Object.entries(tagCounts).sort(([a], [b]) => a.localeCompare(b))
+);
+// console.log(sortedTagCounts);
+// const tags = Array.from(tagsSet).sort();
 ---
 
 <header class="mx-auto flex max-w-screen-md flex-col items-center gap-2 mb-10">
@@ -30,29 +47,38 @@ const tags = Array.from(tagsSet).sort();
 </header>
 
 <div class="max-w-screen-md mx-auto mb-16">
-  <ul class="flex flex-wrap justify-center gap-3 mb-8">
+  <ul class="flex flex-wrap justify-center gap-3">
     <li>
       <a
         href="/blog/tags"
-        class={`px-4 h-8 inline-flex items-center justify-center text-sm rounded-full transition duration-300 bg-primary-800/10 ${
-          selected === "all"
-            ? "bg-primary-900 text-white"
-            : " hover:bg-primary-900 hover:text-white"
-        }`}>All</a
-      >
+        class={`group px-4 h-8 inline-flex items-center justify-center text-sm capitalize rounded-full transition duration-300 bg-primary-800/10 ${
+          selected === "all" ? "bg-primary-900 text-white" : " "
+        }`}
+        >All
+        <span
+          class={`ml-1 text-xs text-gray-500 group-hover:text-white${selected === "all" ? " text-white" : ""}`}
+        >
+          ({posts.length})
+        </span>
+      </a>
     </li>
     {
-      tags.map((tag) => (
+      Object.entries(sortedTagCounts).map(([key, value]) => (
         <li>
           <a
-            href={`/blog/tags/${slugify(tag)}`}
-            class={`px-4 h-8 inline-flex items-center justify-center text-sm rounded-full transition duration-300 bg-primary-800/10 ${
-              selected === tag
-                ? "bg-primary-900/100 text-white"
-                : " hover:bg-primary-900 hover:text-white"
+            href={`/blog/tags/${slugify(key)}`}
+            class={`group px-4 h-8 inline-flex items-center justify-center text-sm rounded-full transition duration-300 bg-primary-800/10 ${
+              selected === key ? "bg-primary-900/100 text-white" : " "
             }`}
           >
-            {tag.charAt(0).toUpperCase() + tag.slice(1)}
+            <span class="inline-flex items-center justify-center capitalize">
+              {key}
+              <span
+                class={`ml-1 text-xs text-gray-500 ${selected === key ? " text-white " : ""}`}
+              >
+                ({value || 0})
+              </span>
+            </span>
           </a>
         </li>
       ))

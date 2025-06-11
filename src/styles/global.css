@@ -119,8 +119,16 @@
     @apply text-xs font-medium uppercase tracking-wider text-gray-500;
   }
 
+  .text-lead {
+    @apply text-balance text-center text-gray-600 lg:text-xl;
+  }
+
+  .text-heading {
+    @apply mb-3 text-pretty text-3xl font-semibold md:mb-4 md:text-4xl lg:mb-6 lg:text-5xl;
+  }
+
   .text-subheading {
-    @apply mb-3 text-pretty text-3xl font-semibold md:mb-4 md:text-4xl lg:mb-6 lg:text-4xl;
+    @apply mb-3 text-pretty text-2xl font-semibold md:mb-4 md:text-3xl lg:mb-6 lg:text-4xl;
   }
 }
 
@@ -268,7 +276,7 @@ a:focus {
 }
 
 .embla {
-  max-width: 70rem;
+  /* max-width: 70rem; */
   margin: auto;
   --slide-height: 19rem;
   --slide-spacing: 1rem;
