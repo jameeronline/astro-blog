@@ -14,35 +14,40 @@ const teams = await getCollection("teams");
 ---
 
 <BaseLayout title={title} description={description}>
-  <section class="py-32">
-    <div class="container flex flex-col items-start text-left">
-      <p class="semibold">Our team</p>
-      <h2 class="my-6 text-pretty text-2xl font-bold lg:text-4xl">
+  <section>
+    <header
+      class="mx-auto flex flex-col items-center text-center lg:max-w-3xl gap-6 mb-16"
+      data-scroll-animate
+    >
+      <p class="text-caption" data-scroll-animate>Our team</p>
+      <h1 class="text-heading mt-2 mb-2" data-scroll-animate>
         The team you&#x27;ll be working with
-      </h2>
-      <p class="mb-8 max-w-3xl text-gray-600 lg:text-xl">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+      </h1>
+      <p class="text-lead" data-scroll-animate>
+        Meet our talented and passionate team dedicated to delivering
+        exceptional results. Each member brings unique skills and experience to
+        help drive our projects forward and ensure your success.
       </p>
-    </div>
+    </header>
     <div
       class="container mt-16 grid gap-x-12 gap-y-16 md:grid-cols-2 lg:grid-cols-4"
     >
       {
         teams.map(({ data }) => (
-          <article>
-            <div class="flex flex-col items-start">
+          <article data-scroll-animate>
+            <div class="flex flex-col items-center text-center">
               <Image
                 src={data.picture}
                 alt={data.name}
-                class="relative flex shrink-0 overflow-hidden rounded-full mb-4 grayscale size-20 md:mb-5 lg:size-24"
+                class="relative flex shrink-0 overflow-hidden rounded-full mb-4 grayscale hover:grayscale-0 size-20 md:mb-5 lg:size-24"
                 width={96}
                 height={96}
               />
+              <p class="font-semibold">{data.name}</p>
+              <p class="text-gray-600">{data.role}</p>
+              <p class="py-3 text-sm text-gray-600">{data.description}</p>
+              <div class="mt-10" />
             </div>
-            <p class="font-medium">{data.name}</p>
-            <p class="text-gray-600">{data.role}</p>
-            <p class="py-3 text-sm text-gray-600">{data.description}</p>
-            <div class="mt-2 flex gap-4" />
           </article>
         ))
       }

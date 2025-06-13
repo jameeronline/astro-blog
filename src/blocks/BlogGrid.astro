@@ -16,27 +16,24 @@ interface BlogGridProps {
 // Type assertion for Astro.props
 const { posts } = Astro.props as BlogGridProps;
 
-const delayClasses = [
-  "intersect:animate-delay-[0ms]",
-  "intersect:animate-delay-[100ms]",
-  "intersect:animate-delay-[200ms]",
-  "intersect:animate-delay-[300ms]",
-  "intersect:animate-delay-[400ms]",
-  "intersect:animate-delay-[500ms]",
-  "intersect:animate-delay-[600ms]",
-  "intersect:animate-delay-[700ms]",
-  "intersect:animate-delay-[800ms]",
-  "intersect:animate-delay-[900ms]",
-];
+// const delayClasses = [
+//   "intersect:animate-delay-[0ms]",
+//   "intersect:animate-delay-[100ms]",
+//   "intersect:animate-delay-[200ms]",
+//   "intersect:animate-delay-[300ms]",
+//   "intersect:animate-delay-[400ms]",
+//   "intersect:animate-delay-[500ms]",
+//   "intersect:animate-delay-[600ms]",
+//   "intersect:animate-delay-[700ms]",
+//   "intersect:animate-delay-[800ms]",
+//   "intersect:animate-delay-[900ms]",
+// ];
 ---
 
 <div class="grid grid-cols-4 gap-6 md:grid-cols-8 md:gap-12 lg:grid-cols-12">
   {
     posts.map((post, index) => (
-      <div
-        key={index}
-        class={`col-span-4 intersect:animate-fade-up ${delayClasses[index]} intersect-once`}
-      >
+      <div key={index} class="col-span-4" data-scroll-animate>
         <BlogCard item={post.data} url={slugify(post.data.title)} />
       </div>
     ))

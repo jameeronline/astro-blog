@@ -10,6 +10,8 @@
 @theme {
   --breakpoint-2xl: 72rem;
 
+  /* --font-heading: "Outfit Variable", sans-serif; */
+
   /* --color-primary-50: #eeeeff;
   --color-primary-100: #e0e1ff;
   --color-primary-200: #c7c8fe;
@@ -33,6 +35,18 @@
   --color-primary-800: #007e47;
   --color-primary-900: #00663d;
   --color-primary-950: #003b20;
+
+  --color-secondary-50: #f8fafc;
+  --color-secondary-100: #f1f5f9;
+  --color-secondary-200: #e2e8f0;
+  --color-secondary-300: #cad5e2;
+  --color-secondary-400: #90a1b9;
+  --color-secondary-500: #62748e;
+  --color-secondary-600: #45556c;
+  --color-secondary-700: #314158;
+  --color-secondary-800: #1d293d;
+  --color-secondary-900: #0f172b;
+  --color-secondary-950: #020618;
 }
 
 /* Icons */
@@ -47,16 +61,16 @@
     @apply font-sans antialiased;
   }
 
-  h1,
+  /* h1,
   h2,
   h3,
   h4,
   h5,
   h6 {
-    @apply font-sans tracking-tight;
-  }
+    @apply font-heading;
+  } */
 
-  h1 {
+  /* h1 {
     @apply text-4xl font-bold md:text-5xl lg:text-6xl;
   }
 
@@ -70,6 +84,42 @@
 
   h4 {
     @apply text-xl font-bold;
+  } */
+
+  h1,
+  h2,
+  h3 {
+    @apply mb-6 font-bold;
+  }
+
+  h4,
+  h5,
+  h6 {
+    @apply mb-4 font-semibold;
+  }
+
+  h1 {
+    @apply text-4xl lg:text-6xl;
+  }
+
+  h2 {
+    @apply text-3xl lg:text-5xl;
+  }
+
+  h3 {
+    @apply text-2xl lg:text-3xl;
+  }
+
+  h4 {
+    @apply text-xl lg:text-2xl;
+  }
+
+  h5 {
+    @apply text-lg lg:text-xl;
+  }
+
+  h6 {
+    @apply text-base lg:text-lg;
   }
 
   p {
@@ -116,11 +166,11 @@
 
   /* Custom Components */
   .text-caption {
-    @apply text-xs font-medium uppercase tracking-wider text-gray-500;
+    @apply text-xs font-medium uppercase tracking-wider text-gray-500 dark:text-slate-400;
   }
 
   .text-lead {
-    @apply text-balance text-gray-600 lg:text-xl;
+    @apply text-balance text-gray-600 lg:text-xl dark:text-slate-300;
   }
 
   /* Headings */
@@ -130,6 +180,29 @@
 
   .text-subheading {
     @apply mb-3 text-pretty text-2xl font-semibold md:mb-4 md:text-3xl lg:mb-6 lg:text-4xl;
+  }
+
+  .highlight {
+    @apply text-primary-500;
+  }
+
+  .small {
+    @apply text-sm font-normal text-neutral-400 dark:text-neutral-500;
+  }
+
+  /* Global basic styling */
+  .basic-text {
+    @apply [&_blockquote]:relative [&_blockquote]:mb-6 [&_blockquote]:rounded [&_blockquote]:border [&_blockquote]:border-neutral-100 [&_blockquote]:bg-neutral-50 [&_blockquote]:p-6 [&_blockquote]:text-lg [&_blockquote]:leading-relaxed [&_blockquote]:text-neutral-700 [&_blockquote]:before:absolute [&_blockquote]:before:left-0 [&_blockquote]:before:top-0 [&_blockquote]:before:z-[0] [&_blockquote]:before:block [&_blockquote]:before:text-9xl [&_blockquote]:before:italic [&_blockquote]:before:text-neutral-200 [&_blockquote]:before:opacity-50 [&_blockquote]:before:content-['"'] lg:[&_blockquote]:-mx-12 dark:[&_blockquote]:border-neutral-600 dark:[&_blockquote]:bg-neutral-700 dark:[&_blockquote]:text-neutral-50 dark:[&_blockquote]:before:text-neutral-600 [&_blockquote_p]:relative [&_blockquote_p]:z-[1] [&_blockquote_p]:px-6 [&_h1:not(:first-child)]:mt-24 [&_h2:not(:first-child)]:mt-24 [&_h3:not(:first-child)]:mt-24 [&_h4:not(:first-child)]:mt-12 [&_img]:rounded [&_img]:border [&_img]:border-neutral-100 dark:[&_img]:border-neutral-600 [&_li]:mb-2 [&_li]:ml-4 [&_li]:list-disc [&_li]:marker:text-primary-500 lg:[&_p:has(img)]:-mx-12;
+  }
+
+  .basic-text--lg {
+    @apply text-lg leading-relaxed [&_blockquote]:text-xl [&_blockquote]:leading-loose;
+  }
+
+  /* Scroll animations */
+  /* To disable scroll animations remove the class "sroll-animation" from root html in the layout file */
+  .scroll-animation [data-scroll-animate] {
+    @apply translate-y-4 transform opacity-0 transition-all duration-1000 [&.scroll-animated]:translate-y-0 [&.scroll-animated]:opacity-100 [&:nth-child(1)]:delay-[50ms] [&:nth-child(10)]:delay-[725ms] [&:nth-child(11)]:delay-[800ms] [&:nth-child(12)]:delay-[875ms] [&:nth-child(2)]:delay-[125ms] [&:nth-child(3)]:delay-[200ms] [&:nth-child(4)]:delay-[275ms] [&:nth-child(5)]:delay-[350ms] [&:nth-child(6)]:delay-[425ms] [&:nth-child(7)]:delay-[500ms] [&:nth-child(8)]:delay-[575ms] [&:nth-child(9)]:delay-[650ms];
   }
 }
 

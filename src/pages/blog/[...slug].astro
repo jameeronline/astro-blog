@@ -65,17 +65,32 @@ const { title, description, image, pubDate, author } = data;
 <BaseLayout title={title}>
   <section>
     <header
-      class="prose max-w-none lg:prose-lg prose-h1:leading-[1.2] prose-h1:mb-3 md:prose-h1:mb-1 prose-p:my-2 mb-8"
+      class="prose dark:prose-invert max-w-none lg:prose-lg prose-h1:leading-[1.2] prose-h1:mb-4 md:prose-h1:mb-4 prose-p:my-2 mb-8"
     >
       <div
         class="grid grid-cols-4 gap-6 md:grid-cols-8 md:gap-12 lg:grid-cols-12"
       >
-        <div class="col-span-4 md:col-span-8">
+        <div class="col-span-4 md:col-span-12 text-center">
           <!-- <Breadcrumbs /> -->
-          <BackButton label="Back to blog" href="/blog" />
-          <h1>{title}</h1>
+          <!-- <BackButton label="Back to blog" href="/blog" data-scroll-animate /> -->
 
-          <p class="text-sm text-gray-600">
+          <div
+            class="flex items-center justify-center flex-wrap gap-2 mb-4 mt-4 md:mb-6"
+          >
+            {
+              categories.map((category, index) => (
+                <Badge
+                  key={index}
+                  label={category}
+                  href={`/blog/category/${slugify(category)}`}
+                />
+              ))
+            }
+          </div>
+
+          <h1 data-scroll-animate>{title}</h1>
+
+          <p class="text-gray-500 text-sm" data-scroll-animate>
             Written by {author} on {formatDate(pubDate)}
           </p>
         </div>
@@ -86,7 +101,7 @@ const { title, description, image, pubDate, author } = data;
     >
       <div class="col-span-4 md:col-span-8 lg:col-span-9">
         <article>
-          <figure>
+          <figure data-scroll-animate>
             <div class="relative">
               <Image
                 src={image.url}
@@ -100,15 +115,23 @@ const { title, description, image, pubDate, author } = data;
           </figure>
 
           <!-- Summary -->
-          <p class="text-xl md:text-2xl text-gray-500 my-10">{description}</p>
+          <p
+            class="text-xl md:text-2xl text-gray-600 my-10"
+            data-scroll-animate
+          >
+            {description}
+          </p>
 
-          <div class="prose lg:prose-lg max-w-none">
+          <div
+            class="prose lg:prose-lg max-w-none dark:prose-invert"
+            data-scroll-animate
+          >
             <Content />
           </div>
         </article>
       </div>
 
-      <div class="col-span-4 hidden lg:col-span-3 lg:block">
+      <div class="col-span-4 hidden lg:col-span-3 lg:block" data-scroll-animate>
         <BlogAside headings={headings} tags={tags} categories={categories} />
       </div>
     </div>
@@ -118,7 +141,11 @@ const { title, description, image, pubDate, author } = data;
           <h3 class="text-xl font-bold mb-8">Related Posts</h3>
           <div class="grid grid-cols-4 gap-6 md:grid-cols-8 md:gap-10 lg:grid-cols-12">
             {relatedPosts.map((post) => (
-              <RelatedBlogCard post={post} url={slugify(post.data.title)} />
+              <RelatedBlogCard
+                post={post}
+                url={slugify(post.data.title)}
+                data-scroll-animate
+              />
             ))}
           </div>
         </footer>

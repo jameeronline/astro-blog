@@ -48,53 +48,56 @@ const contactInfo = [
 ---
 
 <BaseLayout title={title}>
-  {/* Page Title */}
   {/* Hero Section */}
-  <section class="container-tight my-16">
-    <div class="max-w-3xl mx-auto text-center space-y-6">
-      <p class="text-caption">Get in Touch</p>
-      <h1 class="" style={{ animationDelay: "200ms" }}>
-        Let's Work <span class="text-mint">Together</span>
-      </h1>
-      <p
-        class="text-lg text-muted-foreground"
-        style={{ animationDelay: "400ms" }}
-      >
-        Have a project in mind or just want to say hello? Feel free to reach
-        out. I'm always open to discussing new opportunities and ideas.
-      </p>
-    </div>
-  </section>
 
-  <ContactForm />
+  <header
+    class="mx-auto flex flex-col items-center text-center lg:max-w-3xl gap-6 mb-16"
+    data-scroll-animate
+  >
+    <p class="text-caption" data-scroll-animate>Get in Touch</p>
+    <h1 class="text-heading mt-2 mb-2" data-scroll-animate>
+      Let's Work <span class="text-mint">Together</span>
+    </h1>
+    <p class="text-lead" data-scroll-animate>
+      Have a project in mind or just want to say hello? Feel free to reach out.
+      I'm always open to discussing new opportunities and ideas.
+    </p>
+  </header>
+  <!-- <ContactForm /> -->
 
   {/* Contact Section */}
   <section class="container-tight mb-20">
-    <div class="glass-card overflow-hidden">
+    <div
+      class="overflow-hidden bg-white rounded-xl shadow-2xl/10"
+      data-scroll-animate
+    >
       <div class="grid grid-cols-1 lg:grid-cols-5">
         {/* Contact info sidebar */}
-        <div class="lg:col-span-2 bg-navy p-8 lg:p-12 space-y-8">
-          <div class="space-y-3">
+        <div
+          class="lg:col-span-2 p-8 lg:p-12 space-y-8 bg-gradient-to-bl from-slate-900 to-slate-700"
+          data-scroll-animate
+        >
+          <div class="space-y-3 text-slate-200/90">
             <h2 class="text-2xl font-bold">Contact Information</h2>
-            <p class="text-slate-light">
+            <p class="text-sm">
               Fill out the form and I'll get back to you as soon as possible.
             </p>
           </div>
 
-          <div class="space-y-6">
+          <div class="space-y-8">
             {
               contactInfo.map((item, index) => (
                 <a
                   key={index}
                   href={item.link}
-                  class="flex items-start space-x-4 hover:text-mint transition-colors"
+                  class="flex items-center gap-6 hover:text-mint transition-colors text-slate-200/90"
                 >
-                  <div class="p-3 rounded-full bg-navy-light">
+                  <div class="rounded-full">
                     <item.icon />
                   </div>
                   <div>
-                    <h3 class="font-bold ">{item.title}</h3>
-                    <p class="text-slate-light">{item.content}</p>
+                    <h5 class="font-bold mb-0">{item.title}</h5>
+                    <p class="">{item.content}</p>
                   </div>
                 </a>
               ))
@@ -102,7 +105,7 @@ const contactInfo = [
           </div>
 
           {/* Social links */}
-          <div class="pt-8 border-t border-white/10">
+          <div class="pt-8 border-t border-white/10 text-slate-200/90">
             <h3 class="font-bold mb-4">Connect With Me</h3>
             <div class="flex space-x-4">
               <a
@@ -132,13 +135,22 @@ const contactInfo = [
               >
                 <Icon name="brands/x" class="w-6 h-6" />
               </a>
+              <a
+                href="https://twitter.com/yourusername"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="p-3 rounded-full bg-navy-light hover:bg-mint hover:text-navy transition-colors"
+                aria-label="Twitter profile"
+              >
+                <Icon name="brands/facebook" class="w-6 h-6" />
+              </a>
             </div>
           </div>
         </div>
 
         {/* Form container */}
         <div class="lg:col-span-3 p-8 lg:p-12">
-          <div class="mb-8">
+          <div class="mb-8" data-scroll-animate>
             <div class="flex border-b border-border">
               <button
                 class={`pb-4 px-4 font-medium transition-colors ${
@@ -169,7 +181,7 @@ const contactInfo = [
             selectedTab === "contact" ? (
               <ContactForm />
             ) : (
-              <div class="space-y-6">
+              <div class="space-y-6" data-scroll-animate>
                 <p class="text-muted-foreground">
                   Prefer a direct conversation? Schedule a 30-minute call at
                   your convenience.
@@ -203,46 +215,59 @@ const contactInfo = [
   {/* FAQ Section */}
   <section class="container-tight py-16 mb-20">
     <div class="text-center mb-12">
-      <p class="subtitle">FAQ</p>
+      <p class="text-caption">FAQ</p>
       <h2 class="text-3xl font-bold">Frequently Asked Questions</h2>
     </div>
 
-    <div class="grid gap-6 md:grid-cols-2">
-      <div class="glass-card p-6 space-y-3">
-        <h3 class="text-xl font-bold">What services do you offer?</h3>
-        <p class="text-muted-foreground">
-          I specialize in frontend development, UI/UX implementation, web
-          application development, and performance optimization. I can help with
-          everything from small components to full-scale applications.
-        </p>
+    <div
+      class="grid grid-cols-4 md:grid-cols-8 lg:grid-cols-12 gap-6"
+      data-scroll-animate
+    >
+      <div class="col-span-4 lg:col-span-6">
+        <div class="bg-white shadow-2xl/10 rounded-lg p-8 space-y-3">
+          <h3 class="text-xl font-bold">What services do you offer?</h3>
+          <p class="text-secondary-500">
+            I specialize in frontend development, UI/UX implementation, web
+            application development, and performance optimization. I can help
+            with everything from small components to full-scale applications.
+          </p>
+        </div>
       </div>
 
-      <div class="glass-card p-6 space-y-3">
-        <h3 class="text-xl font-bold">What is your typical process?</h3>
-        <p class="text-muted-foreground">
-          My process typically involves an initial consultation, proposal/scope
-          definition, design implementation, development, testing, and
-          deployment. I maintain clear communication throughout each phase.
-        </p>
+      <div class="col-span-4 lg:col-span-6">
+        <div class="bg-white shadow-2xl/10 rounded-lg p-8 space-y-3">
+          <h3 class="text-xl font-bold">What is your typical process?</h3>
+          <p class="text-secondary-500">
+            My process typically involves an initial consultation,
+            proposal/scope definition, design implementation, development,
+            testing, and deployment. I maintain clear communication throughout
+            each phase.
+          </p>
+        </div>
+      </div>
+      <div class="col-span-4 lg:col-span-6">
+        <div class="bg-white shadow-2xl/10 rounded-lg p-8 space-y-3">
+          <h3 class="text-xl font-bold">
+            How long does a typical project take?
+          </h3>
+          <p class="text-secondary-500">
+            Project timelines vary based on scope and complexity. A small
+            project might take 2-4 weeks, while larger applications can take
+            several months. I'll provide a detailed timeline during our initial
+            consultation.
+          </p>
+        </div>
       </div>
 
-      <div class="glass-card p-6 space-y-3">
-        <h3 class="text-xl font-bold">How long does a typical project take?</h3>
-        <p class="text-muted-foreground">
-          Project timelines vary based on scope and complexity. A small project
-          might take 2-4 weeks, while larger applications can take several
-          months. I'll provide a detailed timeline during our initial
-          consultation.
-        </p>
-      </div>
-
-      <div class="glass-card p-6 space-y-3">
-        <h3 class="text-xl font-bold">Do you offer ongoing maintenance?</h3>
-        <p class="text-muted-foreground">
-          Yes, I offer maintenance packages to ensure your application stays
-          up-to-date, secure, and performs well. This can include regular
-          updates, performance monitoring, and feature additions.
-        </p>
+      <div class="col-span-4 lg:col-span-6">
+        <div class="bg-white shadow-2xl/10 rounded-lg p-8 space-y-3">
+          <h3 class="text-xl font-bold">Do you offer ongoing maintenance?</h3>
+          <p class="text-secondary-500">
+            Yes, I offer maintenance packages to ensure your application stays
+            up-to-date, secure, and performs well. This can include regular
+            updates, performance monitoring, and feature additions.
+          </p>
+        </div>
       </div>
     </div>
   </section>

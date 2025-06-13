@@ -14,7 +14,7 @@ const { title, description, logo, onlyLogo } = siteConfig;
   x-data="{open: false}"
   class="relative z-20 w-full border-b shadow-lg border-slate-200 bg-white/90 dark:bg-transparent dark:border-0 shadow-slate-700/5 after:absolute after:top-full after:left-0 after:z-10 after:block after:h-px after:w-full after:bg-slate-200 lg:border-slate-200 lg:backdrop-blur-sm lg:after:hidden"
 >
-  <div class="relative mx-auto px-6 container">
+  <div class="relative w-full xl:container mx-auto px-6">
     <nav
       aria-label="main navigation"
       class="flex h-[5.5rem] items-stretch justify-between font-medium text-slate-700"
@@ -79,7 +79,7 @@ const { title, description, logo, onlyLogo } = siteConfig;
                 aria-current={item.current ? "page" : undefined}
                 aria-haspopup="false"
                 href={item.href}
-                class={`flex items-center gap-2 py-4 transition-colors duration-300 hover:text-primary-900 focus:text-primary-950 focus:outline-none focus-visible:outline-none lg:px-6 ${Astro.url.pathname === item.href ? "text-primary-900 underline" : ""}`}
+                class={`flex items-center gap-2 font-semibold py-4 transition-colors duration-300 hover:text-primary-900 focus:text-primary-950 focus:outline-none focus-visible:outline-none lg:px-6 ${Astro.url.pathname === item.href ? "text-primary-900 underline" : ""}`}
               >
                 {item.icon ? <item.icon /> : <span>{item.name}</span>}
               </a>

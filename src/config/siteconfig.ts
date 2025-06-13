@@ -33,7 +33,7 @@ export const navigation: NavigationItem[] = [
   // { name: "Features", href: "/features", current: false },
   // { name: "Meals", href: "/meals", current: false },
   // { name: "Pricing", href: "/pricing", current: false },
-  // { name: "Teams", href: "/teams", current: false },
+  { name: "Teams", href: "/teams", current: false },
   { name: "Search", href: "/search", current: false, icon: Search },
 ];
 

@@ -56,11 +56,12 @@ const {
 ---
 
 <BaseLayout title="Project Details">
-  <section class="py-8 md:py-16">
+  <section>
     <header
-      class="mx-auto flex flex-col gap-2 items-center text-center lg:max-w-4xl md:gap-6 intersect:animate-delay-150 intersect:animate-fade-up intersect-once"
+      class="mx-auto flex flex-col gap-2 items-center text-center lg:max-w-4xl md:gap-6"
+      data-scroll-animate
     >
-      <h1 class="text-heading">{projectTitle}</h1>
+      <h1 class="text-heading mb-0">{projectTitle}</h1>
       <p class="text-lead hidden md:block">
         {description}
       </p>
@@ -71,6 +72,7 @@ const {
             <a
               href="/projects/tag"
               class="capitalize bg-gray-200 text-gray-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-gray-700 dark:text-gray-300"
+              data-scroll-animate
             >
               {tag}
             </a>
@@ -79,7 +81,7 @@ const {
       </div>
     </header>
 
-    <figure class="my-8 md:my-16">
+    <figure class="my-8 md:my-16" data-scroll-animate>
       <Image
         src={thumbnail}
         alt={projectTitle}
@@ -95,35 +97,37 @@ const {
     <div
       class="grid grid-cols-4 gap-6 md:grid-cols-8 md:gap-12 lg:grid-cols-12"
     >
-      <div class="col-span-4 md:col-span-8 lg:col-span-9">
+      <div class="col-span-4 md:col-span-8 lg:col-span-8">
         <article>
-          <div class="prose max-w-none prose-li:marker:text-gray-800">
+          <div
+            class="prose max-w-none prose-li:marker:text-gray-800 dark:prose-invert"
+          >
             <Content />
           </div>
         </article>
       </div>
 
-      <div class="col-span-4 hidden lg:col-span-3 lg:block">
+      <div class="col-span-4 hidden lg:col-span-4 lg:block">
         <!-- <BlogAside headings={headings} tags={tags} categories={categories} /> -->
         <div class="bg-white rounded-lg p-6 shadow-xl/5">
           <h2 class="text-xl font-bold mb-4">Project Details</h2>
 
-          <div class="space-y-4">
+          <div class="space-y-6">
             <div>
-              <h3 class="text-sm font-medium text-gray-500">
+              <h3 class="text-xs font-medium text-gray-500 mb-1">
                 Project Duration
               </h3>
-              <p>{duration}</p>
+              <p class="font-semibold text-gray-600">{duration}</p>
             </div>
 
             <div>
-              <h3 class="text-sm font-medium text-gray-500">Team Size</h3>
-              <p>{teamSize} developers</p>
+              <h3 class="text-xs font-medium text-gray-500 mb-1">Team Size</h3>
+              <p class="font-semibold text-gray-600">{teamSize} developers</p>
             </div>
 
             <div>
-              <h3 class="text-sm font-medium text-gray-500">Completed</h3>
-              <p>
+              <h3 class="text-xs font-medium text-gray-500 mb-1">Completed</h3>
+              <p class="font-semibold text-gray-600">
                 {
                   new Date(year).toLocaleDateString("en-US", {
                     year: "numeric",

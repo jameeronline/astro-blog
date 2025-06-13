@@ -1,32 +1,22 @@
 // @ts-check
 import { defineConfig } from "astro/config";
+
 import path from "path";
-import tailwindcss from "@tailwindcss/vite";
-import alpinejs from "@astrojs/alpinejs";
+
+//adapter
 import netlify from "@astrojs/netlify";
 
-import react from "@astrojs/react";
-
-import mdx from "@astrojs/mdx";
-
-import expressiveCode from "astro-expressive-code";
-
-import sitemap from "@astrojs/sitemap";
-
+//integrations
 import icon from "astro-icon";
+import mdx from "@astrojs/mdx";
+import react from "@astrojs/react";
+import sitemap from "@astrojs/sitemap";
+import alpinejs from "@astrojs/alpinejs";
+import tailwindcss from "@tailwindcss/vite";
+import expressiveCode from "astro-expressive-code";
 
 // https://astro.build/config
 export default defineConfig({
-  // alias: {
-  //   "@": "./src",
-  //   "@components": "./src/components",
-  //   "@blocks": "./src/blocks",
-  //   "@layouts": "./src/layouts",
-  //   "@pages": "./src/pages",
-  //   "@utils": "./src/utils",
-  //   "@styles": "./src/styles",
-  //   "@config": "./src/config",
-  // },
   site: "https://jameer.online",
   vite: {
     plugins: [tailwindcss()],

@@ -11,20 +11,7 @@ import Paginate from "@components/Paginate.astro";
 import { slugify } from "@utils/helper";
 
 //site config
-import { siteConfig } from "@config/siteconfig.ts";
-
-const delayClasses = [
-  "intersect:animate-delay-[0ms]",
-  "intersect:animate-delay-[100ms]",
-  "intersect:animate-delay-[200ms]",
-  "intersect:animate-delay-[300ms]",
-  "intersect:animate-delay-[400ms]",
-  "intersect:animate-delay-[500ms]",
-  "intersect:animate-delay-[600ms]",
-  "intersect:animate-delay-[700ms]",
-  "intersect:animate-delay-[800ms]",
-  "intersect:animate-delay-[900ms]",
-];
+import { siteConfig } from "@config/siteconfig";
 
 //page metadata
 const title = "Projects Page";
@@ -45,7 +32,8 @@ const { page } = Astro.props;
 <BaseLayout title={title} description={description}>
   <section class="py-16">
     <header
-      class="mx-auto flex flex-col items-center text-center lg:max-w-3xl gap-6 mb-16 intersect:animate-delay-150 intersect:animate-fade-up intersect-once"
+      class="mx-auto flex flex-col items-center text-center lg:max-w-3xl gap-6 mb-16"
+      data-scroll-animate
     >
       <h1 class="text-heading">Projects and Portfolio</h1>
       <p class="text-lead">
@@ -58,11 +46,8 @@ const { page } = Astro.props;
       class="grid grid-cols-4 gap-6 md:grid-cols-8 md:gap-12 lg:grid-cols-12"
     >
       {
-        page.data.map((project, index) => (
-          <div
-            key={index}
-            class={`col-span-4 intersect:animate-fade-up ${delayClasses[index % delayClasses.length]}  intersect-once`}
-          >
+        page.data.map((project, index: number) => (
+          <div key={index} class="col-span-4" data-scroll-animate>
             <ProjectCard
               data={project.data}
               url={slugify(project.data.title)}

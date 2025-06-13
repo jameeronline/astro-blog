@@ -52,10 +52,10 @@ const ContactForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
+    <form onSubmit={handleSubmit} className="space-y-6" data-scroll-animate>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="space-y-2">
-          <label htmlFor="name" className="text-sm font-medium">
+        <div className="space-y-4">
+          <label htmlFor="name" className="text-sm font-semibold">
             Name <span className="text-mint">*</span>
           </label>
           <input
@@ -65,8 +65,8 @@ const ContactForm = () => {
             required
             value={formData.name}
             onChange={handleChange}
-            className="w-full px-4 py-3 rounded-md border border-border bg-background/50 focus:outline-none focus:ring-2 focus:ring-mint/50"
-            placeholder="Your name"
+            className="w-full px-4 py-3 rounded-md border border-slate-300 bg-background/50 focus:outline-none focus:ring-2 focus:ring-mint/50"
+            placeholder="Your fullname"
             disabled={isSubmitting || isSubmitted}
           />
         </div>
@@ -82,7 +82,7 @@ const ContactForm = () => {
             required
             value={formData.email}
             onChange={handleChange}
-            className="w-full px-4 py-3 rounded-md border border-border bg-background/50 focus:outline-none focus:ring-2 focus:ring-mint/50"
+            className="w-full px-4 py-3 rounded-md border border-slate-300 bg-background/50 focus:outline-none focus:ring-2 focus:ring-mint/50"
             placeholder="your.email@example.com"
             disabled={isSubmitting || isSubmitted}
           />
@@ -100,7 +100,7 @@ const ContactForm = () => {
           required
           value={formData.subject}
           onChange={handleChange}
-          className="w-full px-4 py-3 rounded-md border border-border bg-background/50 focus:outline-none focus:ring-2 focus:ring-mint/50"
+          className="w-full px-4 py-3 rounded-md border border-slate-300 bg-background/50 focus:outline-none focus:ring-2 focus:ring-mint/50"
           placeholder="What's this about?"
           disabled={isSubmitting || isSubmitted}
         />
@@ -117,7 +117,7 @@ const ContactForm = () => {
           value={formData.message}
           onChange={handleChange}
           rows={6}
-          className="w-full px-4 py-3 rounded-md border border-border bg-background/50 focus:outline-none focus:ring-2 focus:ring-mint/50 resize-none"
+          className="w-full px-4 py-3 rounded-md border border-slate-300 bg-background/50 focus:outline-none focus:ring-2 focus:ring-mint/50 resize-none"
           placeholder="Tell me about your project, question, or just say hello..."
           disabled={isSubmitting || isSubmitted}
         ></textarea>

@@ -2,18 +2,15 @@
 //astro imports
 import { Image } from "astro:assets";
 
-//vendor imports
-import { format } from "date-fns";
+//utils imports
+import { formatDate } from "@utils/helper";
 
 //props
-const { post, url } = Astro.props;
-const { title, description, image, pubDate } = post.data;
-
-//format date
-const formattedDate = format(pubDate, "MMM d, yyyy");
+const { post, url, ...rest } = Astro.props;
+const { title, image, pubDate } = post.data;
 ---
 
-<div class="col-span-4 lg:col-span-6">
+<div class="col-span-4 lg:col-span-6" {...rest}>
   <div class="group sm:flex lg:items-start">
     <div class="mb-4 shrink-0 sm:mb-0 sm:mr-4">
       <Image
@@ -27,17 +24,14 @@ const formattedDate = format(pubDate, "MMM d, yyyy");
       />
     </div>
     <div>
-      <span class="text-sm text-gray-500">{formattedDate}</span>
+      <span class="text-sm text-gray-500">{formatDate(pubDate)}</span>
       <p class="mt-3 text-lg font-medium leading-6">
         <a
           href={`/blog/${url}`}
-          class="text-xl text-gray-800 hover:text-gray-500"
+          class="text-xl text-gray-800 hover:underline transition-all duration-300"
           >{title}
         </a>
       </p>
-      <!-- <p class="text mt-2 leading-normal text-gray-500">
-      {description}
-    </p> -->
     </div>
   </div>
 </div>
