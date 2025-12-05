@@ -85,10 +85,10 @@ const {
       <Image
         src={thumbnail}
         alt={projectTitle}
-        decoding="async"
-        loading="lazy"
-        width={1600}
-        height={900}
+        priority
+        inferSize
+        layout="constrained"
+        quality={90}
         class="w-full rounded-xl object-cover object-center"
       />
       <figcaption class="sr-only">{projectTitle}</figcaption>
