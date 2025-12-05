@@ -5,6 +5,7 @@ import { getCollection, getEntry } from "astro:content";
 //components imports
 import BaseLayout from "@layouts/BaseLayout.astro";
 import ProjectCard from "@components/ProjectCard.astro";
+import PageHeader from "@blocks/PageHeader.astro";
 import Paginate from "@components/Paginate.astro";
 
 //utils imports
@@ -27,27 +28,30 @@ export async function getStaticPaths({ paginate }) {
 
 // Get the current page data from Astro props
 const { page } = Astro.props;
+
+// page header details
+const pageHeader = {
+  title: "Projects",
+  caption: "Featured Works & Case Studies",
+  description:
+    "Browse through my featured projects showcasing my skills in frontend development, UX design, and creative problem-solving.",
+};
 ---
 
 <BaseLayout title={title} description={description}>
-  <section class="py-16">
-    <header
-      class="mx-auto flex flex-col items-center text-center lg:max-w-3xl gap-6 mb-16"
-      data-scroll-animate
-    >
-      <h1 class="text-heading">Projects and Portfolio</h1>
-      <p class="text-lead">
-        Browse through my featured projects showcasing my skills in frontend
-        development, UX design, and creative problem-solving.
-      </p>
-    </header>
+  <section>
+    <PageHeader
+      title={pageHeader.title}
+      description={pageHeader.description}
+      caption={pageHeader.caption}
+    />
 
     <div
       class="grid grid-cols-4 gap-6 md:grid-cols-8 md:gap-12 lg:grid-cols-12"
     >
       {
-        page.data.map((project, index: number) => (
-          <div key={index} class="col-span-4" data-scroll-animate>
+        page.data.map((project) => (
+          <div class="col-span-4" data-scroll-animate>
             <ProjectCard
               data={project.data}
               url={slugify(project.data.title)}

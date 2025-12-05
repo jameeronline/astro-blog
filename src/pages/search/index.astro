@@ -9,8 +9,9 @@ import { getSearchIndex } from "@utils/search";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import SearchForm from "@blocks/SearchForm.astro";
 import BlogGrid from "@blocks/BlogGrid.astro";
+import PageHeader from "@blocks/PageHeader.astro";
 
-export const prerender = false; // Disable prerendering for dynamic search results
+export const prerender = false; // Disable pre rendering for dynamic search results
 
 const posts = await getCollection("posts");
 const searchIndex = await getSearchIndex(posts);
@@ -30,11 +31,22 @@ if (searchTerm.trim()) {
       (data.tags && data.tags.some((tag) => tag.toLowerCase().includes(term)))
   );
 }
+
+// page header details
+const pageHeader = {
+  title: "Search Articles",
+  caption: "Find the info",
+  description: "Type to search for articles by title, content, or tags.",
+};
 ---
 
 <BaseLayout title="Search Articles">
-  <h1 class="text-3xl font-bold mb-6">Search Articles</h1>
-  <p class="mb-4">Type to search for articles by title, content, or tags.</p>
+  <PageHeader
+    title={pageHeader.title}
+    description={pageHeader.description}
+    caption={pageHeader.caption}
+  />
+
   <SearchForm value={searchTerm} />
 
   {

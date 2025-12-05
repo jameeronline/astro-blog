@@ -45,4 +45,10 @@ export default defineConfig({
   adapter: netlify({
     imageCDN: false,
   }),
+  image: {
+    domains: [
+      "docs.astro.build", "randomuser.me", "images.unsplash.com", "picsum.photos",
+      "avatars.githubusercontent.com", "jameer.online"
+    ]
+  }
 });

@@ -5,30 +5,31 @@ import Image from "astro/components/Image.astro";
 
 //components import
 import BaseLayout from "@layouts/BaseLayout.astro";
+import PageHeader from "@blocks/PageHeader.astro";
 
 //page metadata
 const title = "Teams Page";
 const description = "This is the projects page";
 
 const teams = await getCollection("teams");
+
+// page header details
+const pageHeader = {
+  title: "The team you'll be working with",
+  caption: "Our team",
+  description:
+    "Meet our talented and passionate team dedicated to delivering exceptional results. Each member brings unique skills and experience to help drive our projects forward and ensure your success.",
+};
 ---
 
 <BaseLayout title={title} description={description}>
   <section>
-    <header
-      class="mx-auto flex flex-col items-center text-center lg:max-w-3xl gap-6 mb-16"
-      data-scroll-animate
-    >
-      <p class="text-caption" data-scroll-animate>Our team</p>
-      <h1 class="text-heading mt-2 mb-2" data-scroll-animate>
-        The team you&#x27;ll be working with
-      </h1>
-      <p class="text-lead" data-scroll-animate>
-        Meet our talented and passionate team dedicated to delivering
-        exceptional results. Each member brings unique skills and experience to
-        help drive our projects forward and ensure your success.
-      </p>
-    </header>
+    <PageHeader
+      title={pageHeader.title}
+      description={pageHeader.description}
+      caption={pageHeader.caption}
+    />
+
     <div
       class="container mt-16 grid gap-x-12 gap-y-16 md:grid-cols-2 lg:grid-cols-4"
     >

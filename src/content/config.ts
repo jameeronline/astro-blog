@@ -53,7 +53,7 @@ const teams = defineCollection({
 });
 
 const projects = defineCollection({
-  loader: glob({ pattern: "**/*.mdx", base: "src/content/projects" }),
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "src/content/projects" }),
   schema: zod.object({
     id: zod.number(),
     title: zod.string(),

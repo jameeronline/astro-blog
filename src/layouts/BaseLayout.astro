@@ -30,14 +30,21 @@ import { ClientRouter } from "astro:transitions";
     <meta name="generator" content={Astro.generator} />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <title>{title}</title>
-    <ClientRouter />
+    <!-- <ClientRouter /> -->
   </head>
   <body
-    class="h-full font-sans bg-slate-50 text-gray-900 dark:bg-slate-900 dark:text-slate-50"
+    class="relative h-full font-sans text-gray-900 dark:bg-slate-900 dark:text-slate-50 bg-primary-50/50"
   >
+    <div
+      class="absolute inset-0 opacity-50 bg-no-repeat bg-cover bg-center"
+      style="background-image: url('/bg-mash-gradient.svg');"
+    >
+    </div>
+    <!-- dark overlay -->
+
     <div class="grid grid-cols-1 grid-rows-[auto_1fr_auto] h-full">
       <Header title={title} />
-      <main class="w-full xl:container mx-auto px-4 py-6 md:py-14">
+      <main class="w-full xl:container mx-auto px-4">
         <slot />
       </main>
       <!-- <CTA /> -->

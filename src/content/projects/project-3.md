@@ -23,10 +23,6 @@ duration: 2 months
 teamSize: 2
 ---
 
-import Lead from "../../components/typography/Lead.astro";
-
-<Lead>A reusable UI kit for e-commerce platforms.</Lead>
-
 ## Challenge
 
 Designing a flexible and consistent UI system for various e-commerce needs.

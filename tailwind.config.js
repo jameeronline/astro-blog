@@ -5,7 +5,11 @@ module.exports = {
     // add other paths as needed
   ],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        "body-pattern": "url('./bg.png')",
+      },
+    },
   },
   plugins: [
     // other plugins...

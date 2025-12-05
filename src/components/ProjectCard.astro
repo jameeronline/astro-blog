@@ -13,18 +13,16 @@ const { data, url = "#" } = Astro.props;
       class="object-cover object-center w-full lg:h-48 md:h-36 bg-gray-50 transition duration-300 ease-in-out hover:scale-110"
       src={data.thumbnail}
       alt={data.title}
-      format="webp"
+      layout="constrained"
       loading="lazy"
-      width={1600}
-      height={900}
     />
   </div>
 
-  <h1
-    class="mx-auto mb-8 text-2xl font-semibold leading-snug tracking-tighter text-gray-800 lg:text-2xl meal-title"
+  <h3
+    class="font-heading mb-8 text-2xl font-semibold leading-snug tracking-tighter text-gray-800 lg:text-3xl"
   >
     {data.title}
-  </h1>
+  </h3>
   <p class="mx-auto text-base leading-relaxed text-gray-600 line-clamp-3">
     {data.description}
   </p>
@@ -32,7 +30,7 @@ const { data, url = "#" } = Astro.props;
   <div class="mt-6 flex gap-4">
     {
       data.tags.map((tag) => (
-        <span class="inline-block rounded-full bg-gray-200 px-2 py-0.5 text-sm text-gray-700">
+        <span class="inline-block rounded-full bg-gray-200 px-2 py-0.5 text-sm text-gray-700 capitalize cursor-default">
           {tag}
         </span>
       ))
@@ -46,7 +44,7 @@ const { data, url = "#" } = Astro.props;
     <div class="flex items-center justify-between gap-4">
       <a
         href={data.github}
-        class="w-10 h-10 inline-flex items-center justify-center rounded-full transition duration-300 hover:bg-gray-200"
+        class="w-10 h-10 inline-flex items-center justify-center rounded-full transition duration-300 bg-primary-100 hover:bg-gray-200"
       >
         <Icon
           name="github-line"
@@ -56,7 +54,7 @@ const { data, url = "#" } = Astro.props;
       </a>
       <a
         href={data.liveDemo}
-        class="w-10 h-10 inline-flex items-center justify-center rounded-full transition duration-300 hover:bg-gray-200"
+        class="w-10 h-10 inline-flex items-center justify-center rounded-full transition duration-300 bg-secondary-100 hover:bg-gray-200"
       >
         <Icon
           name="external-link-line"

@@ -31,26 +31,26 @@ const support = {
 };
 ---
 
-<footer class="text-gray-100 bg-primary-950">
+<footer class="text-gray-100 bg-primary-900 mt-4 md:mt-10">
   <div class="py-12 lg:py-16">
     <div class="w-full xl:container px-6 mx-auto">
       <div class="xl:grid xl:grid-cols-3 xl:gap-8">
         <div class="space-y-8 xl:col-span-1">
           <a
             href="#"
-            class="text-lg font-bold tracking-tighter tracking-wide text-primary-100/40 transition duration-500 ease-in-out lg:pr-8"
+            class="text-2xl font-bold tracking-wide text-primary-50/90 transition duration-500 ease-in-out lg:pr-8"
           >
             {title}
           </a>
-          <p class="mt-2 w-1/2 text-sm text-gray-100">
+          <!-- <p class="mt-2 w-1/2 text-sm text-gray-100">
             {description}
-          </p>
+          </p> -->
         </div>
         <div class="mt-12 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
           <div class="md:grid md:grid-cols-2 md:gap-8">
             <div>
               <h3
-                class="text-xs font-semibold uppercase tracking-wider text-primary-100/40"
+                class="text-xs font-semibold uppercase tracking-wider text-primary-100/60"
               >
                 Solutions
               </h3>
@@ -71,7 +71,7 @@ const support = {
             </div>
             <div class="mt-12 md:mt-0">
               <h3
-                class="text-xs font-semibold uppercase tracking-wider text-primary-100/40"
+                class="text-xs font-semibold uppercase tracking-wider text-primary-100/60"
               >
                 Support
               </h3>
@@ -95,7 +95,7 @@ const support = {
             <div class="mt-12 w-full md:mt-0">
               <div class="mt-8 lg:justify-end xl:mt-0">
                 <h3
-                  class="text-xs font-semibold uppercase tracking-wider text-primary-100/40"
+                  class="text-xs font-semibold uppercase tracking-wider text-primary-100/60"
                 >
                   Subscribe to our newsletter
                 </h3>
@@ -112,7 +112,7 @@ const support = {
                     id="revue-form"
                     name="revue-form"
                     target="_blank"
-                    class="border mt-4 rounded-xl bg-gray-50 p-1 transition duration-500 ease-in-out sm:flex sm:max-w-lg"
+                    class="border mt-4 rounded bg-gray-50 p-1 transition duration-500 ease-in-out sm:flex sm:max-w-lg"
                   >
                     <div class="min-w-0 flex-1">
                       <label for="member_email" class="sr-only"
@@ -121,7 +121,7 @@ const support = {
                       <input
                         id="cta-email"
                         type="email"
-                        class="block w-full rounded-md border border-transparent bg-transparent px-5 py-3 text-base text-gray-600 transition duration-500 ease-in-out placeholder:text-gray-300 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300"
+                        class="block w-full rounded outline-0 border-transparent bg-transparent px-6 h-12 text-base text-gray-600 transition duration-500 ease-in-out placeholder:text-gray-300 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300"
                         placeholder="Enter your email  "
                       />
                     </div>
@@ -131,7 +131,7 @@ const support = {
                         value="Subscribe"
                         name="member[subscribe]"
                         id="member_submit"
-                        class="block w-full rounded-lg border border-transparent bg-primary-900 px-5 py-3 text-base font-medium text-white shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300 sm:px-10"
+                        class="block w-full rounded border border-transparent bg-secondary-600 px-4 h-full text-base font-medium text-white shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300"
                         >Notify me</button
                       >
                     </div>
@@ -144,7 +144,7 @@ const support = {
       </div>
     </div>
   </div>
-  <div class="bg-gray-50 py-12">
+  <div class="bg-primary-100 py-6">
     <div class="w-full xl:container px-6 mx-auto">
       <div class="md:flex md:items-center md:justify-between">
         <div class="mb-8 flex justify-center space-x-6 md:order-last md:mb-0">
@@ -152,7 +152,7 @@ const support = {
             socialLinks.map((link, index) => (
               <a
                 href={link.href}
-                class="text-gray-400 hover:text-primary-900"
+                class="text-primary-900 hover:text-primary-900 transition-colors duration-300"
                 target="_blank"
               >
                 <span class="sr-only">{link.alt}</span>
@@ -167,7 +167,7 @@ const support = {
             Copyright © {year} - {year + 1}
             <a
               href="https://jameer.online"
-              class="mx-1 text-primary-900 hover:text-blue-700">@{title}</a
+              class="mx-1 text-primary-900 hover:text-blue-700">{title}</a
             >
           </span>
         </div>

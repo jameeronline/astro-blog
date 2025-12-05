@@ -27,10 +27,6 @@ duration: 1 months
 teamSize: 1
 ---
 
-import Lead from "../../components/typography/Lead.astro";
-
-<Lead>{frontmatter.description}</Lead>
-
 ## Challenge
 
 Designing a flexible and consistent UI system for various e-commerce needs.

@@ -14,7 +14,9 @@ interface SocialLinkItem {
 import { Search } from "@lucide/astro";
 
 export const siteConfig = {
-  title: "Astro",
+  title: "Rewind.ai",
+  logoText: "Rewind",
+  tagline: "Frontend Developer Portfolio",
   description:
     "A modern frontend developer portfolio built with Astro, Tailwind CSS, and Lucide icons.",
   logo: "/logo.svg",
@@ -34,7 +36,7 @@ export const navigation: NavigationItem[] = [
   // { name: "Meals", href: "/meals", current: false },
   // { name: "Pricing", href: "/pricing", current: false },
   { name: "Teams", href: "/teams", current: false },
-  { name: "Search", href: "/search", current: false, icon: Search },
+  // { name: "Search", href: "/search", current: false, icon: Search },
 ];
 
 //social share
