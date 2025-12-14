@@ -1,13 +1,12 @@
 ---
-id: 3
-title: "E-commerce UI Kit"
-description: "A reusable UI kit for e-commerce platforms."
-thumbnail: "https://docs.astro.build/assets/rose.webp"
+title: E-commerce UI Kit
+description: A reusable UI kit for e-commerce platforms.
+thumbnail: https://docs.astro.build/assets/rose.webp
 images:
   - https://docs.astro.build/assets/rose.webp
   - https://docs.astro.build/assets/rose.webp
   - https://docs.astro.build/assets/rose.webp
-type: "UI/UX"
+type: UI/UX
 tags:
   - ecommerce
   - ui-kit
@@ -15,12 +14,14 @@ tags:
 technologies:
   - Figma
   - Storybook
-github: "https://github.com/username/ecommerce-ui-kit"
-liveDemo: "https://ecommerce-ui-kit.example.com"
+github: https://github.com/username/ecommerce-ui-kit
+liveDemo: https://ecommerce-ui-kit.example.com
 year: 2023
-role: "UI/UX Designer"
+role: UI/UX Designer
 duration: 2 months
 teamSize: 2
+draft: true
+slug: e-commerce-ui
 ---
 
 ## Challenge

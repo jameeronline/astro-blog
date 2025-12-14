@@ -13,7 +13,7 @@ import BackButton from "@components/BackButton.astro";
 import RelatedBlogCard from "@components/RelatedBlogCard.astro";
 
 //icons import
-import { ArrowLeft } from "@lucide/astro";
+import { ArrowLeft, Clock } from "@lucide/astro";
 
 //vendor style imports
 // import "astro-breadcrumbs/breadcrumbs.css";
@@ -25,12 +25,12 @@ import { slugify, formatDate } from "@utils/helper";
 export async function getStaticPaths() {
   const posts = await getCollection("posts");
   return posts.map((post) => ({
-    params: { slug: slugify(post.data.title) },
+    params: { slug: post.id },
     props: { id: post.id, posts: posts },
   }));
 }
 
-const { slug } = Astro.params;
+//const { slug } = Astro.params;
 const { id, posts } = Astro.props;
 
 // Fetch the post entry using the ID from the dynamic route
@@ -43,7 +43,7 @@ if (!post) {
 
 // Extract data and content from the post
 const { data } = post;
-const { Content, headings } = await render(post);
+const { Content, headings, remarkPluginFrontmatter } = await render(post);
 
 const tags = data.tags.map((tag) => tag.trim());
 const categories = data.categories.map((category) => category.trim());
@@ -88,6 +88,10 @@ const { title, description, image, pubDate, author } = data;
       <p class="text-gray-500" data-scroll-animate>
         Written by <span  class="text-primary-900 font-bold underline underline-offset-2">{author}</span> on <span>{formatDate(pubDate)}</span>
       </p>
+      <p class="flex items-center gap-2 text-gray-500" data-scroll-animate>
+        <Clock class="w-4 h-4" />
+        {remarkPluginFrontmatter.minutesRead}
+      </p>
     </header>
     <div
       class="grid grid-cols-4 gap-6 md:grid-cols-8 md:gap-12 lg:grid-cols-12"
@@ -120,7 +124,7 @@ const { title, description, image, pubDate, author } = data;
           </p>
 
           <div
-            class="prose dark:prose-invert max-w-none lg:prose-lg prose-h1:leading-[1.2] prose-h1:mb-4 md:prose-h1:mb-4 prose-p:my-2"
+            class="prose dark:prose-invert max-w-none lg:prose-lg prose-heading:leading-[1.2] prose-heading:mb-4 md:prose-heading:mb-4 prose-p:my-2 prose-a:underline prose-a:decoration-primary-400 prose-a:decoration-2 hover:prose-a:decoration-4 transition-all prose-li:my-0 prose-li:marker:text-primary-400"
             data-scroll-animate
           >
             <Content />

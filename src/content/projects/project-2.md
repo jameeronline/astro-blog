@@ -1,13 +1,12 @@
 ---
-id: 2
-title: "Task Manager App"
-description: "A web application to manage daily tasks with user authentication."
-thumbnail: "https://docs.astro.build/assets/rose.webp"
+title: Task Manager App
+description: A web application to manage daily tasks with user authentication.
+thumbnail: https://docs.astro.build/assets/rose.webp
 images:
   - https://docs.astro.build/assets/rose.webp
   - https://docs.astro.build/assets/rose.webp
   - https://docs.astro.build/assets/rose.webp
-type: "Fullstack"
+type: Fullstack
 tags:
   - tasks
   - productivity
@@ -16,12 +15,13 @@ technologies:
   - React
   - Node.js
   - MongoDB
-github: "https://github.com/username/task-manager"
-liveDemo: "https://taskmanager.example.com"
+github: https://github.com/username/task-manager
+liveDemo: https://taskmanager.example.com
 year: 2024
-role: "Fullstack Developer"
+role: Fullstack Developer
 duration: 2 months
 teamSize: 2
+slug: task-manager-app
 ---
 
 ## Challenge

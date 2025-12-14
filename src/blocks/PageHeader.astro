@@ -1,21 +1,25 @@
 ---
+//tailwind merge
+import { twMerge } from 'tailwind-merge'
+
 interface Props {
   title: string;
   description?: string;
   caption?: string;
+  class?: string;
 }
-const { title, description, caption }: Props = Astro.props;
+const { title, description, caption, class: className }: Props = Astro.props;
 ---
 
 <header
-  class="mx-auto flex flex-col items-center text-center lg:max-w-4xl gap-6 mb-10 md:mb-20"
+  class={twMerge("mx-auto flex flex-col items-center text-center lg:max-w-4xl gap-6 mb-10 md:mb-20", className)}
   data-scroll-animate
 >
   <div class="flex flex-col gap-2">
     <p class="text-caption" data-scroll-animate>{caption}</p>
     <h1 class="mb-0 text-heading" data-scroll-animate>{title}</h1>
   </div>
-  <p class="text-lead" data-scroll-animate>
+  <p class="text-lead text-gray-600" data-scroll-animate>
     {description}
   </p>
 </header>

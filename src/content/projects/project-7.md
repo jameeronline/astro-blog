@@ -1,14 +1,13 @@
 ---
-id: 7
-title: "Movie Verse"
-description: "A sleek movie database web app where users can browse, search, and view details of movies."
-
-thumbnail: "https://docs.astro.build/assets/rose.webp"
+title: Movie database using Tailwind V4
+description: A sleek movie database web app where users can browse, search, and
+  view details of movies.
+thumbnail: https://docs.astro.build/assets/rose.webp
 images:
   - https://docs.astro.build/assets/rose.webp
   - https://docs.astro.build/assets/rose.webp
   - https://docs.astro.build/assets/rose.webp
-type: "Frontend"
+type: Frontend
 tags:
   - movies
   - search
@@ -18,12 +17,13 @@ technologies:
   - TMDB API
   - Tailwind CSS
   - React Router
-github: "https://github.com/username/movieverse"
-liveDemo: "https://movieverse.example.com"
+github: https://github.com/username/movieverse
+liveDemo: https://movieverse.example.com
 year: 2024
-role: "Frontend Developer"
+role: Frontend Developer
 duration: 3 months
 teamSize: 3
+slug: movie-database-using-tailwind
 ---
 
 ## Challenge

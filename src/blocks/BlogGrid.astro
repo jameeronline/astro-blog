@@ -5,9 +5,6 @@ import type { CollectionEntry } from "astro:content";
 //components imports
 import BlogCard from "@components/BlogCard.astro";
 
-//utils imports
-import { slugify } from "@utils/helper";
-
 // Define the expected props interface
 interface BlogGridProps {
   posts: CollectionEntry<"posts">[];
@@ -19,9 +16,9 @@ const { posts } = Astro.props as BlogGridProps;
 
 <div class="grid gap-4 grid-cols-4 md:grid-cols-8 md:gap-12 lg:grid-cols-12">
   {
-    posts.map((post, index) => (
+    posts.map((post) => (
       <div class="col-span-4" data-scroll-animate>
-        <BlogCard item={post.data} url={slugify(post.data.title)} />
+        <BlogCard item={post.data} url={post.id} />
       </div>
     ))
   }

@@ -11,11 +11,11 @@ interface SocialLinkItem {
   alt: string;
 }
 
-import { Search } from "@lucide/astro";
+import { Search, House, CircleUser, Presentation, Headset, UsersRound, Rss } from "@lucide/astro";
 
 export const siteConfig = {
-  title: "Rewind.ai",
-  logoText: "Rewind",
+  title: "Jam.dev",
+  logoText: "Jam",
   tagline: "Frontend Developer Portfolio",
   description:
     "A modern frontend developer portfolio built with Astro, Tailwind CSS, and Lucide icons.",
@@ -28,14 +28,14 @@ export const siteConfig = {
 //navigation
 export const navigation: NavigationItem[] = [
   // { name: "Home", href: "/", current: true },
-  { name: "About", href: "/about", current: false },
-  { name: "Blog", href: "/blog", current: false },
-  { name: "Projects", href: "/projects", current: false },
-  { name: "Contact", href: "/contact", current: false },
+  { name: "About", href: "/about", current: false, icon: House },
+  { name: "Blog", href: "/blog", current: false, icon: Rss },
+  { name: "Projects", href: "/projects", current: false, icon: Presentation },
+  { name: "Contact", href: "/contact", current: false, icon: Headset },
   // { name: "Features", href: "/features", current: false },
   // { name: "Meals", href: "/meals", current: false },
   // { name: "Pricing", href: "/pricing", current: false },
-  { name: "Teams", href: "/teams", current: false },
+  { name: "Teams", href: "/teams", current: false, icon: UsersRound },
   // { name: "Search", href: "/search", current: false, icon: Search },
 ];
 

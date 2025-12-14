@@ -1,13 +1,13 @@
 ---
-id: 8
-title: "AdminDash"
-description: "A modern admin dashboard with charts, tables, and responsive layout built for managing user data and analytics."
-thumbnail: "https://docs.astro.build/assets/rose.webp"
+title: AdminDash
+description: A modern admin dashboard with charts, tables, and responsive layout
+  built for managing user data and analytics.
+thumbnail: https://docs.astro.build/assets/rose.webp
 images:
   - https://docs.astro.build/assets/rose.webp
   - https://docs.astro.build/assets/rose.webp
   - https://docs.astro.build/assets/rose.webp
-type: "Frontend"
+type: Frontend
 tags:
   - dashboard
   - admin
@@ -17,12 +17,13 @@ technologies:
   - Chart.js
   - Tailwind CSS
   - React Router
-github: "https://github.com/username/admindash"
-liveDemo: "https://admindash.example.com"
+github: https://github.com/username/admindash
+liveDemo: https://admindash.example.com
 year: 2024
-role: "Frontend Developer"
+role: Frontend Developer
 duration: 2 months
 teamSize: 2
+slug: admin-dashboard-nextjs
 ---
 
 ## Challenge

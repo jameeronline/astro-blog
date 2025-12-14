@@ -9,12 +9,12 @@ export interface Props {
 const { currentPage, lastPage, prevUrl, nextUrl } = Astro.props;
 ---
 
-<nav class="flex justify-center gap-4 mt-12">
+<nav class="flex justify-center gap-2 mt-12">
   {
     prevUrl ? (
       <a
         href={prevUrl}
-        class="px-4 py-2 border rounded-lg hover:bg-gray-100 transition-colors"
+        class="px-4 py-2 border rounded-full hover:bg-gray-100 transition-colors"
       >
         &larr; Previous
       </a>
@@ -24,14 +24,14 @@ const { currentPage, lastPage, prevUrl, nextUrl } = Astro.props;
   }
 
   <span class="px-4 py-2">
-    Page {currentPage} of {lastPage}
+    Page <span aria-live="polite" class="font-bold">{currentPage}</span> of <span aria-live="polite">{lastPage}</span>
   </span>
 
   {
     nextUrl ? (
       <a
         href={nextUrl}
-        class="px-4 py-2 border rounded-lg hover:bg-gray-100 transition-colors"
+        class="px-4 py-2 border rounded-full hover:bg-gray-100 transition-colors"
       >
         Next &rarr;
       </a>

@@ -1,13 +1,14 @@
 ---
-id: 1
-title: "Personal Portfolio Website"
-description: "A fully responsive personal portfolio website designed to elegantly present my professional projects, technical skills, and achievements, ensuring an optimal viewing experience across all devices."
-thumbnail: "https://docs.astro.build/assets/rose.webp"
+title: Personal Portfolio Website
+description: A fully responsive personal portfolio website designed to elegantly
+  present my professional projects, technical skills, and achievements, ensuring
+  an optimal viewing experience across all devices.
+thumbnail: https://docs.astro.build/assets/rose.webp
 images:
   - https://docs.astro.build/assets/rose.webp
   - https://docs.astro.build/assets/rose.webp
   - https://docs.astro.build/assets/rose.webp
-type: "Frontend"
+type: Frontend
 tags:
   - Portfolio
   - Web Development
@@ -19,12 +20,13 @@ technologies:
   - Astro
   - Alphine JS
   - Tailwind CSS
-github: "https://github.com/username/portfolio"
-liveDemo: "https://username.github.io/portfolio"
+github: https://github.com/username/portfolio
+liveDemo: https://username.github.io/portfolio
 year: 2023
-role: "Frontend Developer"
+role: Frontend Developer
 duration: 1 months
 teamSize: 1
+slug: personal-portfolio
 ---
 
 ## Challenge

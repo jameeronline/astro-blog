@@ -6,6 +6,9 @@ import path from "path";
 //adapter
 import netlify from "@astrojs/netlify";
 
+//remark plugins
+import { remarkReadingTime } from './remark-reading-time.mjs';
+
 //integrations
 import icon from "astro-icon";
 import mdx from "@astrojs/mdx";
@@ -17,7 +20,7 @@ import expressiveCode from "astro-expressive-code";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://jameer.online",
+	site: "https://jameer.online",
   vite: {
     plugins: [tailwindcss()],
     resolve: {
@@ -50,5 +53,8 @@ export default defineConfig({
       "docs.astro.build", "randomuser.me", "images.unsplash.com", "picsum.photos",
       "avatars.githubusercontent.com", "jameer.online"
     ]
-  }
+  },
+  markdown: {
+    remarkPlugins: [remarkReadingTime],
+  },
 });

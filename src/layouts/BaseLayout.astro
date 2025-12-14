@@ -1,11 +1,17 @@
 ---
+interface BaseLayoutProps {
+  title?: string;
+  description?: string;
+}
+
 // styles imports
-import "@styles/global.css";
+import "@/styles/global.css";
 
 //components imports
 import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
 import CTA from "@blocks/CTA.astro";
+import CookieBanner from "@/components/CookieBanner.astro";
 
 //fonts import
 import "@fontsource-variable/outfit";
@@ -17,7 +23,7 @@ import LocalScript from "@components/scripts/LocalScript.astro";
 import { siteConfig } from "@config/siteconfig.ts";
 
 //page meta data imports
-const { title = siteConfig.title } = Astro.props;
+const { title = siteConfig.title, description = siteConfig.description } = Astro.props;
 
 import { ClientRouter } from "astro:transitions";
 ---
@@ -36,7 +42,7 @@ import { ClientRouter } from "astro:transitions";
     class="relative h-full font-sans text-gray-900 dark:bg-slate-900 dark:text-slate-50 bg-primary-50/50"
   >
     <div
-      class="absolute inset-0 opacity-50 bg-no-repeat bg-cover bg-center"
+      class="absolute inset-0 opacity-50 bg-no-repeat bg-contain bg-left-top -z-10"
       style="background-image: url('/bg-mash-gradient.svg');"
     >
     </div>
@@ -49,6 +55,7 @@ import { ClientRouter } from "astro:transitions";
       </main>
       <!-- <CTA /> -->
       <Footer />
+      <CookieBanner />
     </div>
     <LocalScript />
     <script>

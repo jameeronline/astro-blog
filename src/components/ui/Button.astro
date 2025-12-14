@@ -1,5 +1,13 @@
 ---
-//props
+interface ButtonProps {
+  type?: "button" | "submit" | "reset";
+  size?: "sm" | "md" | "lg";
+  variant?: "primary" | "secondary" | "outline" | "link";
+  as?: "button" | "a";
+  href?: string;
+  [key: string]: any;
+}
+
 const {
   type = "button",
   size = "md",
@@ -20,30 +28,22 @@ const sizeClasses = {
 
 const variantClasses = {
   primary:
-    "bg-primary-900 text-white hover:bg-primary-950 focus:ring-primary-500",
-  secondary: "bg-gray-900 text-white hover:bg-gray-800 focus:ring-gray-500",
+    "bg-primary text-white hover:bg-primary-darker focus:ring-primary-dark",
+  secondary: "bg-typo text-white hover:bg-gray-800 focus:ring-seconadary-dark",
   outline:
-    "border border-primary-900 text-primary-900 bg-transparent hover:bg-primary-50 focus:ring-primary-500",
-  link: "bg-transparent text-primary-900 underline hover:text-primary-800 focus:ring-primary-500",
+    "border border-primary text-primary bg-transparent hover:bg-primary-50 focus:ring-primary",
+  link: "bg-transparent text-primary underline hover:text-primary-800 focus:ring-primary",
 };
+
+const classes = `${baseClasses} ${sizeClasses[size] ?? sizeClasses.md} ${variantClasses[variant] ?? variantClasses.primary}`;
 ---
 
-{
-  Astro.props.as === "a" ? (
-    <a
-      href={Astro.props.href}
-      class={`${baseClasses} ${sizeClasses[size] ?? sizeClasses.md} ${variantClasses[variant] ?? variantClasses.primary}`}
-      {...props}
-    >
-      <slot />
-    </a>
-  ) : (
-    <button
-      type={type}
-      class={`${baseClasses} ${sizeClasses[size] ?? sizeClasses.md} ${variantClasses[variant] ?? variantClasses.primary}`}
-      {...props}
-    >
-      <slot />
-    </button>
-  )
-}
+{as === "a" ? (
+  <a href={href} class={classes} {...props}>
+    <slot />
+  </a>
+) : (
+  <button type={type} class={classes} {...props}>
+    <slot />
+  </button>
+)}

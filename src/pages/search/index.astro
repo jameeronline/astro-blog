@@ -1,9 +1,16 @@
 ---
 //astro imports
 import { getCollection } from "astro:content";
+interface SearchItem {
+  title: string;
+  description: string;
+  thumbnail?: string;
+  _type: "post" | "project";
+}
 
 //utils imports
-import { getSearchIndex } from "@utils/search";
+//import { getSearchIndex } from "@utils/search";
+import { slugify } from "@utils/helper";
 
 //components imports
 import BaseLayout from "@layouts/BaseLayout.astro";
@@ -14,21 +21,42 @@ import PageHeader from "@blocks/PageHeader.astro";
 export const prerender = false; // Disable pre rendering for dynamic search results
 
 const posts = await getCollection("posts");
-const searchIndex = await getSearchIndex(posts);
+const projects = await getCollection("projects");
+
+// Combine posts and projects, tagging each with a type
+const allItems = [
+  ...posts.map(({ data }) => ({
+    title: data.title,
+    description: data.description,
+    thumbnail: data.thumbnail || data.image,
+    _type: "post",
+  })),
+  ...projects.map(({ data }) => ({
+    title: data.title,
+    description: data.description,
+    thumbnail: data.thumbnail || data.image,
+    _type: "project",
+  })),
+];
+//const searchIndex = await getSearchIndex(posts);
+//console.log(allItems);
+
 
 // Get the search term from the URL query
 const url = new URL(Astro.request.url);
 const searchTerm = url.searchParams.get("q") || "";
+const types = url.searchParams.getAll("type"); // ['post', 'project'] or []
 
 // Filter results on the server
-let results: typeof posts = [];
+let results: SearchItem[] = [];
+
 if (searchTerm.trim()) {
   const term = searchTerm.toLowerCase();
-  results = posts.filter(
-    ({ data }) =>
-      data.title.toLowerCase().includes(term) ||
-      data.description.toLowerCase().includes(term) ||
-      (data.tags && data.tags.some((tag) => tag.toLowerCase().includes(term)))
+  results = allItems.filter(
+    (item) =>
+      (item.title.toLowerCase().includes(term) ||
+        item.description.toLowerCase().includes(term)) &&
+      (types.length === 0 || types.includes(item._type))
   );
 }
 
@@ -38,6 +66,7 @@ const pageHeader = {
   caption: "Find the info",
   description: "Type to search for articles by title, content, or tags.",
 };
+
 ---
 
 <BaseLayout title="Search Articles">
@@ -45,18 +74,76 @@ const pageHeader = {
     title={pageHeader.title}
     description={pageHeader.description}
     caption={pageHeader.caption}
+    class="md:mb-10"
   />
 
-  <SearchForm value={searchTerm} />
-
+  <SearchForm value={searchTerm} types={types} />
+  
   {
     results.length > 0 ? (
       <div class="search-results">
-        <BlogGrid posts={results} />
+        {/* <BlogGrid posts={results} /> */}
+        {
+          results.length === 1 ? (
+            <p class="text-center text-gray-600 mt-6" data-scroll-animate>1 result found for "{searchTerm}"</p>
+          ) : (
+            <p class="text-center text-gray-600 mt-6" data-scroll-animate>{results.length} results found for "{searchTerm}"</p>
+          )
+        }
+
+        {
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+            {results.map(({ title, description, thumbnail, _type }) => {
+              // Find the corresponding item in allItems to get type and thumbnail
+              const item = allItems.find((i) => i.title === title && i.description === description);
+              const type = item?._type || "post";
+              //const thumbnail = item?.thumbnail;
+              const link =
+                type === "post"
+                  ? `/blog/${slugify(title)}`
+                  : `/projects/${slugify(title)}`;
+
+              return (
+                <a href={link} class="block bg-white rounded-lg shadow hover:shadow-lg transition overflow-hidden group">
+                  {/* {thumbnail && (
+                    <img
+                      src={thumbnail}
+                      alt={data.title}
+                      class="w-full h-48 object-cover group-hover:scale-105 transition-transform"
+                      loading="lazy"
+                    />
+                  )} */}
+                  <div class="p-4">
+                    <h3 class="text-lg font-semibold mb-2">{title}</h3>
+                    <p class="text-gray-600 text-sm">{description}</p>
+                    <span class="inline-block mt-3 px-3 py-1 text-xs rounded-full bg-blue-100 text-blue-700">
+                      {type.charAt(0).toUpperCase() + type.slice(1)}
+                    </span>
+                  </div>
+                </a>
+              );
+            })}
+          </div>
+        }
       </div>
     ) : searchTerm ? (
-      <div class="text-red-600 py-8 text-center font-semibold">
-        No results found.
+      <div class="flex flex-col items-center justify-center py-10  max-w-3xl mx-auto mt-8" data-scroll-animate>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-gray-400 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="2" fill="none"/>
+          <line x1="21" y1="21" x2="16.65" y2="16.65" stroke="currentColor" stroke-width="2"/>
+          <line x1="11" y1="7" x2="11" y2="11" stroke="currentColor" stroke-width="2"/>
+          <line x1="11" y1="11" x2="13" y2="13" stroke="currentColor" stroke-width="2"/>
+        </svg>
+        <div class="text-lg font-semibold text-gray-700 mb-2">No results found</div>
+        <div class="text-gray-500 mb-6 text-center px-4">
+          We couldn't find any articles matching your search. Try refining your keywords or check your spelling.
+        </div>
+        <button
+          class="px-5 py-2 bg-blue-600 text-white rounded-full font-medium hover:bg-blue-700 transition"
+          onclick="document.querySelector('input[name=q]').focus();"
+        >
+          Refine Search
+        </button>
       </div>
     ) : null
   }

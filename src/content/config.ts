@@ -1,5 +1,5 @@
 // 1. Import utilities from `astro:content`
-import { defineCollection, z as zod } from "astro:content";
+import { defineCollection, z as zod, reference } from "astro:content";
 
 // 2. Import loader(s)
 import { glob, file } from "astro/loaders";
@@ -19,7 +19,7 @@ const posts = defineCollection({
       .optional(),
     pubDate: zod.date(),
     tags: zod.array(zod.string()),
-    categories: zod.array(zod.string()),
+    categories: zod.array(reference("categories")).optional(),
     featured: zod.boolean().optional(),
     draft: zod.boolean().optional(),
   }),
@@ -31,6 +31,16 @@ const posts = defineCollection({
 //     title: zod.string(),
 //   }),
 // });
+
+const categories = defineCollection({
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "src/content/categories" }),
+  schema: zod.object({
+    title: zod.string(),
+    slug: zod.string(),
+    description: zod.string(),
+    icon: zod.string().optional(),
+  }),
+});
 
 const teams = defineCollection({
   loader: file("src/content/teams.json"),
@@ -55,7 +65,6 @@ const teams = defineCollection({
 const projects = defineCollection({
   loader: glob({ pattern: "**/*.{md,mdx}", base: "src/content/projects" }),
   schema: zod.object({
-    id: zod.number(),
     title: zod.string(),
     description: zod.string(),
     thumbnail: zod.string(),
@@ -92,4 +101,4 @@ const projects = defineCollection({
 // });
 
 // 4. Export a single `collections` object to register your collection(s)
-export const collections = { posts, projects, teams };
+export const collections = { posts, projects, teams, categories };

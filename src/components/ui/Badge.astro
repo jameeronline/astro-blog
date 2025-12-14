@@ -1,20 +1,24 @@
 ---
-//props
-const { label, href } = Astro.props;
+import { twMerge } from 'tailwind-merge';
+export interface Props {
+  label: string;
+  href?: string;
+  class?: string;
+}
+
+const { label, href, class: className } = Astro.props;
 const isLink = !!href;
 ---
 
-{
-  isLink ? (
-    <a
-      href={href}
-      class="inline-flex items-center justify-center gap-1 rounded-full bg-primary-700/10 px-2.5 py-1 text-sm text-primary-900 decoration-0 hover:bg-primary-900 hover:text-white transition-colors capitalize"
-    >
-      {label}
-    </a>
-  ) : (
-    <span class="inline-flex items-center justify-center gap-1 rounded-full bg-primary-700/10 px-2.5 py-1 text-sm text-primary-900">
-      {label}
-    </span>
-  )
-}
+{isLink ? (
+  <a
+    href={href}
+    class={twMerge("inline-flex items-center justify-center gap-1 rounded-full bg-typo/10 px-2.5 py-1 text-sm text-primary-900 decoration-0 hover:bg-primary-900 hover:text-white transition-colors capitalize", className)}
+  >
+    {label}
+  </a>
+) : (
+  <span class={twMerge("inline-flex items-center justify-center gap-1 rounded-full bg-typo/10 px-2.5 py-1 text-sm text-primary-900", className)}>
+    {label}
+  </span>
+)}

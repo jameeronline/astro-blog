@@ -1,14 +1,12 @@
 ---
-id: 6
-title: "Recipe Finder"
-description: "A web app to search and save recipes from various cuisines."
-
-thumbnail: "https://docs.astro.build/assets/rose.webp"
+title: Recipe Finder
+description: A web app to search and save recipes from various cuisines.
+thumbnail: https://docs.astro.build/assets/rose.webp
 images:
   - https://docs.astro.build/assets/rose.webp
   - https://docs.astro.build/assets/rose.webp
   - https://docs.astro.build/assets/rose.webp
-type: "Frontend"
+type: Frontend
 tags:
   - recipes
   - search
@@ -17,12 +15,13 @@ technologies:
   - React
   - Redux
   - Firebase
-github: "https://github.com/username/recipe-finder"
-liveDemo: "https://recipe-finder.example.com"
+github: https://github.com/username/recipe-finder
+liveDemo: https://recipe-finder.example.com
 year: 2024
-role: "Frontend Developer"
+role: Frontend Developer
 duration: 2 months
 teamSize: 2
+slug: recipe-finder
 ---
 
 ## Challenge

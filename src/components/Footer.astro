@@ -8,7 +8,7 @@ import { Icon } from "astro-icon/components";
 
 //site config imports
 import { siteConfig, socialLinks } from "@config/siteconfig";
-const { title, description, year } = siteConfig;
+const { title, description, year, logoText } = siteConfig;
 
 const solutions = {
   title: "Solutions",
@@ -31,16 +31,16 @@ const support = {
 };
 ---
 
-<footer class="text-gray-100 bg-primary-900 mt-4 md:mt-10">
+<footer class="text-gray-100 bg-primary-900 mt-4 md:mt-20">
   <div class="py-12 lg:py-16">
     <div class="w-full xl:container px-6 mx-auto">
       <div class="xl:grid xl:grid-cols-3 xl:gap-8">
         <div class="space-y-8 xl:col-span-1">
           <a
             href="#"
-            class="text-2xl font-bold tracking-wide text-primary-50/90 transition duration-500 ease-in-out lg:pr-8"
+            class="text-3xl font-bold font-heading tracking-wide text-primary-50 transition duration-500 ease-in-out lg:pr-8"
           >
-            {title}
+            {logoText}<span class="text-gray-50">.ai</span>
           </a>
           <!-- <p class="mt-2 w-1/2 text-sm text-gray-100">
             {description}

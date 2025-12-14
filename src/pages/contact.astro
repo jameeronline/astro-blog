@@ -47,6 +47,29 @@ const contactInfo = [
   },
 ];
 
+const faqs = [
+  {
+    question: "What services do you offer?",
+    answer:
+      "I specialize in frontend development, UI/UX implementation, web application development, and performance optimization. I can help with everything from small components to full-scale applications.",
+  },
+  {
+    question: "What is your typical process?",
+    answer:
+      "My process typically involves an initial consultation, proposal/scope definition, design implementation, development, testing, and deployment. I maintain clear communication throughout each phase.",
+  },
+  {
+    question: "How long does a typical project take?",
+    answer:
+      "Project timelines vary based on scope and complexity. A small project might take 2-4 weeks, while larger applications can take several months. I'll provide a detailed timeline during our initial consultation.",
+  },
+  {
+    question: "Do you offer ongoing maintenance?",
+    answer:
+      "Yes, I offer maintenance packages to ensure your application stays up-to-date, secure, and performs well. This can include regular updates, performance monitoring, and feature additions.",
+  },
+];
+
 // page header details
 const pageHeader = {
   title: "Let's Work Together",
@@ -215,7 +238,7 @@ const pageHeader = {
     </section>
 
     {/* FAQ Section */}
-    <section class="container-tight py-16 mb-20">
+    <section class="container-tight py-16">
       <div class="text-center mb-12">
         <p class="text-caption">FAQ</p>
         <h2 class="text-3xl font-bold">Frequently Asked Questions</h2>
@@ -225,52 +248,14 @@ const pageHeader = {
         class="grid grid-cols-4 md:grid-cols-8 lg:grid-cols-12 gap-6"
         data-scroll-animate
       >
-        <div class="col-span-4 lg:col-span-6">
-          <div class="bg-white shadow-2xl/10 rounded-lg p-8 space-y-3">
-            <h3 class="text-xl font-bold">What services do you offer?</h3>
-            <p class="">
-              I specialize in frontend development, UI/UX implementation, web
-              application development, and performance optimization. I can help
-              with everything from small components to full-scale applications.
-            </p>
+        {faqs.map((faq) => (
+          <div class="col-span-4 lg:col-span-6">
+            <div class="bg-white shadow-2xl/10 rounded-lg p-8 space-y-3">
+              <h3 class="text-xl font-bold">{faq.question}</h3>
+              <p>{faq.answer}</p>
+            </div>
           </div>
-        </div>
-
-        <div class="col-span-4 lg:col-span-6">
-          <div class="bg-white shadow-2xl/10 rounded-lg p-8 space-y-3">
-            <h3 class="text-xl font-bold">What is your typical process?</h3>
-            <p class="">
-              My process typically involves an initial consultation,
-              proposal/scope definition, design implementation, development,
-              testing, and deployment. I maintain clear communication throughout
-              each phase.
-            </p>
-          </div>
-        </div>
-        <div class="col-span-4 lg:col-span-6">
-          <div class="bg-white shadow-2xl/10 rounded-lg p-8 space-y-3">
-            <h3 class="text-xl font-bold">
-              How long does a typical project take?
-            </h3>
-            <p class="">
-              Project timelines vary based on scope and complexity. A small
-              project might take 2-4 weeks, while larger applications can take
-              several months. I'll provide a detailed timeline during our
-              initial consultation.
-            </p>
-          </div>
-        </div>
-
-        <div class="col-span-4 lg:col-span-6">
-          <div class="bg-white shadow-2xl/10 rounded-lg p-8 space-y-3">
-            <h3 class="text-xl font-bold">Do you offer ongoing maintenance?</h3>
-            <p class="">
-              Yes, I offer maintenance packages to ensure your application stays
-              up-to-date, secure, and performs well. This can include regular
-              updates, performance monitoring, and feature additions.
-            </p>
-          </div>
-        </div>
+        ))}
       </div>
     </section>
   </section>

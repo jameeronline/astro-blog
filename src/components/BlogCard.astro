@@ -1,9 +1,13 @@
 ---
 //astro import
-import Image from "astro/components/Image.astro";
+import { Image } from "astro:assets";
+import { getEntry, getEntries } from 'astro:content';
+
 
 //components import
-import Badge from "./ui/Badge.astro";
+// import Badge from "./ui/Badge.astro";
+
+import { Badge } from "@/components/starwind/badge";
 
 // utils import
 import { slugify } from "@utils/helper";
@@ -13,16 +17,21 @@ const { item, url = "#" } = Astro.props;
 
 // get tags and categories from item
 const tags = item.tags.map((tag: string) => tag.trim());
-const categories = item.categories.map((category: string) => category.trim());
+// const categories = item.categories.map((category: { title: string; slug: string, description: string }) => ({
+//   title: category.title.trim(),
+//   slug: category.slug.trim(),
+// }));
+
+const categories = await getEntries(item.categories);
 ---
 
 <article class="rounded-xl transition-all">
   <a href={`/blog/${url}`} aria-label={`Read more about ${item.title}`}>
     <div class="relative overflow-hidden bg-cover bg-no-repeat rounded-xl mb-8">
       <Image
-        class="object-cover object-center w-full lg:h-48 md:h-36 bg-slate-50 transition duration-300 ease-in-out hover:scale-110 dark:bg-transparent"
+        class="object-cover object-center w-full lg:h-48 md:h-36 bg-gray-200 transition duration-300 ease-in-out hover:scale-110 dark:bg-transparent"
         src={item.image.url}
-        alt={item.title}
+        alt={item.image.alt}
         layout="constrained"
         loading="lazy"
         inferSize
@@ -30,7 +39,7 @@ const categories = item.categories.map((category: string) => category.trim());
     </div>
 
     <h3
-      class="mb-8 text-2xl lg:text-3xl font-semibold font-heading leading-snug tracking-tighter text-slate-800 dark:text-slate-100 hover:text-primary-700 transition-colors duration-300"
+      class="mb-8 text-2xl lg:text-3xl font-semibold font-heading leading-snug tracking-tighter text-slate-800 dark:text-slate-100 hover:text-primary transition-colors duration-300"
     >
       {item.title}
     </h3>
@@ -43,13 +52,11 @@ const categories = item.categories.map((category: string) => category.trim());
 
   <div class="mt-6 flex gap-4">
     {
-      categories.map((category: string, index: number) => (
+      categories.map(({data}) => (
         <Badge
-          key={index}
-          label={category}
-          href={`/blog/category/${slugify(category)}`}
-          class="capitalize"
-        />
+          variant="outline"
+          href={`/blog/category/${slugify(data.slug)}`}
+          class="capitalize">{data.title}</Badge>
       ))
     }
   </div>

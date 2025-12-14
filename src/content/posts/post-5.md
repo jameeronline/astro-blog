@@ -1,13 +1,19 @@
 ---
-title: "Modern CSS Techniques You Should Be Using Today"
+slug: modern-css-techniques
+title: Modern CSS Techniques You Should Be Using Today
 author: Astro Learner
-description: "I had some challenges, but asking in the community really helped!"
+description: I had some challenges, but asking in the community really helped!
 image:
-  url: "https://docs.astro.build/assets/rays.webp"
-  alt: "The Astro logo on a dark background with rainbow rays."
+  url: https://docs.astro.build/assets/rays.webp
+  alt: The Astro logo on a dark background with rainbow rays.
 pubDate: 2022-07-15
-tags: ["astro", "learning in public", "setbacks", "community"]
-categories: ["React"]
+tags:
+  - astro
+  - learning in public
+  - setbacks
+  - community
+categories:
+  - css
 ---
 
 It wasn't always smooth sailing, but I'm enjoying building with Astro. And, the [Discord community](https://astro.build/chat) is really friendly and helpful!

@@ -8,9 +8,6 @@ import BlogGrid from "@blocks/BlogGrid.astro";
 import PageHeader from "@blocks/PageHeader.astro";
 import Paginate from "@components/Paginate.astro";
 
-//utils import
-import { slugify } from "@utils/helper";
-
 //site config
 import { siteConfig } from "../../config/siteconfig.ts";
 
@@ -18,14 +15,14 @@ import { siteConfig } from "../../config/siteconfig.ts";
 const pageTitle = "Blog Index";
 
 // Pagination setup
-export async function getStaticPaths({ paginate }) {
+export async function getStaticPaths({ paginate }: { paginate: any }) {
   // Get all posts (you can add sorting/filtering here)
-  const allPosts = await getCollection("posts");
+  const allPosts = await getCollection("posts", ({ data }) => data.draft !== true);
   const { pageLength } = siteConfig;
 
   // Sort posts by date (newest first)
   const sortedPosts = allPosts.sort(
-    (a, b) => new Date(b.data.pubDate) - new Date(a.data.pubDate)
+    (a, b) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime()
   );
 
   return paginate(sortedPosts, {
@@ -45,7 +42,7 @@ const pageHeader = {
 };
 ---
 
-<BaseLayout title={pageTitle}>
+<BaseLayout title={pageHeader.title} description={pageHeader.description}>
   <section>
     <PageHeader
       title={pageHeader.title}

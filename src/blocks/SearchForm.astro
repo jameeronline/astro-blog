@@ -2,17 +2,21 @@
 //icons import
 import { Search } from "@lucide/astro";
 
+//starwind components imports
+import { Checkbox } from "@/components/starwind/checkbox";
+
+
 //props
 const { value } = Astro.props;
 ---
 
-<form class="max-w-2xl mx-auto mb-16" method="GET">
+<form class="max-w-2xl mx-auto mb-16" method="GET" data-scroll-animate>
   <label
     for="default-search"
     class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
     >Search</label
   >
-  <div class="relative">
+  <div class="relative flex items-center gap-2">
     <div
       class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none"
     >
@@ -22,15 +26,66 @@ const { value } = Astro.props;
       id="searchInput"
       name="q"
       type="search"
-      class="block w-full p-4 ps-11 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 placeholder:text-gray-400"
+      class="block w-full h-14 p-4 ps-11 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 placeholder:text-gray-400"
       placeholder="Search Mockups, Logos..."
       required
+      autocomplete="off"
       value={value}
     />
     <button
       type="submit"
-      class="text-white absolute end-2.5 bottom-2.5 bg-primary-900 hover:bg-primary-950 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+      class="text-white bg-primary-900 hover:bg-primary-950 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-6 h-14 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
       >Search</button
     >
   </div>
+
+  {
+    (Astro.url.searchParams.get("q") || Astro.url.searchParams.getAll("type").length > 0) && (
+      <div class="flex items-center gap-4 mt-4">
+        <div class="flex items-center">
+          <input
+            id="posts-checkbox"
+            type="checkbox"
+            value="post"
+            name="type"
+            class="w-6 h-6 border rounded bg-primary-800 focus:ring-2 focus:ring-brand-soft"
+            checked={
+              Astro.url.searchParams.getAll("type").includes("post")
+            }
+          />
+          <label
+            for="posts-checkbox"
+            class="select-none ms-2 text-sm font-medium"
+          >
+            Posts
+          </label>
+        </div>
+        <div class="flex items-center">
+          <input
+            id="project-checkbox"
+            type="checkbox"
+            value="project"
+            name="type"
+            class="w-6 h-6 border rounded focus:ring-2 focus:ring-brand-soft checked:bg-primary-800"
+            checked={
+              Astro.url.searchParams.getAll("type").includes("project")
+            }
+          />
+          <label
+            for="project-checkbox"
+            class="select-none ms-2 text-sm font-medium"
+          >
+            Projects
+          </label>
+        </div>
+
+        <a
+          href="/search"
+          class="text-sm text-primary-700 underline hover:text-primary-900 transition"
+        >
+          Clear
+        </a>
+      </div>
+    )
+  }
 </form>

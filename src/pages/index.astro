@@ -52,14 +52,17 @@ export interface User {
 // console.log(users);
 
 //page metadata
-const pageTitle = "Home Page";
+const pageInfo = {
+  title: "Home Page",
+  description: "Welcome to my Astro site homepage",
+};
 
 //posts
 const posts = await getCollection("posts");
 const featuredPosts = posts.filter((post) => post.data.featured);
 ---
 
-<BaseLayout title={pageTitle}>
+<BaseLayout title={pageInfo.title} description={pageInfo.description}>
   <!-- <FeaturedPosts posts={featuredPosts} /> -->
   <Hero title="Welcome to my site" subtitle="This is a subtitle" />
   <!-- <TrustedBrands /> -->

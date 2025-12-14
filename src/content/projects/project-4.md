@@ -1,14 +1,12 @@
 ---
-id: 4
-title: "Weather Dashboard"
-description: "A dashboard to display real-time weather data for multiple cities."
-
-thumbnail: "https://docs.astro.build/assets/rose.webp"
+title: Weather Dashboard
+description: A dashboard to display real-time weather data for multiple cities.
+thumbnail: https://docs.astro.build/assets/rose.webp
 images:
   - https://docs.astro.build/assets/rose.webp
   - https://docs.astro.build/assets/rose.webp
   - https://docs.astro.build/assets/rose.webp
-type: "Frontend"
+type: Frontend
 tags:
   - weather
   - dashboard
@@ -17,12 +15,13 @@ technologies:
   - Vue.js
   - Tailwind CSS
   - Supabase
-github: "https://github.com/username/weather-dashboard"
-liveDemo: "https://weather-dashboard.example.com"
+github: https://github.com/username/weather-dashboard
+liveDemo: https://weather-dashboard.example.com
 year: 2023
-role: "Frontend Developer"
+role: Frontend Developer
 duration: 4 months
 teamSize: 2
+slug: weather-dashboard
 ---
 
 ## Challenge

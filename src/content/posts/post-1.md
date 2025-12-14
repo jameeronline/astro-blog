@@ -1,4 +1,5 @@
 ---
+slug: 10-essential-web-development-skills-every-developer-should-master-in-2025
 title: 10 Essential Web Development Skills Every Developer Should Master in 2025
 author: Astro Learner
 description: Explore the top 10 essential web development skills every developer
@@ -14,9 +15,9 @@ tags:
   - blogging
   - learning in public
 categories:
-  - JavaScript
-featured: true
-slug: ""
+  - tailwind
+  - html
+featured: false
 ---
 
 Web development is a rapidly evolving field, and staying ahead means continuously updating your skill set. Here are ten essential skills every web developer should master to remain competitive and effective in 2025:
