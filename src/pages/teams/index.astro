@@ -1,28 +1,43 @@
 ---
+//types imports
+
+import type { PageProps } from "@/types/global";
+
 //astro imports
 import { getCollection, getEntry } from "astro:content";
-import Image from "astro/components/Image.astro";
+import { Image } from "astro:assets";
 
 //components import
 import BaseLayout from "@layouts/BaseLayout.astro";
 import PageHeader from "@blocks/PageHeader.astro";
+import TeamMember from "@/components/TeamMember.astro";
 
-//page metadata
-const title = "Teams Page";
-const description = "This is the projects page";
-
+//get teams data
 const teams = await getCollection("teams");
 
 // page header details
-const pageHeader = {
+const pageHeader: PageProps = {
   title: "The team you'll be working with",
   caption: "Our team",
   description:
     "Meet our talented and passionate team dedicated to delivering exceptional results. Each member brings unique skills and experience to help drive our projects forward and ensure your success.",
 };
+
+const styles = {
+  section: "py-12 px-4 md:px-8 lg:px-16",
+  grid: "grid gap-x-12 gap-y-16 md:grid-cols-3 lg:grid-cols-4",
+  article:
+    "bg-white rounded-xl shadow-md p-6 transition-transform hover:-translate-y-1",
+  image:
+    "relative flex shrink-0 overflow-hidden rounded-full mb-4 grayscale hover:grayscale-0 size-20 md:mb-5 lg:size-24",
+  name: "font-semibold text-lg",
+  role: "text-gray-600 text-base",
+  description: "py-3 text-sm text-gray-600",
+  spacer: "mt-10",
+};
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout title={pageHeader.title} description={pageHeader.description}>
   <section>
     <PageHeader
       title={pageHeader.title}
@@ -30,28 +45,8 @@ const pageHeader = {
       caption={pageHeader.caption}
     />
 
-    <div
-      class="container mt-16 grid gap-x-12 gap-y-16 md:grid-cols-2 lg:grid-cols-4"
-    >
-      {
-        teams.map(({ data }) => (
-          <article data-scroll-animate>
-            <div class="flex flex-col items-center text-center">
-              <Image
-                src={data.picture}
-                alt={data.name}
-                class="relative flex shrink-0 overflow-hidden rounded-full mb-4 grayscale hover:grayscale-0 size-20 md:mb-5 lg:size-24"
-                width={96}
-                height={96}
-              />
-              <p class="font-semibold">{data.name}</p>
-              <p class="text-gray-600">{data.role}</p>
-              <p class="py-3 text-sm text-gray-600">{data.description}</p>
-              <div class="mt-10" />
-            </div>
-          </article>
-        ))
-      }
+    <div class={styles.grid}>
+      {teams.map((team) => <TeamMember item={team} />)}
     </div>
   </section>
 </BaseLayout>

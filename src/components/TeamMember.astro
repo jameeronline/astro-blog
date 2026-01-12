@@ -1,0 +1,43 @@
+---
+//types imports
+import type { CollectionEntry } from "astro:content";
+//import type { TeamMemberProps } from "../types/team-member";
+
+//astro imports
+import { Image } from "astro:assets";
+
+interface Props {
+  item: CollectionEntry<"teams">;
+}
+
+const { item } = Astro.props;
+
+const styles = {
+  article: "flex flex-col items-center text-center",
+  image:
+    "relative flex shrink-0 overflow-hidden rounded-full mb-4 grayscale hover:grayscale-0 size-20 md:mb-5 lg:size-24 transition-all duration-300",
+  name: "font-semibold text-lg",
+  role: "text-gray-600 text-sm md:text-base",
+  description: "py-3 text-sm text-gray-600 max-w-xs md:max-w-sm",
+  spacer: "mt-10",
+};
+
+//data
+const { data } = item;
+---
+
+<article data-scroll-animate>
+  <div class="flex flex-col items-center text-center">
+    <Image
+      src={data.picture || "https://placehold.co/400x400"}
+      alt={data.name}
+      class={styles.image}
+      width={96}
+      height={96}
+    />
+    <p class={styles.name}>{data.name}</p>
+    <p class={styles.role}>{data.role}</p>
+    <p class={styles.description}>{data.description}</p>
+    <div class={styles.spacer}></div>
+  </div>
+</article>

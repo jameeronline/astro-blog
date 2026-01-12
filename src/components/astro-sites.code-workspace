@@ -1,28 +1,7 @@
 {
-  "folders": [
-    {
-      "path": "../.."
-    },
-    {
-      "path": "../../../astro-uidocs"
-    },
-    {
-      "path": "../../../project"
-    },
-    {
-      "path": "../../../hekto"
-    },
-    {
-      "path": "../../../studio-astro-hekto"
-    },
-    {
-      "path": "../../../astro-hekto"
-    },
-    {
-      "path": "../../../astro-darkmatter-cms"
-    }
-  ],
-  "settings": {
-    "liveServer.settings.multiRootWorkspaceName": "hekto"
-  }
+    "folders": [
+        {
+            "path": "../.."
+        }
+    ]
 }

@@ -1,4 +1,9 @@
 ---
+//types
+import type { CollectionEntry } from "astro:content";
+import type { PaginateFunction } from "astro";
+import type { PageProps } from "../../types/global";
+
 //astro imports
 import { getCollection, getEntry } from "astro:content";
 
@@ -8,18 +13,11 @@ import ProjectCard from "@components/ProjectCard.astro";
 import PageHeader from "@blocks/PageHeader.astro";
 import Paginate from "@components/Paginate.astro";
 
-//utils imports
-import { slugify } from "@utils/helper";
-
 //site config
-import { siteConfig } from "@config/siteconfig";
-
-//page metadata
-const title = "Projects Page";
-const description = "This is the projects page";
+import { siteConfig } from "@config/site-config";
 
 // Pagination setup
-export async function getStaticPaths({ paginate }) {
+export async function getStaticPaths({ paginate }: { paginate: PaginateFunction }) {
   const { pageLength } = siteConfig;
 
   const allProjects = await getCollection("projects");
@@ -28,17 +26,18 @@ export async function getStaticPaths({ paginate }) {
 
 // Get the current page data from Astro props
 const { page } = Astro.props;
+//console.log(page);
 
 // page header details
-const pageHeader = {
-  title: "Projects",
-  caption: "Featured Works & Case Studies",
+const pageHeader: PageProps = {
+  title: "Featured Works & Case Studies",
+  caption: "Recent Projects",
   description:
     "Browse through my featured projects showcasing my skills in frontend development, UX design, and creative problem-solving.",
 };
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout title={pageHeader.title} description={pageHeader.description}>
   <section>
     <PageHeader
       title={pageHeader.title}
@@ -53,8 +52,7 @@ const pageHeader = {
         page.data.map((project) => (
           <div class="col-span-4" data-scroll-animate>
             <ProjectCard
-              data={project.data}
-              url={slugify(project.data.title)}
+              project={project}
             />
           </div>
         ))

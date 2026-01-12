@@ -17,6 +17,7 @@ tags:
 categories:
   - tailwind
   - html
+  - bootstrap
 featured: false
 ---
 

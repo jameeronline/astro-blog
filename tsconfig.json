@@ -9,13 +9,15 @@
     "paths": {
       "@/*": ["./src/*"],
       "@components/*": ["./src/components/*"],
-      "@blocks/*": ["./src/blocks/*"],
+      "@blocks/*": ["./src/components/blocks/*"],
       "@layouts/*": ["./src/layouts/*"],
       "@pages/*": ["./src/pages/*"],
       "@utils/*": ["./src/utils/*"],
       "@styles/*": ["./src/styles/*"],
       "@config/*": ["./src/config/*"],
-      "@data/*": ["./src/data/*"]
+      "@data/*": ["./src/data/*"],
+      "@assets/*": ["./src/assets/*"],
+      "@types/*": ["./src/types/*"]
     }
   }
 }

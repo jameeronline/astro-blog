@@ -20,18 +20,20 @@ import expressiveCode from "astro-expressive-code";
 
 // https://astro.build/config
 export default defineConfig({
-	site: "https://jameer.online",
+    site: "https://jameer.online",
   vite: {
     plugins: [tailwindcss()],
     resolve: {
       alias: {
         "@components": path.resolve("./src/components"),
-        "@blocks": path.resolve("./src/blocks"),
+        "@blocks": path.resolve("./src/components/blocks"),
         "@layouts": path.resolve("./src/layouts"),
         "@pages": path.resolve("./src/pages"),
         "@utils": path.resolve("./src/utils"),
         "@styles": path.resolve("./src/styles"),
         "@config": path.resolve("./src/config"),
+        "@assets": path.resolve("./src/assets"),
+        "@types": path.resolve("./src/types"),
       },
     },
   },

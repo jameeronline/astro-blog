@@ -1,62 +1,81 @@
 ---
 //astro import
 import { Image } from "astro:assets";
-import { getEntry, getEntries } from 'astro:content';
+import { getEntry, getEntries } from "astro:content";
 
+import type { CollectionEntry } from "astro:content";
 
-//components import
-// import Badge from "./ui/Badge.astro";
-
-import { Badge } from "@/components/starwind/badge";
-
-// utils import
-import { slugify } from "@utils/helper";
+interface Props {
+  item: CollectionEntry<"posts">;
+  url?: string;
+}
 
 // Astro props
 const { item, url = "#" } = Astro.props;
 
-// get tags and categories from item
-const tags = item.tags.map((tag: string) => tag.trim());
-// const categories = item.categories.map((category: { title: string; slug: string, description: string }) => ({
-//   title: category.title.trim(),
-//   slug: category.slug.trim(),
-// }));
+const styles = {
+  container: "rounded-xl transition-all",
+  imageWrapper:
+    "relative overflow-hidden bg-cover bg-no-repeat rounded-xl mb-8",
+  image:
+    "object-cover object-center w-full aspect-video bg-gray-200 transition duration-300 ease-in-out hover:scale-110 dark:bg-transparent",
+  title:
+    "mb-8 text-2xl lg:text-3xl font-semibold font-heading leading-snug tracking-tighter text-slate-800 dark:text-slate-100 hover:text-primary-800 transition-colors duration-300",
+  description:
+    "text-base leading-relaxed text-slate-600 line-clamp-3 dark:text-slate-400",
+  categoryBadgeWrapper: "mt-6 flex gap-4",
+  categoryItem: "capitalize text-sm inline-flex rounded-full",
+};
 
-const categories = await getEntries(item.categories);
+//data from item
+const { data } = item;
+
+// get tags and categories from item
+const tags = data.tags.map((tag: string) => tag.trim());
+const categories = await getEntries(data?.categories);
 ---
 
-<article class="rounded-xl transition-all">
-  <a href={`/blog/${url}`} aria-label={`Read more about ${item.title}`}>
-    <div class="relative overflow-hidden bg-cover bg-no-repeat rounded-xl mb-8">
-      <Image
-        class="object-cover object-center w-full lg:h-48 md:h-36 bg-gray-200 transition duration-300 ease-in-out hover:scale-110 dark:bg-transparent"
-        src={item.image.url}
-        alt={item.image.alt}
-        layout="constrained"
-        loading="lazy"
-        inferSize
-      />
+<article class={styles.container}>
+  <a href={`/blog/${url}`} aria-label={`Read more about ${data.title}`}>
+    <div class={styles.imageWrapper}>
+      {
+        data.image ? (
+          <Image
+            class={styles.image}
+            src={data.image?.url}
+            alt={data.image?.alt}
+            layout="constrained"
+            loading="lazy"
+            inferSize
+          />
+        ) : (
+          <Image
+            class={styles.image}
+            src="/blog-fallback.png"
+            alt={"Blog post image fallback"}
+            layout="constrained"
+            loading="lazy"
+            width={500}
+            height={500}
+          />
+        )
+      }
     </div>
 
-    <h3
-      class="mb-8 text-2xl lg:text-3xl font-semibold font-heading leading-snug tracking-tighter text-slate-800 dark:text-slate-100 hover:text-primary transition-colors duration-300"
-    >
-      {item.title}
+    <h3 class={styles.title}>
+      {data.title}
     </h3>
-    <p
-      class="text-base leading-relaxed text-slate-600 line-clamp-3 dark:text-slate-400"
-    >
-      {item.description}
+    <p class={styles.description}>
+      {data.description}
     </p>
   </a>
 
-  <div class="mt-6 flex gap-4">
+  <div class={styles.categoryBadgeWrapper}>
     {
-      categories.map(({data}) => (
-        <Badge
-          variant="outline"
-          href={`/blog/category/${slugify(data.slug)}`}
-          class="capitalize">{data.title}</Badge>
+      categories.map(({ data }) => (
+        <a href={`/blog/category/${data?.slug}`} class={styles.categoryItem}>
+          {data?.title}
+        </a>
       ))
     }
   </div>

@@ -71,12 +71,12 @@
   --card-foreground: var(--color-neutral-950);
   --popover: var(--color-white);
   --popover-foreground: var(--color-neutral-950);
-  --primary: var(--color-blue-700);
+  --primary: var(--color-primary-700);
   --primary-foreground: var(--color-neutral-50);
-  --primary-accent: var(--color-blue-700);
-  --secondary: var(--color-fuchsia-700);
+  --primary-accent: var(--color-primary-700);
+  --secondary: var(--color-secondary-700);
   --secondary-foreground: var(--color-neutral-50);
-  --secondary-accent: var(--color-fuchsia-700);
+  --secondary-accent: var(--color-secondary-700);
   --muted: var(--color-neutral-100);
   --muted-foreground: var(--color-neutral-600);
   --accent: var(--color-neutral-100);

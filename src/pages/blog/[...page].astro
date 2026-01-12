@@ -1,6 +1,10 @@
 ---
+//astro types
+import type { PaginateFunction } from "astro";
+import type { PageProps } from "@/types/global";
+
 //astro imports
-import { getCollection } from "astro:content";
+import { getCollection, getEntries } from "astro:content";
 
 //components import
 import BaseLayout from "@layouts/BaseLayout.astro";
@@ -9,20 +13,22 @@ import PageHeader from "@blocks/PageHeader.astro";
 import Paginate from "@components/Paginate.astro";
 
 //site config
-import { siteConfig } from "../../config/siteconfig.ts";
-
-//page meta data
-const pageTitle = "Blog Index";
+import { siteConfig } from "../../config/site-config.ts";
 
 // Pagination setup
-export async function getStaticPaths({ paginate }: { paginate: any }) {
-  // Get all posts (you can add sorting/filtering here)
-  const allPosts = await getCollection("posts", ({ data }) => data.draft !== true);
+export async function getStaticPaths({
+  paginate,
+}: {
+  paginate: PaginateFunction;
+}) {
+  // Get all posts
+  const posts = await getCollection("posts", ({ data }) => data.draft !== true);
   const { pageLength } = siteConfig;
 
   // Sort posts by date (newest first)
-  const sortedPosts = allPosts.sort(
-    (a, b) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime()
+  const sortedPosts = posts.sort(
+    (a, b) =>
+      new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime()
   );
 
   return paginate(sortedPosts, {
@@ -34,9 +40,9 @@ export async function getStaticPaths({ paginate }: { paginate: any }) {
 const { page } = Astro.props;
 
 // page header details
-const pageHeader = {
-  title: "Blog",
-  caption: "Latest Articles & Insights",
+const pageHeader: PageProps = {
+  title: "Latest Articles & Insights",
+  caption: "Blog",
   description:
     "Explore our latest articles, tutorials, and insights on web development, Astro, and more. Stay updated with tips, guides, and case studies from our team.",
 };
@@ -50,12 +56,12 @@ const pageHeader = {
       caption={pageHeader.caption}
     />
 
-    <BlogGrid posts={page.data} />
+    <BlogGrid posts={page?.data} />
     <Paginate
-      currentPage={page.currentPage}
-      lastPage={page.lastPage}
-      prevUrl={page.url.prev}
-      nextUrl={page.url.next}
+      currentPage={page?.currentPage}
+      lastPage={page?.lastPage}
+      prevUrl={page?.url?.prev}
+      nextUrl={page?.url?.next}
     />
   </section>
 </BaseLayout>

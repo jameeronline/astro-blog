@@ -1,0 +1,45 @@
+---
+//astro imports
+import { Image } from "astro:assets";
+
+//interface
+interface Props {
+  image?: {
+    url: string;
+    alt: string;
+  };
+  title: string;
+  classes?: string;
+}
+
+//props
+const { image, title, classes } = Astro.props;
+
+//styles
+const styles = {
+  image: "w-full rounded-xl object-cover object-center bg-gray-50",
+};
+---
+
+<div class="relative" data-scroll-animate>
+  {
+    image?.url ? (
+      <Image
+        src={image.url}
+        alt={title}
+        class:list={[styles.image, { [`${classes}`]: classes }]}
+        priority
+        layout="constrained"
+        quality={80}
+        inferSize
+      />
+    ) : (
+      <img
+        src="/blog-fallback.png"
+        alt="Fallback image"
+        class:list={[styles.image, { [`${classes}`]: classes }]}
+        loading="lazy"
+      />
+    )
+  }
+</div>

@@ -1,6 +1,9 @@
 // src/utils/search.js
-export async function getSearchIndex(posts) {
-  return posts.map((post) => ({
+import type { CollectionEntry } from "astro:content";
+
+//generate search index from posts
+export async function getSearchIndex(posts: CollectionEntry<"blog">[]) {
+  return posts.map((post: CollectionEntry<"blog">) => ({
     id: post.id,
     title: post.data.title,
     description: post.data.description || "",

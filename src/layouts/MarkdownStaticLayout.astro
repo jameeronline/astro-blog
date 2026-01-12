@@ -1,0 +1,33 @@
+---
+//astro imports
+import { Image } from "astro:assets";
+
+//layouts imports
+import BaseLayout from "./BaseLayout.astro";
+
+//vendor imports
+import { format } from "date-fns";
+
+const { frontmatter } = Astro.props;
+const formattedDate = format(frontmatter.pubDate, "MM/dd/yyyy");
+
+//frontmatter props
+const {title, description, pubDate} = frontmatter;
+---
+
+<BaseLayout title={title}>
+  <section class="my-16">
+    <div class="container px-6 m-auto">
+      <div class="grid grid-cols-4 gap-6 md:grid-cols-8 lg:grid-cols-12">
+        <div class="col-span-4 lg:col-span-9">
+          <article class="prose max-w-none">
+            <slot />
+          </article>
+        </div>
+
+        <div class="col-span-4 lg:col-span-3">
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,30 @@
+---
+//astro imports
+import type { CollectionEntry } from "astro:content";
+
+// Define the expected props interface
+interface Props {
+  posts: CollectionEntry<"posts">[];
+}
+
+// props
+const { posts } = Astro.props;
+
+//components imports
+import BlogCard from "@components/BlogCard.astro";
+
+const styles = {
+  layout: "grid gap-4 grid-cols-4 md:grid-cols-8 md:gap-12 lg:grid-cols-12",
+  blogItem: "col-span-4"
+}
+---
+
+<div class={styles.layout}>
+  {
+    posts.map((post) => (
+      <div class={styles.blogItem} data-scroll-animate>
+        <BlogCard item={post} url={post.id} />
+      </div>
+    ))
+  }
+</div>

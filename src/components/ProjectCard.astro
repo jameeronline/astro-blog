@@ -1,66 +1,109 @@
 ---
+//types
+import type { CollectionEntry } from "astro:content";
+
 //astro imports
-import Image from "astro/components/Image.astro";
+import { Image } from "astro:assets";
 import { Icon } from "astro-icon/components";
 
+interface Props {
+  project: CollectionEntry<"projects">;
+}
+
 //props
-const { data, url = "#" } = Astro.props;
+const { project } = Astro.props;
+
+//data from project
+const { data } = project;
+
+//styles
+const styles = {
+  article: "rounded-xl transition-all",
+  imageWrapper: "relative overflow-hidden rounded-xl mb-8",
+  image:
+    "object-cover object-center w-full aspect-video bg-gray-200 transition duration-300 ease-in-out hover:scale-110",
+  title:
+    "font-heading mb-8 text-2xl font-semibold leading-snug tracking-tighter text-gray-800 lg:text-3xl",
+  description: "mx-auto text-base leading-relaxed text-gray-600 line-clamp-3",
+  tagsWrapper: "mt-6 flex gap-4",
+  tag: "inline-block h-8 text-sm text-primary-800 capitalize cursor-default",
+  footer: "flex items-center justify-between mt-10",
+  detailsLink: "text-sm text-primary-800 underline",
+  iconGroup: "flex items-center justify-between gap-4",
+  githubBtn:
+    "w-10 h-10 inline-flex items-center justify-center rounded-full transition duration-300 hover:bg-gray-200",
+  githubIcon:
+    "w-6 h-6 text-gray-800 transition duration-300 hover:text-gray-900",
+  demoBtn:
+    "w-10 h-10 inline-flex items-center justify-center rounded-full transition duration-300 hover:bg-gray-200",
+  demoIcon: "w-6 h-6 text-gray-800 transition duration-300 hover:text-gray-900",
+};
 ---
 
-<article class="rounded-xl transition-all">
-  <div class="relative overflow-hidden rounded-xl mb-8">
-    <Image
-      class="object-cover object-center w-full lg:h-48 md:h-36 bg-gray-200 transition duration-300 ease-in-out hover:scale-110"
-      src={data.thumbnail}
-      alt={data.title}
-      layout="constrained"
-      loading="lazy"
-      inferSize
-    />
-  </div>
-
-  <h3
-    class="font-heading mb-8 text-2xl font-semibold leading-snug tracking-tighter text-gray-800 lg:text-3xl"
-  >
-    {data.title}
-  </h3>
-  <p class="mx-auto text-base leading-relaxed text-gray-600 line-clamp-3">
-    {data.description}
-  </p>
-
-  <div class="mt-6 flex gap-4">
+<article class={styles.article}>
+  <div class={styles.imageWrapper}>
     {
-      data.tags.map((tag) => (
-        <span class="inline-block rounded-full bg-gray-200 px-2 py-0.5 text-sm text-gray-700 capitalize cursor-default">
-          {tag}
-        </span>
-      ))
+      data.thumbnail ? (
+        <Image
+          class={styles.image}
+          src={data.thumbnail}
+          alt={data.title}
+          layout="constrained"
+          loading="lazy"
+          inferSize
+        />
+      ) : (
+        <Image
+          class={styles.image}
+          src="/images/fallback.png"
+          alt="Fallback image"
+          layout="constrained"
+          loading="lazy"
+          inferSize
+        />
+      )
     }
   </div>
 
-  <footer class="flex items-center justify-between mt-10">
-    <a href={`/projects/${url}`} class="text-sm text-primary-800 underline"
-      >View Details</a
+  <h3 class={styles.title}>
+    {data.title}
+  </h3>
+
+  <p class={styles.description}>
+    {data.description}
+  </p>
+
+  <div class={styles.tagsWrapper}>
+    {data.tags.map((tag) => <span class={styles.tag}>{tag}</span>)}
+  </div>
+
+  <footer class={styles.footer}>
+    <a
+      href={`/projects/${project.id}`}
+      class={styles.detailsLink}
+      aria-label={`View details for ${data.title}`}>View Details</a
     >
-    <div class="flex items-center justify-between gap-4">
+    <div class={styles.iconGroup}>
       <a
         href={data.github}
-        class="w-10 h-10 inline-flex items-center justify-center rounded-full transition duration-300 bg-primary-100 hover:bg-gray-200"
+        class={styles.githubBtn}
+        aria-label="GitHub Repository"
+        target="_blank"
+        rel="noopener noreferrer"
       >
-        <Icon
-          name="github-line"
-          class="w-6 h-6 text-gray-800 transition duration-300 hover:text-gray-900"
-          aria-label="GitHub Repository"
-        />
+        <Icon name="github-line" class={styles.githubIcon} aria-hidden="true" />
       </a>
       <a
         href={data.liveDemo}
-        class="w-10 h-10 inline-flex items-center justify-center rounded-full transition duration-300 bg-secondary-100 hover:bg-gray-200"
+        class={styles.demoBtn}
+        aria-label="Live Demo"
+        target="_blank"
+        rel="noopener noreferrer"
       >
         <Icon
           name="external-link-line"
-          class="w-6 h-6 text-gray-800 transition duration-300 hover:text-gray-900"
-          aria-label="Live Demo"
+          class={styles.demoIcon}
+          aria-hidden="true"
         />
       </a>
     </div>

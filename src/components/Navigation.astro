@@ -5,8 +5,11 @@ import ThemeIcon from "./ThemeIcon.astro";
 //icons
 import { Search } from "@lucide/astro";
 
+//components
+import { Button } from "@/components/starwind/button";
+
 //load data
-import { navigation, siteConfig } from "@config/siteconfig.ts";
+import { navigation, siteConfig } from "@config/site-config.ts";
 
 //site config
 const { title, logoText, logo, onlyLogo } = siteConfig;
@@ -16,7 +19,7 @@ const { title, logoText, logo, onlyLogo } = siteConfig;
   x-data="{open: false}"
   class="sticky top-0 mb-10 lg:mb-20 z-20 w-full border-b shadow-lg border-slate-200 bg-white/90 dark:bg-transparent dark:border-0 shadow-slate-700/5 md:bg-transparent md:shadow-none md:border-0 after:absolute after:top-full after:left-0 after:z-10 after:block after:h-px after:w-full after:bg-slate-200 lg:border-slate-200 lg:backdrop-blur-3xl lg:after:hidden"
 >
-  <div class="relative w-full xl:container mx-auto px-4">
+  <div class="relative w-full container mx-auto px-4">
     <nav
       aria-label="main navigation"
       class="flex h-[5.5rem] items-stretch justify-between font-medium text-slate-700"
@@ -34,10 +37,14 @@ const { title, logoText, logo, onlyLogo } = siteConfig;
           onlyLogo ? (
             <img src={logo} alt="Logo" class="h-8 w-auto" />
           ) : (
-            <span class="font-heading"><span class="text-primary-700">{logoText || "jameer"}</span>.dev</span>
+            <span class="font-heading">
+              <span class="text-black">&</span>
+              <span class="text-primary-700">{logoText || "jameer"}</span>
+            </span>
           )
         }
       </a>
+
       <!-- Navigation links -->
       <ul
         role="menubar"
@@ -53,23 +60,35 @@ const { title, logoText, logo, onlyLogo } = siteConfig;
                 aria-current={item.current ? "page" : undefined}
                 aria-haspopup="false"
                 href={item.href}
-                class={`flex items-center gap-2 font-semibold py-4 transition-colors duration-300 hover:text-primary-900 focus:text-primary-950 focus:outline-none focus-visible:outline-none lg:px-4 ${Astro.url.pathname === item.href ? "text-primary-900 underline underline-offset-4" : ""}`}
+                class={`flex items-center gap-2 font-semibold py-4 transition-colors duration-300 hover:text-primary-900 focus:text-primary-950 focus:outline-none focus-visible:outline-none lg:px-4 ${Astro.url.pathname === item.href ? "text-primary-900 underline underline-offset-8" : ""}`}
               >
-                {item.icon && <item.icon class="w-5 h-5 md:hidden" />}  <span>{item.name}</span>
+                {item.icon && <item.icon class="w-5 h-5 md:hidden" />}{" "}
+                <span>{item.name}</span>
               </a>
             </li>
           ))
         }
       </ul>
+
+      <!-- CTA -->
       <div class="flex items-center gap-1 md:gap-2">
         <!-- Search link -->
-        <a href="/search" class="size-10 inline-flex items-center justify-center"><Search class="w-6 h-6" /></a>
+        <a
+          href="/search"
+          class="size-10 inline-flex items-center justify-center"
+          ><Search class="w-6 h-6" /></a
+        >
 
         <!-- Theme Toggle -->
         <ThemeIcon class="hidden lg:block" />
 
         <!-- contact link -->
-        <a href="/contact" class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">Get in Touch</a>
+        <!-- <Button href={'/contact'} variant="primary" class="rounded-md px-4 h-10" size="sm">Get in Touch</Button> -->
+        <a
+          href="/contact"
+          class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
+          >Get in Touch</a
+        >
 
         <!-- Mobile trigger -->
         <button

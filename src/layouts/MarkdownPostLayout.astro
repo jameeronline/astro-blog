@@ -2,7 +2,7 @@
 import { Image } from "astro:assets";
 const { frontmatter } = Astro.props;
 import BaseLayout from "./BaseLayout.astro";
-import BlogAside from "../blocks/BlogAside.astro";
+import BlogAside from "@blocks/BlogAside.astro";
 import { format } from "date-fns";
 
 const formattedDate = format(frontmatter.pubDate, "MM/dd/yyyy");

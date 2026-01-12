@@ -1,21 +1,12 @@
-interface NavigationItem {
-  name: string;
-  href: string;
-  current: boolean;
-  icon?: JSX.Element;
-}
-
-interface SocialLinkItem {
-  href: string;
-  icon: string;
-  alt: string;
-}
+//types
+import type { NavigationItem } from "../types/global";
+import type { SocialLinkItem } from "../types/global";
 
 import { Search, House, CircleUser, Presentation, Headset, UsersRound, Rss } from "@lucide/astro";
 
 export const siteConfig = {
-  title: "Jam.dev",
-  logoText: "Jam",
+  title: "UI Land",
+  logoText: "UI land",
   tagline: "Frontend Developer Portfolio",
   description:
     "A modern frontend developer portfolio built with Astro, Tailwind CSS, and Lucide icons.",

@@ -9,7 +9,7 @@ import { ArrowLeft } from "@lucide/astro";
  * - ...rest: any other props for <a>
  */
 
-interface BackButtonProps {
+interface Props {
   label?: string;
   href?: string;
   [key: string]: any;
@@ -20,7 +20,7 @@ const { label = "Back", href = "#", ...rest } = Astro.props;
 
 <a
   href={href}
-  class="inline-flex items-center justify-center text-sm gap-2 text-gray-600 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium h-10 px-2 mb-4 md:mb-8 dark:focus:ring-gray-700 dark:border-gray-700 hover:underline hover:text-primary-500 transition-colors"
+  class="inline-flex items-center justify-center text-sm gap-2 text-gray-600 hover:text-primary-500 font-medium h-10 mb-4 dark:border-gray-700 hover:underline  transition-colors"
   {...rest}
 >
   <ArrowLeft class="w-5 h-5" /> <span>{label}</span>

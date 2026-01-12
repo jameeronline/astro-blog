@@ -1,4 +1,7 @@
 ---
+//types
+import type { CollectionEntry } from "astro:content";
+
 //astro imports
 import { getCollection, getEntry, render } from "astro:content";
 import { Image } from "astro:assets";
@@ -14,19 +17,16 @@ import { ExternalLink, Link } from "@lucide/astro";
 import { slugify } from "@utils/helper";
 
 export async function getStaticPaths() {
-  const projectCollection = await getCollection("projects");
+  const projects = await getCollection("projects");
 
-  return projectCollection.map((project) => ({
-    params: { slug: slugify(project.data.title) },
-    props: { title: project.data.title, projectid: project.id },
+  return projects.map((project) => ({
+    params: { slug: project.id },
+    props: { project },
   }));
 }
 
 const { slug } = Astro.params;
-const { title, projectid } = Astro.props;
-
-// Fetch the project details using the ID from the dynamic route
-const project = await getEntry("projects", projectid);
+const { project } = Astro.props;
 
 // If the post is not found, throw an error
 if (!project) {
@@ -156,7 +156,9 @@ const {
             </div>
           </div>
 
-          <div class="mt-6 pt-6 border-t border-t-gray-200 flex flex-col md:flex-row md:items-center md:justify-between gap-2">
+          <div
+            class="mt-6 pt-6 border-t border-t-gray-200 flex flex-col md:flex-row md:items-center md:justify-between gap-2"
+          >
             <a
               href={liveDemo}
               target="_blank"

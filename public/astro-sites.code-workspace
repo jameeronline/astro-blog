@@ -1,0 +1,37 @@
+{
+  "folders": [
+    {
+      "path": "../.."
+    },
+    {
+      "path": "../../../astro-uidocs"
+    },
+    {
+      "path": "../../../project"
+    },
+    {
+      "path": "../../../hekto"
+    },
+    {
+      "path": "../../../studio-astro-hekto"
+    },
+    {
+      "path": "../../../astro-hekto"
+    },
+    {
+      "path": "../../../astro-darkmatter-cms"
+    },
+    {
+      "path": "../../../astro-strapi-cms"
+    },
+    {
+      "path": "../../../astro-foxi-theme/foxi-astro-theme"
+    },
+    {
+      "path": "../../../astro-tailwind-design-system"
+    }
+  ],
+  "settings": {
+    "liveServer.settings.multiRootWorkspaceName": "hekto"
+  }
+}

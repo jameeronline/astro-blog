@@ -6,6 +6,12 @@ import { Icon } from "astro-icon/components";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import ContactForm from "@components/framework-ui/ContactForm";
 import PageHeader from "@blocks/PageHeader.astro";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/starwind/accordion";
 
 //icons imports
 import { Clock, Mail, MapPin, MessageSquare, Phone } from "@lucide/astro";
@@ -244,18 +250,33 @@ const pageHeader = {
         <h2 class="text-3xl font-bold">Frequently Asked Questions</h2>
       </div>
 
-      <div
+      <!-- <div
         class="grid grid-cols-4 md:grid-cols-8 lg:grid-cols-12 gap-6"
         data-scroll-animate
       >
-        {faqs.map((faq) => (
-          <div class="col-span-4 lg:col-span-6">
-            <div class="bg-white shadow-2xl/10 rounded-lg p-8 space-y-3">
-              <h3 class="text-xl font-bold">{faq.question}</h3>
-              <p>{faq.answer}</p>
+        {
+          faqs.map((faq) => (
+            <div class="col-span-4 lg:col-span-6">
+              <div class="bg-white shadow-2xl/10 rounded-lg p-8 space-y-3">
+                <h3 class="text-xl font-bold">{faq.question}</h3>
+                <p>{faq.answer}</p>
+              </div>
             </div>
-          </div>
-        ))}
+          ))
+        }
+      </div> -->
+
+      <div class="bg-white shadow-2xl/10 rounded-lg p-8 space-y-3">
+        <Accordion type="multiple" defaultValue="item-0" class="w-full mb-0">
+          {
+            faqs.map((faq, idx) => (
+              <AccordionItem value={`item-${idx}`}>
+                <AccordionTrigger class="text-xl font-bold">{faq.question}</AccordionTrigger>
+                <AccordionContent>{faq.answer}</AccordionContent>
+              </AccordionItem>
+            ))
+          }
+        </Accordion>
       </div>
     </section>
   </section>

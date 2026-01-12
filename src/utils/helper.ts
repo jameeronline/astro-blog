@@ -1,3 +1,4 @@
+//convert text to slug
 export function textToSlug(text: string): string {
   return text
     .toLowerCase()
@@ -6,10 +7,12 @@ export function textToSlug(text: string): string {
     .replace(/^-+|-+$/g, "");
 }
 
+//capitalize each word
 export function capitalizeText(text: string): string {
   return text.toLowerCase().replace(/\b\w/g, (char) => char.toUpperCase());
 }
 
+//slugify
 export function slugify(text: string): string {
   return text
     .toLowerCase() // Convert to lowercase

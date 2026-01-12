@@ -1,8 +1,11 @@
 ---
+//import types
+import type { CollectionEntry } from "astro:content";
+
 //astro imports
 import { Image } from "astro:assets";
-import { Breadcrumbs } from "astro-breadcrumbs";
-import { getCollection, getEntry, render } from "astro:content";
+// import { Breadcrumbs } from "astro-breadcrumbs";
+import { getCollection, getEntry, render, getEntries } from "astro:content";
 
 //components import
 import BaseLayout from "@layouts/BaseLayout.astro";
@@ -11,30 +14,29 @@ import BlogGrid from "@blocks/BlogGrid.astro";
 import Badge from "@components/ui/Badge.astro";
 import BackButton from "@components/BackButton.astro";
 import RelatedBlogCard from "@components/RelatedBlogCard.astro";
+import Breadcrumbs from "@components/Breadcrumbs.astro";
 
 //icons import
 import { ArrowLeft, Clock } from "@lucide/astro";
 
 //vendor style imports
-// import "astro-breadcrumbs/breadcrumbs.css";
+import "astro-breadcrumbs/breadcrumbs.css";
 
 //utils import
 import { slugify, formatDate } from "@utils/helper";
+import Thumbnail from "@/components/pages/blog-details/Thumbnail.astro";
 
-//define static paths for dynamic routing
+//define static paths
 export async function getStaticPaths() {
   const posts = await getCollection("posts");
+
   return posts.map((post) => ({
     params: { slug: post.id },
-    props: { id: post.id, posts: posts },
+    props: { id: post.id, post: post },
   }));
 }
 
-//const { slug } = Astro.params;
-const { id, posts } = Astro.props;
-
-// Fetch the post entry using the ID from the dynamic route
-const post = await getEntry("posts", id);
+const { post } = Astro.props;
 
 // If the post is not found, throw an error
 if (!post) {
@@ -46,17 +48,26 @@ const { data } = post;
 const { Content, headings, remarkPluginFrontmatter } = await render(post);
 
 const tags = data.tags.map((tag) => tag.trim());
-const categories = data.categories.map((category) => category.trim());
+const categories = await getEntries(data.categories);
+//console.log(categories);
 
 // Get related posts: share at least one tag or category, exclude current post
-const relatedPosts = posts
-  .filter(
-    (p) =>
-      p.id !== post.id &&
-      (p.data.tags.some((tag) => tags.includes(tag.trim())) ||
-        p.data.categories.some((cat) => categories.includes(cat.trim())))
-  )
-  .slice(0, 4); // Limit to 4
+// const relatedPosts = posts
+//   .filter(
+//     (p) =>
+//       p.id !== post.id &&
+//       (p.data.tags.some((tag) => tags.includes(tag.trim())) ||
+//         p.data.categories.some((cat) => categories.includes(cat.trim())))
+//   )
+//   .slice(0, 4);
+
+const styles = {
+  grid: "grid grid-cols-4 gap-6 md:grid-cols-8 md:gap-12 lg:grid-cols-12",
+  aside: "col-span-4 hidden lg:col-span-3 lg:block",
+  summary: "text-xl md:text-2xl text-gray-600 my-10",
+  content:
+    "prose dark:prose-invert max-w-none lg:prose-lg prose-heading:leading-[1.2] prose-heading:mb-4 md:prose-heading:mb-4 prose-p:my-2 prose-a:underline prose-a:decoration-primary-400 prose-a:decoration-2 hover:prose-a:decoration-4 transition-all prose-li:my-0 prose-li:marker:text-primary-400",
+};
 
 //access data properties
 const { title, description, image, pubDate, author } = data;
@@ -64,11 +75,7 @@ const { title, description, image, pubDate, author } = data;
 
 <BaseLayout title={title}>
   <section>
-    <header class="mb-10">
-      <BackButton label="Back to blog" href="/blog" data-scroll-animate />
-      
-      <!-- <Breadcrumbs /> -->
-
+    <header class="mb-10" data-scroll-animate>
       <!-- <div
         class="flex items-center justify-center flex-wrap gap-2 mb-4 mt-4 md:mb-6"
       >
@@ -83,61 +90,52 @@ const { title, description, image, pubDate, author } = data;
         }
       </div> -->
 
-      <h1 data-scroll-animate class="text-heading font-bold mb-2 leading-tight">{title}</h1>
-
-      <p class="text-gray-500" data-scroll-animate>
-        Written by <span  class="text-primary-900 font-bold underline underline-offset-2">{author}</span> on <span>{formatDate(pubDate)}</span>
-      </p>
-      <p class="flex items-center gap-2 text-gray-500" data-scroll-animate>
-        <Clock class="w-4 h-4" />
-        {remarkPluginFrontmatter.minutesRead}
-      </p>
-    </header>
-    <div
-      class="grid grid-cols-4 gap-6 md:grid-cols-8 md:gap-12 lg:grid-cols-12"
-    >
-      <div class="col-span-4 md:col-span-8 lg:col-span-9">
-        <article
-          class="mb-8"
+      <div class="flex flex-col gap-2">
+        <Breadcrumbs />
+        <h1
+          data-scroll-animate
+          class="text-heading font-bold mb-2 leading-tight"
         >
-          <figure data-scroll-animate>
-            <div class="relative">
-              <Image
-                src={image?.url}
-                alt={title}
-                class="w-full rounded-xl object-cover object-center"
-                priority
-                layout="constrained"
-                quality={90}
-                inferSize
-              />
-            </div>
-            <figcaption class="sr-only">{image?.alt}</figcaption>
-          </figure>
+          {title}
+        </h1>
+        <div class="flex gap-4">
+          <p class="text-gray-500" data-scroll-animate>
+            Last updated on <span class="font-bold text-gray-800"
+              >{formatDate(pubDate)}</span
+            >
+          </p>
+          <div class="border-l h-6 border-gray-300"></div>
+          <p class="flex items-center gap-2 text-gray-500" data-scroll-animate>
+            <Clock class="w-4 h-4" />
+            {remarkPluginFrontmatter.minutesRead}
+          </p>
+        </div>
+      </div>
+    </header>
+    <div class={styles.grid}>
+      <div class="col-span-4 md:col-span-8 lg:col-span-9" data-scroll-animate>
+        <article class="mb-8">
+          <!-- thumbnail -->
+          <Thumbnail image={image} title={title} />
 
-          <!-- Summary -->
-          <p
-            class="text-xl md:text-2xl text-gray-600 my-10"
-            data-scroll-animate
-          >
+          <!-- summary -->
+          <p class={styles.summary} data-scroll-animate>
             {description}
           </p>
 
-          <div
-            class="prose dark:prose-invert max-w-none lg:prose-lg prose-heading:leading-[1.2] prose-heading:mb-4 md:prose-heading:mb-4 prose-p:my-2 prose-a:underline prose-a:decoration-primary-400 prose-a:decoration-2 hover:prose-a:decoration-4 transition-all prose-li:my-0 prose-li:marker:text-primary-400"
-            data-scroll-animate
-          >
+          <!-- content -->
+          <div class={styles.content} data-scroll-animate>
             <Content />
           </div>
         </article>
       </div>
 
-      <div class="col-span-4 hidden lg:col-span-3 lg:block" data-scroll-animate>
+      <div class={styles.aside} data-scroll-animate>
         <BlogAside headings={headings} tags={tags} categories={categories} />
       </div>
     </div>
-    {
-      relatedPosts.length > 0 && (
+    <!-- {
+      // relatedPosts.length > 0 && (
         <footer class="my-16">
           <h3 class="text-xl font-bold mb-8">Related Posts</h3>
           <div class="grid grid-cols-4 gap-6 md:grid-cols-8 md:gap-10 lg:grid-cols-12">
@@ -151,6 +149,6 @@ const { title, description, image, pubDate, author } = data;
           </div>
         </footer>
       )
-    }
+    } -->
   </section>
 </BaseLayout>

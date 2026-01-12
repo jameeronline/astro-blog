@@ -12,7 +12,7 @@
 
 @theme {
   /* breakpoints */
-  --breakpoint-2xl: 72rem;
+  --breakpoint-2xl: 80rem;
 
   /* fonts */
   /* --font-sans: "Outfit Variable", sans-serif; */
@@ -41,6 +41,20 @@
 --color-primary-800: #255365;
 --color-primary-900: #234656;
 --color-primary-950: #122d3a; */
+
+/* --color-primary-50: #eefde8;
+--color-primary-100: #daf9ce;
+--color-primary-200: #b8f3a3;
+--color-primary-300: #8ce96d;
+--color-primary-400: #64db40;
+--color-primary-500: #45c422;
+--color-primary-600: #309a16;
+--color-primary-700: #277516;
+--color-primary-800: #235d17;
+--color-primary-900: #214f18;
+--color-primary-950: #0c2b08; */
+
+
 
   --color-secondary-50: #f2fee7;
   --color-secondary-100: #e2fccb;

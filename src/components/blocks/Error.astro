@@ -1,0 +1,34 @@
+---
+//import types
+import type { ErrorProps } from "@/types/global";
+
+//icons imports
+import { ArrowLeftIcon } from "@lucide/astro";
+
+//props
+const { code, title, description } = Astro.props as ErrorProps;
+---
+
+<section
+  class="h-full flex flex-col items-center justify-center text-center px-4"
+>
+  <p
+    class="mb-4 text-8xl text-heading leading-none text-primary-800"
+    aria-hidden="true"
+  >
+    {code}
+  </p>
+  <h1 class="text-4xl md:text-6xl mb-4 text-heading leading-none">
+    <span class="sr-only">Error {code}: </span>{title}
+  </h1>
+  <p class="mb-10 text-base md:text-lg text-gray-600">
+    {description}
+  </p>
+  <a
+    href="/"
+    class="inline-flex items-center text-gray-900 bg-gray-50 border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-full text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+  >
+    <ArrowLeftIcon class="w-4 h-4 mr-2" aria-hidden="true" />
+    Back to Homepage
+  </a>
+</section>
